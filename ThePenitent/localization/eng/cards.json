@@ -1,0 +1,32 @@
+{
+  "THEPENITENT-THE_PENITENT_STRIKE_CARD.description": "Deal 6 damage",
+  "THEPENITENT-THE_PENITENT_STRIKE_CARD.upgradeDescription": "Deal 9 damage",
+  "THEPENITENT-THE_PENITENT_STRIKE_CARD.title": "Strike",
+  
+  "THEPENITENT-THE_PENITENT_DEFEND_CARD.description": "Gain 5 Block",
+  "THEPENITENT-THE_PENITENT_DEFEND_CARD.upgradeDescription": "Gain 8 Block",
+  "THEPENITENT-THE_PENITENT_DEFEND_CARD.title": "Defend",
+  
+  "THEPENITENT-BLASPHEMOUS_BOLT_CARD.description": "Deal 13 damage. Descend 4",
+  "THEPENITENT-BLASPHEMOUS_BOLT_CARD.upgradeDescription": "Deal 16 damage. Descend 5",
+  "THEPENITENT-BLASPHEMOUS_BOLT_CARD.title": "Blasphemous Bolt",
+  
+  "THEPENITENT-GRIM_UNCERTAINTY_CARD.description": "Whenever you gain Burden, deal 2 damage to a random enemy",
+  "THEPENITENT-GRIM_UNCERTAINTY_CARD.upgradeDescription": "Whenever you gain Burden, deal 3 damage to a random enemy",
+  "THEPENITENT-GRIM_UNCERTAINTY_CARD.title": "Grim Uncertainty",
+  
+  "THEPENITENT-DARK_WHISPER_CARD.description": "Descend 3. Draw 1 card.",
+  "THEPENITENT-DARK_WHISPER_CARD.title": "Dark Whisper",
+
+  "THEPENITENT-RUINOUS_CONFESSION_CARD.description": "Ascend equal to your Burden. Deal damage equal to twice the Ascended amount to all enemies",
+  "THEPENITENT-RUINOUS_CONFESSION_CARD.title": "Ruinous Confession",
+  
+  "THEPENITENT-PRAYER_CARD.description": "Ascend 4",
+  "THEPENITENT-PRAYER_CARD.title": "Prayer",
+  
+  "THEPENITENT-MEND_WOUNDS_CARD.description": "Atone 5",
+  "THEPENITENT-MEND_WOUNDS_CARD.title": "Mend Wounds",
+  
+  "THEPENITENT-EMPTY_HANDS_CARD.description": "If you have no Block, gain Ascend 10",
+  "THEPENITENT-EMPTY_HANDS_CARD.title": "Empty Hands"
+}

@@ -1,0 +1,11 @@
+{
+  "THEPENITENT-BURDEN_POWER.description": "At the end of combat, lose HP equal to your Burden. If this would kill you, survive at 1 HP and lose Max HP equal to the excess.",
+  "THEPENITENT-BURDEN_POWER.smartDescription": "At the end of combat, lose #b{0} HP. If this would kill you, survive at 1 HP and lose Max HP equal to the excess.",
+  "THEPENITENT-BURDEN_POWER.title": "Burden",
+  "THEPENITENT-GRIM_CERTAINTY_POWER.description": "Whenever you gain Burden, deal 2 damage to a random enemy.",
+  "THEPENITENT-GRIM_CERTAINTY_POWER.smartDescription": "Whenever you gain Burden, deal #b{0} damage to a random enemy.",
+  "THEPENITENT-GRIM_CERTAINTY_POWER.title": "Grim Certainty",
+  "THEPENITENT-FAITH_POWER.description": "Faith prevents damage equal to its amount. This persists between turns. At the start of your turn, lose half of your Faith.",
+  "THEPENITENT-FAITH_POWER.smartDescription": "Faith prevents the next #b{0} damage.",
+  "THEPENITENT-FAITH_POWER.title": "Faith"
+}
