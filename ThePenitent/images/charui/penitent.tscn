@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlqisikwhc4ak"]
+
+[ext_resource type="Texture2D" uid="uid://b0iotm5h8vjd2" path="res://ThePenitent/images/charui/ThePenitentChar.png" id="1_pb3ti"]
+
+[node name="Penitent" type="Node2D"]
+
+[node name="Visuals" type="Sprite2D" parent="."]
+position = Vector2(15, -135)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_pb3ti")
+flip_h = true
+
+[node name="Bounds" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -120.0
+offset_top = -300.0
+offset_right = 155.0
+offset_bottom = 20.0
+mouse_filter = 2
+
+[node name="CenterPos" type="Marker2D" parent="."]
+position = Vector2(20, -155)
+
+[node name="IntentPos" type="Marker2D" parent="."]
+position = Vector2(15, -335)

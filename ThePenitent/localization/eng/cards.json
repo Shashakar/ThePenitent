@@ -17,7 +17,7 @@
   "THEPENITENT-EMPTY_HANDS_CARD.description": "If you have no [gold]Block[/gold], [gold]Ascend[/gold] {FaithPower:diff()}.",
   "THEPENITENT-EMPTY_HANDS_CARD.title": "Empty Hands",
 
-  "THEPENITENT-FALL_FROM_GRACE_CARD.description": "[purple]Descend[/purple] twice your [gold]Faith[/gold].\nDeal {CalculatedDamage:diff()} damage.",
+  "THEPENITENT-FALL_FROM_GRACE_CARD.description": "[purple]Descend[/purple] twice your [gold]Faith[/gold].\nDeal that much damage. ({CalculatedDamage:diff()} damage)",
   "THEPENITENT-FALL_FROM_GRACE_CARD.title": "Fall From Grace",
 
   "THEPENITENT-FINAL_PENANCE_CARD.description": "Lose HP equal to half your [purple]Burden[/purple], rounded down.\nDeal damage to ALL enemies equal to {ExtraDamage:diff()} times the HP lost.\n[gold]Ascend[/gold] equal to your [purple]Burden[/purple].\n[gold]Exhaust[/gold].",

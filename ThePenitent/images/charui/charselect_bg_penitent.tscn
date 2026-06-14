@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://54delpu1pd6p"]
+
+[ext_resource type="Texture2D" uid="uid://b5ehodt7k7bcp" path="res://ThePenitent/images/charui/ThePenitentBG.png" id="1_drsa3"]
+[ext_resource type="Texture2D" uid="uid://b0iotm5h8vjd2" path="res://ThePenitent/images/charui/ThePenitentChar.png" id="2_bl7r1"]
+
+[node name="ThePenitentCharacterSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundArt" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_drsa3")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Character" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.0
+offset_top = -517.0
+offset_right = 779.0
+offset_bottom = 648.3336
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_bl7r1")
+expand_mode = 1
+stretch_mode = 5
