@@ -1,40 +1,34 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using ThePenitent.ThePenitentCode.Cards;
 using ThePenitent.ThePenitentCode.HoverTips;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
-
-public class EmptyHandsCard() :
+public class BlackBenedictionCard() :
     ThePenitentMechanicCard
     (
         cost: 2,
-        type: CardType.Skill,
+        type: CardType.Attack,
         rarity: CardRarity.Uncommon,
-        target: TargetType.Self,
-        faith: 10M,
-        extraHoverTips: [PenitentHoverTipFactory.Ascend(), PenitentHoverTipFactory.Faith()]
+        target: TargetType.AnyEnemy,
+        damage: 24M,
+        burden: 8M,
+        extraHoverTips: [PenitentHoverTipFactory.Descend(), PenitentHoverTipFactory.Burden()]
     )
 {
-    
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        //If you have no block
-        if (Owner.Creature.Block > 0)
-            return;
-        
-        // Gain 10 faith.
-        await Ascend();
-        
+        await Descend();
+        await AttackTarget(choiceContext, play);
     }
 
     protected override void OnUpgrade()
     {
-        Faith.UpgradeValueBy(2M);
-        EnergyCost.UpgradeBy(-1);
+        Damage.UpgradeValueBy(8M);
     }
-
-
 }

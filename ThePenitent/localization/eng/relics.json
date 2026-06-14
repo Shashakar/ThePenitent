@@ -1,5 +1,5 @@
 {
-  "THEPENITENT-FRACTURED_HALO_RELIC.description": "At the start of each combat, gain 6 Faith.",
+  "THEPENITENT-FRACTURED_HALO_RELIC.description": "At the start of each combat, gain {FaithPower} Faith.",
   "THEPENITENT-FRACTURED_HALO_RELIC.flavor": "Its light is damaged, but not gone. The faithful learn to survive on what remains.",
   "THEPENITENT-FRACTURED_HALO_RELIC.title": "Fractured Halo"
 }

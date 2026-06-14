@@ -5,36 +5,27 @@ using ThePenitent.ThePenitentCode.HoverTips;
 namespace ThePenitent.ThePenitentCode.Cards;
 
 
-public class EmptyHandsCard() :
+public class ConfessCard() :
     ThePenitentMechanicCard
     (
-        cost: 2,
+        cost: 1,
         type: CardType.Skill,
         rarity: CardRarity.Uncommon,
         target: TargetType.Self,
-        faith: 10M,
+        faith: 5M,
+        cardsToDraw: 1,
         extraHoverTips: [PenitentHoverTipFactory.Ascend(), PenitentHoverTipFactory.Faith()]
     )
 {
-    
-    protected override async Task OnPlay(
-        PlayerChoiceContext choiceContext,
-        CardPlay play)
+
+    protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        //If you have no block
-        if (Owner.Creature.Block > 0)
-            return;
-        
-        // Gain 10 faith.
         await Ascend();
-        
+        await DrawCards(choiceContext);
     }
 
     protected override void OnUpgrade()
     {
         Faith.UpgradeValueBy(2M);
-        EnergyCost.UpgradeBy(-1);
     }
-
-
 }

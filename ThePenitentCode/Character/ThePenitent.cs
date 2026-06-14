@@ -21,7 +21,7 @@ public class ThePenitent : PlaceholderCharacterModel
     public override CharacterGender Gender => CharacterGender.Masculine;
     public override int StartingHp => 70;
 
-    /*public override IEnumerable<CardModel> StartingDeck =>
+    public override IEnumerable<CardModel> StartingDeck =>
     [
         ModelDb.Card<ThePenitentStrikeCard>(),
         ModelDb.Card<ThePenitentStrikeCard>(),
@@ -32,9 +32,10 @@ public class ThePenitent : PlaceholderCharacterModel
         ModelDb.Card<ThePenitentDefendCard>(),
         ModelDb.Card<ThePenitentDefendCard>(),
         ModelDb.Card<MendWoundsCard>(),
-    ];*/
+        ModelDb.Card<PrayerCard>(),
+    ];
     
-    public override IEnumerable<CardModel> StartingDeck =>
+    /*public override IEnumerable<CardModel> StartingDeck =>
     [
         ModelDb.Card<RuinousConfessionCard>(),
         ModelDb.Card<DarkWhisperCard>(),
@@ -45,7 +46,7 @@ public class ThePenitent : PlaceholderCharacterModel
         ModelDb.Card<PrayerCard>(),
         ModelDb.Card<PrayerCard>(),
         ModelDb.Card<MendWoundsCard>(),
-    ];
+    ];*/
 
     public override IReadOnlyList<RelicModel> StartingRelics =>
     [

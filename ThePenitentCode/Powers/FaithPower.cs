@@ -60,8 +60,13 @@ public sealed class FaithPower : ThePenitentPower
         return amount - faithUsed;
     }
 
-    public override async Task AfterDamageReceived(PlayerChoiceContext choiceContext, Creature target, DamageResult result, ValueProp props,
-        Creature? dealer, CardModel? cardSource)
+    public override async Task AfterDamageReceived(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        DamageResult result,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource)
     {
         if (target != Owner)
             return;
@@ -75,5 +80,13 @@ public sealed class FaithPower : ThePenitentPower
         Flash();
 
         await PowerCmd.ModifyAmount(this, -faithLoss, dealer, null);
+
+        if (dealer == null)
+            return;
+
+        foreach (var listener in Owner.Powers.OfType<IFaithPreventedDamageListener>())
+        {
+            await listener.OnFaithPreventedDamage(choiceContext, dealer, faithLoss);
+        }
     }
 }

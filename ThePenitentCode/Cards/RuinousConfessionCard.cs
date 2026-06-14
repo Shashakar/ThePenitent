@@ -1,21 +1,22 @@
 ﻿using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using ThePenitent.ThePenitentCode.HoverTips;
 using ThePenitent.ThePenitentCode.Powers;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
-public sealed class RuinousConfessionCard : ThePenitentMechanicCard
+public sealed class RuinousConfessionCard() :
+    ThePenitentMechanicCard
+    (
+        cost: 3,
+        type: CardType.Attack,
+        rarity: CardRarity.Rare,
+        target: TargetType.AllEnemies,
+        keywords: [CardKeyword.Exhaust],
+        extraHoverTips: [PenitentHoverTipFactory.Ascend(), PenitentHoverTipFactory.Burden()]
+    )
 {
-    public RuinousConfessionCard()
-        : base(
-            cost: 3,
-            type: CardType.Attack,
-            rarity: CardRarity.Rare,
-            target: TargetType.AllEnemies,
-            keywords: [CardKeyword.Exhaust])
-    {
-    }
 
     protected override IEnumerable<DynamicVar> AdditionalCanonicalVars =>
     [
@@ -24,7 +25,7 @@ public sealed class RuinousConfessionCard : ThePenitentMechanicCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        int ascendedAmount = (int)Owner.Creature.GetPowerAmount<BurdenPower>();
+        int ascendedAmount = Owner.Creature.GetPowerAmount<BurdenPower>();
 
         if (ascendedAmount <= 0)
             return;
@@ -40,6 +41,6 @@ public sealed class RuinousConfessionCard : ThePenitentMechanicCard
 
     protected override void OnUpgrade()
     {
-        RemoveKeyword(CardKeyword.Exhaust);
+        EnergyCost.UpgradeBy(-1);
     }
 }

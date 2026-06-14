@@ -9,17 +9,15 @@ using ThePenitent.ThePenitentCode.Powers;
 namespace ThePenitent.ThePenitentCode.Cards;
 
 
-public sealed class ThePenitentDefendCard : ThePenitentCard
+public sealed class ThePenitentDefendCard() : 
+    ThePenitentCard
+    (
+        cost: 1,
+        type: CardType.Skill,
+        rarity: CardRarity.Basic,
+        target: TargetType.Self
+    )
 {
-    public ThePenitentDefendCard()
-        : base(
-            cost: 1,
-            type: CardType.Skill,
-            rarity: CardRarity.Basic,
-            target: TargetType.Self)
-    {
-    }
-
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new BlockVar(5M, ValueProp.Move),

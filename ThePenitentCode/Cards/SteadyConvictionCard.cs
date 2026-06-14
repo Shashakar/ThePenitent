@@ -4,30 +4,30 @@ using ThePenitent.ThePenitentCode.HoverTips;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
-
-public sealed class DarkWhisperCard() :
+public sealed class SteadyConvictionCard() :
     ThePenitentMechanicCard
     (
         cost: 1,
         type: CardType.Skill,
         rarity: CardRarity.Common,
         target: TargetType.Self,
-        burden: 3M,
-        cardsToDraw: 1,
-        extraHoverTips: [PenitentHoverTipFactory.Descend(), PenitentHoverTipFactory.Burden()]
+        block: 4M,
+        faith: 3M,
+        extraHoverTips: [PenitentHoverTipFactory.Ascend(), PenitentHoverTipFactory.Faith()]
     )
 {
-    
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await Descend();
-
-        await DrawCards(choiceContext);
+        await GainSelfBlock(cardPlay);
+        await Ascend();
     }
     
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        Block.UpgradeValueBy(2M);
+        Faith.UpgradeValueBy(1M);
     }
+
+
 }

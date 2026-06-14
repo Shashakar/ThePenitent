@@ -1,3 +1,19 @@
 {
-  
+  "CONVICTION.title": "Conviction",
+  "CONVICTION.description": "The Penitent's spiritual scale. Ascending moves Conviction toward Faith. Descending moves it toward Burden.",
+
+  "ASCEND.title": "Ascend",
+  "ASCEND.description": "Move Conviction toward Faith. Remove up to that much Burden. Any excess becomes Faith.",
+
+  "DESCEND.title": "Descend",
+  "DESCEND.description": "Move Conviction toward Burden. Remove up to that much Faith. Any excess becomes Burden.",
+
+  "FAITH.title": "Faith",
+  "FAITH.description": "Positive Conviction. Prevents unblocked HP damage 1-for-1. At the start of your turn, lose half your Faith, rounded up.",
+
+  "BURDEN.title": "Burden",
+  "BURDEN.description": "Negative Conviction. At combat's end, lose HP equal to your Burden. If this would kill you, survive at 1 HP and lose Max HP for each unpaid HP.",
+
+  "ATONE.title": "Atone",
+  "ATONE.description": "Heal the target. The Penitent Descends by the HP restored."
 }

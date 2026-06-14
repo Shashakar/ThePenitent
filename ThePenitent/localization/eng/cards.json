@@ -1,32 +1,59 @@
 {
-  "THEPENITENT-THE_PENITENT_STRIKE_CARD.description": "Deal 6 damage",
-  "THEPENITENT-THE_PENITENT_STRIKE_CARD.upgradeDescription": "Deal 9 damage",
-  "THEPENITENT-THE_PENITENT_STRIKE_CARD.title": "Strike",
+  "THEPENITENT-BLACK_BENEDICTION_CARD.description": "Deal {Damage:diff()} damage.\n[purple]Descend[/purple] {BurdenPower:diff()}.",
+  "THEPENITENT-BLACK_BENEDICTION_CARD.title": "Black Benediction",
   
-  "THEPENITENT-THE_PENITENT_DEFEND_CARD.description": "Gain 5 Block",
-  "THEPENITENT-THE_PENITENT_DEFEND_CARD.upgradeDescription": "Gain 8 Block",
+  "THEPENITENT-BLASPHEMOUS_BOLT_CARD.description": "Deal {Damage:diff()} damage.\n[purple]Descend[/purple] {BurdenPower:diff()}.",
+  "THEPENITENT-BLASPHEMOUS_BOLT_CARD.title": "Blasphemous Bolt",
+
+  "THEPENITENT-CONFESS_CARD.description": "[gold]Ascend[/gold] {FaithPower:diff()}.\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
+  "THEPENITENT-CONFESS_CARD.title": "Confess",
+
+  "THEPENITENT-CRISIS_OF_FAITH_CARD.description": "[purple]Descend[/purple] equal to your [gold]Faith[/gold].\nGain {BlockMultiplier:diff()} times that much [gold]Block[/gold]{AdditionalBlock:cond:>0? + {AdditionalBlock:diff()}|}.",
+  "THEPENITENT-CRISIS_OF_FAITH_CARD.title": "Crisis of Faith",
+
+  "THEPENITENT-DARK_WHISPER_CARD.description": "[purple]Descend[/purple] {BurdenPower:diff()}.\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
+  "THEPENITENT-DARK_WHISPER_CARD.title": "Dark Whisper",
+  
+  "THEPENITENT-EMPTY_HANDS_CARD.description": "If you have no [gold]Block[/gold], [gold]Ascend[/gold] {FaithPower:diff()}.",
+  "THEPENITENT-EMPTY_HANDS_CARD.title": "Empty Hands",
+
+  "THEPENITENT-FALL_FROM_GRACE_CARD.description": "[purple]Descend[/purple] twice your [gold]Faith[/gold].\nDeal {CalculatedDamage:diff()} damage.",
+  "THEPENITENT-FALL_FROM_GRACE_CARD.title": "Fall From Grace",
+
+  "THEPENITENT-FINAL_PENANCE_CARD.description": "Lose HP equal to half your [purple]Burden[/purple], rounded down.\nDeal damage to ALL enemies equal to {ExtraDamage:diff()} times the HP lost.\n[gold]Ascend[/gold] equal to your [purple]Burden[/purple].\n[gold]Exhaust[/gold].",
+  "THEPENITENT-FINAL_PENANCE_CARD.title": "Final Penance",
+
+  "THEPENITENT-GENTLE_MERCY_CARD.description": "Heal {Heal:diff()} HP.\nThis healing does not generate [purple]Burden[/purple].",
+  "THEPENITENT-GENTLE_MERCY_CARD.title": "Gentle Mercy",
+
+  "THEPENITENT-GRIM_UNCERTAINTY_CARD.description": "Whenever your [purple]Descend[/purple] creates [purple]Burden[/purple], deal {GrimCertaintyPower:diff()} damage to a random enemy.",
+  "THEPENITENT-GRIM_UNCERTAINTY_CARD.title": "Grim Uncertainty",
+
+  "THEPENITENT-HEAVY_SOUL_CARD.description": "Deal {Damage:diff()} damage.\nIf you have [purple]Burden[/purple], deal {Damage:diff()} additional damage.",
+  "THEPENITENT-HEAVY_SOUL_CARD.title": "Heavy Soul",
+
+  "THEPENITENT-INTERCESSION_CARD.description": "[gold]Atone[/gold] an ally {Heal:diff()}",
+  "THEPENITENT-INTERCESSION_CARD.title": "Intercession",
+
+  "THEPENITENT-MEND_WOUNDS_CARD.description": "[gold]Atone[/gold] {Heal:diff()}.",
+  "THEPENITENT-MEND_WOUNDS_CARD.title": "Mend Wounds",
+
+  "THEPENITENT-PRAYER_CARD.description": "[gold]Ascend[/gold] {FaithPower:diff()}.",
+  "THEPENITENT-PRAYER_CARD.title": "Prayer",
+
+  "THEPENITENT-RUINOUS_CONFESSION_CARD.description": "[gold]Ascend[/gold] equal to your [purple]Burden[/purple].\nDeal damage equal to {ExtraDamage:diff()} times the Ascended amount to ALL enemies.\n[gold]Exhaust[/gold].",
+  "THEPENITENT-RUINOUS_CONFESSION_CARD.title": "Ruinous Confession",
+
+  "THEPENITENT-STEADY_CONVICTION_CARD.description": "Gain {Block:diff()} [gold]Block[/gold].\n[gold]Ascend[/gold] {FaithPower:diff()}.",
+  "THEPENITENT-STEADY_CONVICTION_CARD.title": "Steady Conviction",
+
+  "THEPENITENT-THE_PENITENT_DEFEND_CARD.description": "Gain {Block:diff()} [gold]Block[/gold].",
   "THEPENITENT-THE_PENITENT_DEFEND_CARD.title": "Defend",
   
-  "THEPENITENT-BLASPHEMOUS_BOLT_CARD.description": "Deal 13 damage. Descend 4",
-  "THEPENITENT-BLASPHEMOUS_BOLT_CARD.upgradeDescription": "Deal 16 damage. Descend 5",
-  "THEPENITENT-BLASPHEMOUS_BOLT_CARD.title": "Blasphemous Bolt",
-  
-  "THEPENITENT-GRIM_UNCERTAINTY_CARD.description": "Whenever you gain Burden, deal 2 damage to a random enemy",
-  "THEPENITENT-GRIM_UNCERTAINTY_CARD.upgradeDescription": "Whenever you gain Burden, deal 3 damage to a random enemy",
-  "THEPENITENT-GRIM_UNCERTAINTY_CARD.title": "Grim Uncertainty",
-  
-  "THEPENITENT-DARK_WHISPER_CARD.description": "Descend 3. Draw 1 card.",
-  "THEPENITENT-DARK_WHISPER_CARD.title": "Dark Whisper",
+  "THEPENITENT-THE_PENITENT_STRIKE_CARD.description": "Deal {Damage:diff()} damage.",
+  "THEPENITENT-THE_PENITENT_STRIKE_CARD.title": "Strike",
 
-  "THEPENITENT-RUINOUS_CONFESSION_CARD.description": "Ascend equal to your Burden. Deal damage equal to twice the Ascended amount to all enemies",
-  "THEPENITENT-RUINOUS_CONFESSION_CARD.title": "Ruinous Confession",
-  
-  "THEPENITENT-PRAYER_CARD.description": "Ascend 4",
-  "THEPENITENT-PRAYER_CARD.title": "Prayer",
-  
-  "THEPENITENT-MEND_WOUNDS_CARD.description": "Atone 5",
-  "THEPENITENT-MEND_WOUNDS_CARD.title": "Mend Wounds",
-  
-  "THEPENITENT-EMPTY_HANDS_CARD.description": "If you have no Block, gain Ascend 10",
-  "THEPENITENT-EMPTY_HANDS_CARD.title": "Empty Hands"
+  "THEPENITENT-ZEALOUS_RETORT_CARD.description": "Whenever [gold]Faith[/gold] prevents damage, deal {ZealousRetortPower:diff()} damage to the attacker.",
+  "THEPENITENT-ZEALOUS_RETORT_CARD.title": "Zealous Retort"
+
 }

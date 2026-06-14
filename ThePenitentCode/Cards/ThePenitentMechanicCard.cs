@@ -2,6 +2,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
@@ -13,11 +14,13 @@ namespace ThePenitent.ThePenitentCode.Cards;
 public abstract class ThePenitentMechanicCard : ThePenitentCard
 {
     private readonly decimal? _damage;
+    private readonly decimal? _block;
     private readonly decimal? _healAmount;
     private readonly decimal? _burden;
     private readonly decimal? _faith;
     private readonly int? _cardsToDraw;
     private readonly IReadOnlyList<CardKeyword> _keywords;
+    private readonly IReadOnlyList<IHoverTip> _extraHoverTips;
 
     protected ThePenitentMechanicCard(
         int cost,
@@ -25,19 +28,23 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
         CardRarity rarity,
         TargetType target,
         decimal? damage = null,
+        decimal? block = null,
         decimal? healAmount = null,
         decimal? burden = null,
         decimal? faith = null,
         int? cardsToDraw = null,
-        IEnumerable<CardKeyword>? keywords = null)
+        IEnumerable<CardKeyword>? keywords = null,
+        IEnumerable<IHoverTip>? extraHoverTips = null)
         : base(cost, type, rarity, target)
     {
         _damage = damage;
+        _block = block;
         _healAmount = healAmount;
         _burden = burden;
         _faith = faith;
         _cardsToDraw = cardsToDraw;
         _keywords = keywords?.ToArray() ?? [];
+        _extraHoverTips = extraHoverTips?.ToArray() ?? [];
     }
 
     protected override IEnumerable<DynamicVar> CanonicalVars
@@ -46,6 +53,9 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
         {
             if (_damage is not null)
                 yield return new DamageVar(_damage.Value, ValueProp.Move);
+            
+            if (_block is not null)
+                yield return new BlockVar(_block.Value, ValueProp.Move);
 
             if (_healAmount is not null)
                 yield return new HealVar(_healAmount.Value);
@@ -79,8 +89,23 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
     protected virtual IEnumerable<DynamicVar> AdditionalCanonicalVars => [];
 
     protected virtual IEnumerable<CardKeyword> AdditionalCanonicalKeywords => [];
+    
+    protected override IEnumerable<IHoverTip> ExtraHoverTips
+    {
+        get
+        {
+            foreach (IHoverTip hoverTip in _extraHoverTips)
+                yield return hoverTip;
+
+            foreach (IHoverTip hoverTip in AdditionalExtraHoverTips)
+                yield return hoverTip;
+        }
+    }
+    
+    protected virtual IEnumerable<IHoverTip> AdditionalExtraHoverTips => [];
 
     protected DamageVar Damage => DynamicVars.Damage;
+    protected BlockVar Block => DynamicVars.Block;
     protected HealVar Heal => DynamicVars.Heal;
     protected CardsVar Cards => DynamicVars.Cards;
 
@@ -94,17 +119,17 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
         return (PowerVar<TPower>)DynamicVars[key];
     }
 
-    protected Task ApplyBurdenToSelf()
+    protected Task Descend()
     {
-        return Descend(Burden.BaseValue);
+        return ApplyBurden(Burden.BaseValue);
     }
-
-    protected Task ApplyFaithToSelf()
-    {
-        return Ascend(Faith.BaseValue);
-    }
-
+    
     protected Task Descend(decimal amount)
+    {
+        return ApplyBurden(amount);
+    }
+    
+    private Task ApplyBurden(decimal amount)
     {
         return PenitentPowerCmd.ApplyBurden(
             Owner.Creature,
@@ -113,8 +138,18 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
             this
         );
     }
+    
+    protected Task Ascend()
+    {
+        return ApplyFaith(Faith.BaseValue);
+    }
 
     protected Task Ascend(decimal amount)
+    {
+        return ApplyFaith(amount);
+    }
+
+    private Task ApplyFaith(decimal amount)
     {
         return PenitentPowerCmd.ApplyFaith(
             Owner.Creature,
@@ -151,18 +186,33 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
 
     protected Task AttackAllEnemies(PlayerChoiceContext choiceContext)
     {
-        return DamageCmd.Attack(Damage.BaseValue)
+        return AttackAllEnemies(choiceContext, Damage.BaseValue);
+    }
+
+    protected Task AttackAllEnemies(PlayerChoiceContext choiceContext, decimal damageAmount)
+    {
+        if (CombatState is null)
+            return Task.CompletedTask;
+        
+        return DamageCmd.Attack(damageAmount)
             .FromCard(this)
             .TargetingAllOpponents(CombatState)
             .Execute(choiceContext);
     }
 
-    protected Task AttackAllEnemies(PlayerChoiceContext choiceContext, decimal damageAmount)
+    protected Task GainSelfBlock(CardPlay cardPlay)
     {
-        return DamageCmd.Attack(damageAmount)
-            .FromCard(this)
-            .TargetingAllOpponents(CombatState)
-            .Execute(choiceContext);
+        return GainBlock(Owner.Creature, cardPlay, Block);
+    }
+    
+    protected Task GainSelfBlock(CardPlay cardPlay, BlockVar blockAmount)
+    {
+        return GainBlock(Owner.Creature, cardPlay, blockAmount);
+    }
+
+    protected Task GainBlock(Creature creature, CardPlay cardPlay, BlockVar amount)
+    {
+        return CreatureCmd.GainBlock(creature, amount, cardPlay);
     }
 
     /// <summary>
@@ -200,5 +250,29 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
     protected Task HealTarget(Creature target)
     {
         return CreatureCmd.Heal(target, Heal.BaseValue);
+    }
+
+    protected Task<IEnumerable<DamageResult>> LoseHp(int hpAmount)
+    {
+        return CreatureCmd.Damage(
+            new ThrowingPlayerChoiceContext(),
+            Owner.Creature,
+            hpAmount,
+            ValueProp.Unpowered | ValueProp.Unblockable,
+            Owner.Creature,
+            null
+        );
+    }
+    
+    protected async Task<int> LoseHpAndGetHpLost(int hpAmount)
+    {
+        if (hpAmount <= 0)
+            return 0;
+
+        IEnumerable<DamageResult> results = await LoseHp(hpAmount);
+
+        return results
+            .Where(result => result.Receiver == Owner.Creature)
+            .Sum(result => result.UnblockedDamage);
     }
 }

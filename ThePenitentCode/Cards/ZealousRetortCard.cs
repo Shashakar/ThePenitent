@@ -7,27 +7,26 @@ using ThePenitent.ThePenitentCode.Powers;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
-
-public class GrimUncertaintyCard() : ThePenitentMechanicCard(1,
+public class ZealousRetortCard() : ThePenitentMechanicCard(1,
     CardType.Power, CardRarity.Uncommon,
-    TargetType.Self, extraHoverTips: [PenitentHoverTipFactory.Descend(), PenitentHoverTipFactory.Burden()])
+    TargetType.Self, extraHoverTips: [PenitentHoverTipFactory.Faith()])
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new PowerVar<GrimCertaintyPower>(2M),
+        new PowerVar<ZealousRetortPower>(3M),
     ];
     
-    public PowerVar<GrimCertaintyPower> GrimCertainty =>
-        (PowerVar<GrimCertaintyPower>)DynamicVars["GrimCertaintyPower"];
+    public PowerVar<ZealousRetortPower> ZealousRetort =>
+        (PowerVar<ZealousRetortPower>)DynamicVars["ZealousRetortPower"];
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        await PowerCmd.Apply<GrimCertaintyPower>(
+        await PowerCmd.Apply<ZealousRetortPower>(
             Owner.Creature,
-            GrimCertainty.BaseValue,
+            ZealousRetort.BaseValue,
             Owner.Creature,
             this
         );
@@ -35,6 +34,6 @@ public class GrimUncertaintyCard() : ThePenitentMechanicCard(1,
 
     protected override void OnUpgrade()
     {
-        GrimCertainty.UpgradeValueBy(1M);
+        ZealousRetort.UpgradeValueBy(1M);
     }
 }
