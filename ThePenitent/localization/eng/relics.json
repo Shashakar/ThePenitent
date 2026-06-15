@@ -1,5 +1,49 @@
 {
+  "THEPENITENT-ASH_STAINED_VEIL_RELIC.description": "Once per combat, when you Atone, do not Descend.",
+  "THEPENITENT-ASH_STAINED_VEIL_RELIC.flavor": "Mercy leaves a mark. So does fire.",
+  "THEPENITENT-ASH_STAINED_VEIL_RELIC.title": "Ash-Stained Veil",
+
+  "THEPENITENT-BOOK_OF_DEBTS_RELIC.description": "Atone heals 2 additional HP. Whenever you Atone, Descend 2 additional.",
+  "THEPENITENT-BOOK_OF_DEBTS_RELIC.flavor": "Every mercy is recorded. Every name is underlined.",
+  "THEPENITENT-BOOK_OF_DEBTS_RELIC.title": "Book of Debts",
+
+  "THEPENITENT-BROKEN_RELIQUARY_RELIC.description": "Gain 1 Energy at the start of each turn. At the start of each combat, Descend 6.",
+  "THEPENITENT-BROKEN_RELIQUARY_RELIC.flavor": "Power leaks from the fracture, and something darker leaks with it.",
+  "THEPENITENT-BROKEN_RELIQUARY_RELIC.title": "Broken Reliquary",
+  
+  "THEPENITENT-COMPLETED_HALO_RELIC.description": "At the start of each combat, gain {FaithPower} Faith.",
+  "THEPENITENT-COMPLETED_HALO_RELIC.flavor": "Its circle is whole again. For a moment, so is the soul beneath it.",
+  "THEPENITENT-COMPLETED_HALO_RELIC.title": "Completed Halo",
+
+  "THEPENITENT-CRACKED_CENSER_RELIC.description": "At the start of each combat, if you have no Faith or Burden, gain {FaithPower} Faith.",
+  "THEPENITENT-CRACKED_CENSER_RELIC.flavor": "The smoke rises unevenly, but still it rises.",
+  "THEPENITENT-CRACKED_CENSER_RELIC.title": "Cracked Censer",
+
   "THEPENITENT-FRACTURED_HALO_RELIC.description": "At the start of each combat, gain {FaithPower} Faith.",
   "THEPENITENT-FRACTURED_HALO_RELIC.flavor": "Its light is damaged, but not gone. The faithful learn to survive on what remains.",
-  "THEPENITENT-FRACTURED_HALO_RELIC.title": "Fractured Halo"
+  "THEPENITENT-FRACTURED_HALO_RELIC.title": "Fractured Halo",
+
+  "THEPENITENT-HERETICS_CANDLE_RELIC.description": "Your Attacks deal 2 additional damage while you have Burden.",
+  "THEPENITENT-HERETICS_CANDLE_RELIC.flavor": "Its flame does not warm. It accuses.",
+  "THEPENITENT-HERETICS_CANDLE_RELIC.title": "Heretic's Candle",
+  
+  "THEPENITENT-HALLOW_CROWN_RELIC.description": "Faith no longer decays. You cannot gain Block from cards.",
+  "THEPENITENT-HALLOW_CROWN_RELIC.flavor": "It shines without grace, a perfect circle around an empty promise.",
+  "THEPENITENT-HALLOW_CROWN_RELIC.title": "Hallow Crown",
+
+  "THEPENITENT-IRON_CONFESSIONAL_RELIC.description": "The first time each combat you would Descend, Descend 2 less.",
+  "THEPENITENT-IRON_CONFESSIONAL_RELIC.flavor": "A prison for sins too heavy to speak aloud.",
+  "THEPENITENT-IRON_CONFESSIONAL_RELIC.title": "Iron Confessional",
+
+  "THEPENITENT-MARTYRS_BELL_RELIC.description": "The first time each turn Faith prevents damage, gain {Block} Block.",
+  "THEPENITENT-MARTYRS_BELL_RELIC.flavor": "It rings only for those who endure the blow.",
+  "THEPENITENT-MARTYRS_BELL_RELIC.title": "Martyr's Bell",
+  
+  "THEPENITENT-SEALED_PENANCE_RELIC.description": "At combat's end, Burden cannot reduce your Max HP by more than 3.",
+  "THEPENITENT-SEALED_PENANCE_RELIC.flavor": "Some debts are deferred. None are forgiven.",
+  "THEPENITENT-SEALED_PENANCE_RELIC.title": "Sealed Penance",
+
+  "THEPENITENT-THORNED_ROSARY_RELIC.description": "Whenever your Descend creates {BurdenPower} Burden, deal {Damage} damage to ALL enemies.",
+  "THEPENITENT-THORNED_ROSARY_RELIC.flavor": "Each bead is a prayer. Each thorn remembers the cost.",
+  "THEPENITENT-THORNED_ROSARY_RELIC.title": "Thorned Rosary"
 }

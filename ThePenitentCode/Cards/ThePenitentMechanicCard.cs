@@ -135,7 +135,8 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
             Owner.Creature,
             amount,
             Owner.Creature,
-            this
+            this,
+            CombatState
         );
     }
     
@@ -155,7 +156,8 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
             Owner.Creature,
             amount,
             Owner.Creature,
-            this
+            this,
+            CombatState
         );
     }
 
@@ -233,12 +235,8 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
         if (hpRestored <= 0)
             return;
 
-        await PenitentPowerCmd.ApplyBurden(
-            Owner.Creature,
-            hpRestored,
-            Owner.Creature,
-            this
-        );
+        await Descend(hpRestored);
+        
     }
 
     protected Task HealTarget(CardPlay cardPlay)

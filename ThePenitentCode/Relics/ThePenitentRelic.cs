@@ -1,8 +1,10 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using ThePenitent.ThePenitentCode.Character;
 using ThePenitent.ThePenitentCode.Extensions;
+using ThePenitent.ThePenitentCode.Powers;
 
 namespace ThePenitent.ThePenitentCode.Relics;
 
@@ -24,4 +26,7 @@ public abstract class ThePenitentRelic : CustomRelicModel
         $"{Id.Entry.RemovePrefix().ToLowerInvariant()}_outline.png".RelicImagePath();
 
     protected override string BigIconPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".BigRelicImagePath();
+    
+    public PowerVar<FaithPower> Faith =>
+        (PowerVar<FaithPower>)DynamicVars["FaithPower"];
 }

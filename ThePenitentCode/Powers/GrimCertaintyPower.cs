@@ -1,33 +1,29 @@
-﻿using MegaCrit.Sts2.Core.Commands;
+﻿using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
+using ThePenitent.ThePenitentCode.Interfaces;
 
 namespace ThePenitent.ThePenitentCode.Powers;
 
-public sealed class GrimCertaintyPower : ThePenitentPower
+public sealed class GrimCertaintyPower : ThePenitentPower, ICreatedBurdenListener
 {
     public override PowerType Type => PowerType.Buff;
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override async Task AfterPowerAmountChanged(
-        PowerModel power,
-        decimal amount,
-        Creature? applier,
-        CardModel? cardSource)
+    public async Task OnCreatedBurden(Creature owner, decimal descendAmount, decimal burdenCreated, Creature? source,
+        CardModel? cardSource, CombatState? combatState)
     {
-        if (power is not BurdenPower)
+        if (owner != Owner)
             return;
 
-        if (power.Owner != Owner)
+        if (burdenCreated <= 0)
             return;
-
-        if (amount <= 0)
-            return;
-
+        
         IReadOnlyList<Creature> hittableEnemies = CombatState.HittableEnemies;
         if (hittableEnemies.Count == 0)
             return;
