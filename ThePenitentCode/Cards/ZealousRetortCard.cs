@@ -7,9 +7,15 @@ using ThePenitent.ThePenitentCode.Powers;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
-public class ZealousRetortCard() : ThePenitentMechanicCard(1,
-    CardType.Power, CardRarity.Uncommon,
-    TargetType.Self, extraHoverTips: [PenitentHoverTipFactory.Faith()])
+public class ZealousRetortCard() : 
+    ThePenitentMechanicCard
+    (
+        cost: 1,
+        type: CardType.Power, 
+        rarity: CardRarity.Uncommon,
+        target: TargetType.Self, 
+        extraHoverTips: [PenitentHoverTipFactory.Faith()]
+    )
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [

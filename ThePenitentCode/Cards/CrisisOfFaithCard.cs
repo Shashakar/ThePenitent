@@ -18,6 +18,8 @@ public class CrisisOfFaithCard() :
         extraHoverTips: [PenitentHoverTipFactory.Descend(), PenitentHoverTipFactory.Faith(), PenitentHoverTipFactory.Burden()]
     )
 {
+    protected override bool ShouldGlowRedInternal => HasFaithPower;
+        
     public override bool GainsBlock => true;
     
     protected override IEnumerable<DynamicVar> AdditionalCanonicalVars =>

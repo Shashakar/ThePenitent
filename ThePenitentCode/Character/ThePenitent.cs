@@ -18,8 +18,11 @@ public class ThePenitent : PlaceholderCharacterModel
     public static readonly Color Color = new("D8C89A");
 
     public override Color NameColor => Color;
+    public override Color MapDrawingColor => Color;
+    public override Color EnergyLabelOutlineColor => Color;
+    
     public override CharacterGender Gender => CharacterGender.Masculine;
-    public override int StartingHp => 70;
+    public override int StartingHp => 65;
 
     public override IEnumerable<CardModel> StartingDeck =>
     [
@@ -33,20 +36,8 @@ public class ThePenitent : PlaceholderCharacterModel
         ModelDb.Card<ThePenitentDefendCard>(),
         ModelDb.Card<MendWoundsCard>(),
         ModelDb.Card<PrayerCard>(),
+        ModelDb.Card<BlasphemousBoltCard>(),
     ];
-    
-    /*public override IEnumerable<CardModel> StartingDeck =>
-    [
-        ModelDb.Card<RuinousConfessionCard>(),
-        ModelDb.Card<DarkWhisperCard>(),
-        ModelDb.Card<DarkWhisperCard>(),
-        ModelDb.Card<DarkWhisperCard>(),
-        ModelDb.Card<DarkWhisperCard>(),
-        ModelDb.Card<PrayerCard>(),
-        ModelDb.Card<PrayerCard>(),
-        ModelDb.Card<PrayerCard>(),
-        ModelDb.Card<MendWoundsCard>(),
-    ];*/
 
     public override IReadOnlyList<RelicModel> StartingRelics =>
     [
@@ -77,4 +68,6 @@ public class ThePenitent : PlaceholderCharacterModel
     public override string CustomMapMarkerPath => "map_marker_char_name.png".CharacterUiPath();
     public override string CustomCharacterSelectBg =>  "charselect_bg_penitent.tscn".CharacterUiPath();
     public override string CustomVisualPath => "penitent.tscn".CharacterUiPath();
+
+
 }

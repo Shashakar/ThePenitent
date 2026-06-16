@@ -17,6 +17,8 @@ public class FinalPenanceCard() :
         extraHoverTips: [PenitentHoverTipFactory.Burden(), PenitentHoverTipFactory.Ascend(), PenitentHoverTipFactory.Faith()]
     )
 {
+    protected override bool ShouldGlowRedInternal => !HasBurdenPower;
+
     protected override IEnumerable<DynamicVar> AdditionalCanonicalVars =>
     [
         new ExtraDamageVar(3M)

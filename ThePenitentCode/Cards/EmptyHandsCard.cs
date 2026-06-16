@@ -16,7 +16,9 @@ public class EmptyHandsCard() :
         extraHoverTips: [PenitentHoverTipFactory.Ascend(), PenitentHoverTipFactory.Faith()]
     )
 {
-    
+    protected override bool ShouldGlowRedInternal => Owner.Creature.Block != 0;
+    protected override bool ShouldGlowGoldInternal => Owner.Creature.Block == 0;
+
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)

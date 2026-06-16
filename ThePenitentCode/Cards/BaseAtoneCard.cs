@@ -34,6 +34,8 @@ public abstract class BaseAtoneCard : ThePenitentMechanicCard
     private static IEnumerable<IHoverTip> BuildHoverTips(IEnumerable<IHoverTip>? extraHoverTips)
     {
         yield return PenitentHoverTipFactory.Atone();
+        yield return PenitentHoverTipFactory.Descend();
+        yield return PenitentHoverTipFactory.Burden();
 
         if (extraHoverTips is null)
             yield break;

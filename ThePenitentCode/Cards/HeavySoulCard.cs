@@ -16,6 +16,7 @@ public class HeavySoulCard() :
         extraHoverTips: [PenitentHoverTipFactory.Burden()]
     )
 {
+    protected override bool ShouldGlowGoldInternal => HasBurdenPower;
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

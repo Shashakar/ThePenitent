@@ -8,9 +8,15 @@ using ThePenitent.ThePenitentCode.Powers;
 namespace ThePenitent.ThePenitentCode.Cards;
 
 
-public class GrimUncertaintyCard() : ThePenitentMechanicCard(1,
-    CardType.Power, CardRarity.Uncommon,
-    TargetType.Self, extraHoverTips: [PenitentHoverTipFactory.Descend(), PenitentHoverTipFactory.Burden()])
+public class GrimUncertaintyCard() : 
+    ThePenitentMechanicCard
+    (
+        cost: 1,
+        type: CardType.Power, 
+        rarity: CardRarity.Uncommon,
+        target: TargetType.Self, 
+        extraHoverTips: [PenitentHoverTipFactory.Descend(), PenitentHoverTipFactory.Burden()]
+    )
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [

@@ -20,7 +20,7 @@
   "THEPENITENT-FALL_FROM_GRACE_CARD.description": "[purple]Descend[/purple] twice your [gold]Faith[/gold].\nDeal that much damage. ({CalculatedDamage:diff()} damage)",
   "THEPENITENT-FALL_FROM_GRACE_CARD.title": "Fall From Grace",
 
-  "THEPENITENT-FINAL_PENANCE_CARD.description": "Lose HP equal to half your [purple]Burden[/purple], rounded down.\nDeal damage to ALL enemies equal to {ExtraDamage:diff()} times the HP lost.\n[gold]Ascend[/gold] equal to your [purple]Burden[/purple].\n[gold]Exhaust[/gold].",
+  "THEPENITENT-FINAL_PENANCE_CARD.description": "Lose HP equal to half your [purple]Burden[/purple], rounded down.\nDeal damage to ALL enemies equal to {ExtraDamage:diff()} times the HP lost.\n[gold]Ascend[/gold] equal to your [purple]Burden[/purple].",
   "THEPENITENT-FINAL_PENANCE_CARD.title": "Final Penance",
 
   "THEPENITENT-GENTLE_MERCY_CARD.description": "Heal {Heal:diff()} HP.\nThis healing does not generate [purple]Burden[/purple].",
@@ -41,7 +41,7 @@
   "THEPENITENT-PRAYER_CARD.description": "[gold]Ascend[/gold] {FaithPower:diff()}.",
   "THEPENITENT-PRAYER_CARD.title": "Prayer",
 
-  "THEPENITENT-RUINOUS_CONFESSION_CARD.description": "[gold]Ascend[/gold] equal to your [purple]Burden[/purple].\nDeal damage equal to {ExtraDamage:diff()} times the Ascended amount to ALL enemies.\n[gold]Exhaust[/gold].",
+  "THEPENITENT-RUINOUS_CONFESSION_CARD.description": "[gold]Ascend[/gold] equal to your [purple]Burden[/purple].\nDeal damage equal to {ExtraDamage:diff()} times the Ascended amount to ALL enemies.",
   "THEPENITENT-RUINOUS_CONFESSION_CARD.title": "Ruinous Confession",
 
   "THEPENITENT-STEADY_CONVICTION_CARD.description": "Gain {Block:diff()} [gold]Block[/gold].\n[gold]Ascend[/gold] {FaithPower:diff()}.",

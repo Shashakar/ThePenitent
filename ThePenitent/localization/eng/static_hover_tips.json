@@ -9,7 +9,7 @@
   "DESCEND.description": "Move Conviction toward Burden. Remove up to that much Faith. Any excess becomes Burden.",
 
   "FAITH.title": "Faith",
-  "FAITH.description": "Positive Conviction. Prevents unblocked HP damage 1-for-1. At the start of your turn, lose half your Faith, rounded up.",
+  "FAITH.description": "Positive Conviction. Consumes unblocked HP damage 1-for-1. At the start of your turn, lose half your Faith, rounded up.",
 
   "BURDEN.title": "Burden",
   "BURDEN.description": "Negative Conviction. At combat's end, lose HP equal to your Burden. If this would kill you, survive at 1 HP and lose Max HP for each unpaid HP.",

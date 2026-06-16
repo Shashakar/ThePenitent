@@ -17,6 +17,7 @@ public sealed class RuinousConfessionCard() :
         extraHoverTips: [PenitentHoverTipFactory.Ascend(), PenitentHoverTipFactory.Burden()]
     )
 {
+    protected override bool ShouldGlowRedInternal => !HasBurdenPower;
 
     protected override IEnumerable<DynamicVar> AdditionalCanonicalVars =>
     [

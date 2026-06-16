@@ -17,6 +17,7 @@ public sealed class FallFromGraceCard() :
         extraHoverTips: [PenitentHoverTipFactory.Descend(), PenitentHoverTipFactory.Faith(), PenitentHoverTipFactory.Burden()]
     )
 {
+    protected override bool ShouldGlowRedInternal => !HasFaithPower;
 
     protected override IEnumerable<DynamicVar> AdditionalCanonicalVars =>
     [

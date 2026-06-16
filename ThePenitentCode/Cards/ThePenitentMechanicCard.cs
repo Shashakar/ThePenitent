@@ -46,6 +46,9 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
         _keywords = keywords?.ToArray() ?? [];
         _extraHoverTips = extraHoverTips?.ToArray() ?? [];
     }
+    
+    protected bool HasBurdenPower => Owner.Creature.HasPower<BurdenPower>();
+    protected bool HasFaithPower => Owner.Creature.HasPower<FaithPower>();
 
     protected override IEnumerable<DynamicVar> CanonicalVars
     {
