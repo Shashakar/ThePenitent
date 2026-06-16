@@ -1,0 +1,310 @@
+[gd_scene load_steps=4 format=3 uid="uid://cwild2ipjnim1"]
+
+[ext_resource type="Texture2D" uid="uid://ndqjv88abui5" path="res://ThePenitent/images/combat/layer1_penitent.png" id="1_iwlta"]
+[ext_resource type="Texture2D" uid="uid://djo7vy1ni7ahp" path="res://ThePenitent/images/combat/layer2_penitent.png" id="2_ahw2p"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_l85a6"]
+script/source = "using System;
+using System.Collections.Generic;
+using System.Text;
+using Godot;
+using MegaCrit.Sts2.Core.Assets;
+using MegaCrit.Sts2.Core.Entities.Text;
+
+namespace MegaCrit.Sts2.addons.mega_text;
+
+public static class MegaLabelHelper
+{
+	private enum BbcodeParsingState
+	{
+		NotInTag,
+		InTag,
+		InEndTag,
+		InTagEnvironment
+	}
+
+	private const float _defaultLineSpacing = -3f;
+
+	private static readonly List<BbcodeObject> _cachedBbcodeObjects = new List<BbcodeObject>();
+
+	public static void AssertThemeFontOverride(Control control, StringName fontOverrideName)
+	{
+		if (control.HasThemeFontOverride(fontOverrideName))
+		{
+			return;
+		}
+		throw new InvalidOperationException($\"{control.GetType().Name} '{control.GetPath()}' has no theme font override. Please set one to avoid a Godot engine bug.\");
+	}
+
+	public static List<BbcodeObject> ParseBbcode(string bbcode)
+	{
+		_cachedBbcodeObjects.Clear();
+		BbcodeParsingState bbcodeParsingState = BbcodeParsingState.NotInTag;
+		Stack<string> stack = new Stack<string>();
+		StringBuilder stringBuilder = new StringBuilder();
+		for (int i = 0; i < bbcode.Length; i++)
+		{
+			if (bbcode[i] == '[' && bbcodeParsingState == BbcodeParsingState.NotInTag)
+			{
+				if (stringBuilder.Length > 0)
+				{
+					_cachedBbcodeObjects.Add(new BbcodeObject
+					{
+						text = stringBuilder.ToString(),
+						type = BbcodeObjectType.Text
+					});
+					stringBuilder.Clear();
+				}
+				bbcodeParsingState = BbcodeParsingState.InTag;
+			}
+			else if ((bbcode[i] == ' ' || bbcode[i] == '=') && bbcodeParsingState == BbcodeParsingState.InTag)
+			{
+				string text = stringBuilder.ToString();
+				_cachedBbcodeObjects.Add(new BbcodeObject
+				{
+					tag = text,
+					type = BbcodeObjectType.BeginTag
+				});
+				stack.Push(text);
+				bbcodeParsingState = BbcodeParsingState.InTagEnvironment;
+			}
+			else if (bbcode[i] == '/' && bbcodeParsingState == BbcodeParsingState.InTag)
+			{
+				bbcodeParsingState = BbcodeParsingState.InEndTag;
+			}
+			else if (bbcode[i] == ']' && (bbcodeParsingState == BbcodeParsingState.InTag || bbcodeParsingState == BbcodeParsingState.InEndTag || bbcodeParsingState == BbcodeParsingState.InTagEnvironment))
+			{
+				if (bbcodeParsingState != BbcodeParsingState.InTagEnvironment)
+				{
+					string text2 = stringBuilder.ToString();
+					if (text2 == \"lb\")
+					{
+						_cachedBbcodeObjects.Add(new BbcodeObject
+						{
+							text = \"[\",
+							type = BbcodeObjectType.Text
+						});
+					}
+					else if (text2 == \"rb\")
+					{
+						_cachedBbcodeObjects.Add(new BbcodeObject
+						{
+							text = \"]\",
+							type = BbcodeObjectType.Text
+						});
+					}
+					else
+					{
+						if (bbcodeParsingState == BbcodeParsingState.InEndTag)
+						{
+							if (stack.Count == 0)
+							{
+								throw new InvalidOperationException($\"Found end tag {text2} with no tag on the stack. ({bbcode})\");
+							}
+							if (stack.Peek() != text2)
+							{
+								throw new InvalidOperationException($\"Found end tag {text2}, expected {stack.Peek()}. ({bbcode})\");
+							}
+							stack.Pop();
+						}
+						else
+						{
+							stack.Push(text2);
+						}
+						_cachedBbcodeObjects.Add(new BbcodeObject
+						{
+							tag = text2,
+							type = ((bbcodeParsingState == BbcodeParsingState.InTag) ? BbcodeObjectType.BeginTag : BbcodeObjectType.EndTag)
+						});
+					}
+				}
+				bbcodeParsingState = BbcodeParsingState.NotInTag;
+				stringBuilder.Clear();
+			}
+			else if (bbcodeParsingState != BbcodeParsingState.InTagEnvironment)
+			{
+				stringBuilder.Append(bbcode[i]);
+			}
+		}
+		if (bbcodeParsingState != BbcodeParsingState.NotInTag)
+		{
+			throw new InvalidOperationException(\"In tag at end of string\");
+		}
+		if (stringBuilder.Length > 0)
+		{
+			_cachedBbcodeObjects.Add(new BbcodeObject
+			{
+				text = stringBuilder.ToString(),
+				type = BbcodeObjectType.Text
+			});
+		}
+		return _cachedBbcodeObjects;
+	}
+
+	public static Vector2 EstimateTextSize(TextParagraph paragraph, List<BbcodeObject> objs, Font font, int fontSize, float maxWidth, float lineSpacing)
+	{
+		paragraph.Clear();
+		paragraph.Direction = TextServer.Direction.Auto;
+		paragraph.Orientation = TextServer.Orientation.Horizontal;
+		Stack<string> stack = new Stack<string>();
+		int num = 0;
+		foreach (BbcodeObject obj in objs)
+		{
+			if (obj.type == BbcodeObjectType.BeginTag)
+			{
+				stack.Push(obj.tag);
+			}
+			else if (obj.type == BbcodeObjectType.EndTag)
+			{
+				stack.Pop();
+			}
+			else if (obj.type == BbcodeObjectType.Text)
+			{
+				if (stack.TryPeek(out var result) && result == \"img\")
+				{
+					string text = obj.text;
+					Texture2D texture2D = PreloadManager.Cache.GetTexture2D(text);
+					paragraph.AddObject(num, texture2D.GetSize(), InlineAlignment.Center);
+					num++;
+				}
+				else
+				{
+					paragraph.AddString(obj.text, font, fontSize);
+				}
+			}
+		}
+		paragraph.Width = maxWidth;
+		paragraph.BreakFlags = TextServer.LineBreakFlag.Mandatory | TextServer.LineBreakFlag.WordBound;
+		paragraph.JustificationFlags = TextServer.JustificationFlag.Kashida | TextServer.JustificationFlag.WordBound;
+		paragraph.TextOverrunBehavior = TextServer.OverrunBehavior.TrimChar;
+		paragraph.Alignment = HorizontalAlignment.Center;
+		paragraph.MaxLinesVisible = -1;
+		int lineCount = paragraph.GetLineCount();
+		return paragraph.GetSize() + Vector2.Down * (lineSpacing - -3f) * (lineCount - 1);
+	}
+
+	public static bool IsTooBig(TextParagraph paragraph, List<BbcodeObject> objs, Font font, int fontSize, float lineSpacing, Vector2 rectSize, bool horizontallyBound, bool verticallyBound)
+	{
+		Vector2 vector = EstimateTextSize(paragraph, objs, font, fontSize, rectSize.X, lineSpacing);
+		float x = rectSize.X;
+		float y = rectSize.Y;
+		bool flag = vector.X > x;
+		bool flag2 = vector.Y > y;
+		if (!(flag && horizontallyBound))
+		{
+			return flag2 && verticallyBound;
+		}
+		return true;
+	}
+
+	public static Vector2 EstimateTextSize(TextParagraph paragraph, string text, Font font, int fontSize, float maxWidth, float lineSpacing, bool wrap = true)
+	{
+		paragraph.Clear();
+		paragraph.Direction = TextServer.Direction.Auto;
+		paragraph.Orientation = TextServer.Orientation.Horizontal;
+		paragraph.AddString(text, font, fontSize);
+		paragraph.Width = maxWidth;
+		paragraph.BreakFlags = (TextServer.LineBreakFlag)(wrap ? 3 : 0);
+		paragraph.JustificationFlags = TextServer.JustificationFlag.Kashida | TextServer.JustificationFlag.WordBound;
+		paragraph.TextOverrunBehavior = TextServer.OverrunBehavior.NoTrimming;
+		paragraph.Alignment = HorizontalAlignment.Center;
+		paragraph.MaxLinesVisible = -1;
+		int lineCount = paragraph.GetLineCount();
+		return paragraph.GetSize() + Vector2.Down * (lineSpacing - -3f) * (lineCount - 1);
+	}
+
+	public static bool IsTooBig(TextParagraph paragraph, string text, Font font, int fontSize, float lineSpacing, bool wrap, Vector2 rectSize)
+	{
+		Vector2 vector = EstimateTextSize(paragraph, text, font, fontSize, rectSize.X, lineSpacing, wrap);
+		float x = rectSize.X;
+		float y = rectSize.Y;
+		bool flag = vector.X > x;
+		bool flag2 = vector.Y > y;
+		return flag || flag2;
+	}
+}
+"
+
+[node name="PenitentEnergyCounter" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 128.0
+
+[node name="Layer1" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Layer1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_iwlta")
+expand_mode = 2
+
+[node name="Layer2" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Layer3" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Layer4" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Layer4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -14.0
+offset_top = -16.0
+offset_right = 15.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ahw2p")
+expand_mode = 1
+
+[node name="Layer5" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+theme_override_colors/font_outline_color = Color(0.43727878, 0.520689, 0.5357575, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 34
+text = "3/3"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = SubResource("CSharpScript_l85a6")
+theme_override_font_sizes/font_size = 34

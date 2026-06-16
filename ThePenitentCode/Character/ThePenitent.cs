@@ -68,6 +68,5 @@ public class ThePenitent : PlaceholderCharacterModel
     public override string CustomMapMarkerPath => "map_marker_char_name.png".CharacterUiPath();
     public override string CustomCharacterSelectBg =>  "charselect_bg_penitent.tscn".CharacterUiPath();
     public override string CustomVisualPath => "penitent.tscn".CharacterUiPath();
-
-
+    public override string CustomEnergyCounterPath => "penitent_energy_counter.tscn".CharacterUiPath();
 }
