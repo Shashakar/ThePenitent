@@ -228,18 +228,39 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
     {
         Creature target = cardPlay.Target ?? Owner.Creature;
 
+        var atoneData = new AtoneData(
+            Owner.Creature,
+            target,
+            Heal.BaseValue,
+            this,
+            CombatState
+        );
+
+        await PenitentMechanicNotifier.NotifyBeforeAtone(atoneData);
+
+        if (atoneData.HealAmount <= 0)
+        {
+            await PenitentMechanicNotifier.NotifyAfterAtone(atoneData);
+            return;
+        }
+
         int hpBefore = target.CurrentHp;
 
-        await CreatureCmd.Heal(target, Heal.BaseValue);
+        await CreatureCmd.Heal(target, atoneData.HealAmount);
 
         int hpAfter = target.CurrentHp;
         int hpRestored = Math.Max(0, hpAfter - hpBefore);
 
-        if (hpRestored <= 0)
-            return;
+        atoneData.ActualHealAmount = hpRestored;
+        atoneData.DescendAmount = hpRestored;
 
-        await Descend(hpRestored);
-        
+        if (atoneData.ActualHealAmount > 0)
+            await PenitentMechanicNotifier.NotifyBeforeAtoneDescend(atoneData);
+
+        if (atoneData.WillDescend)
+            await Descend(atoneData.DescendAmount);
+
+        await PenitentMechanicNotifier.NotifyAfterAtone(atoneData);
     }
 
     protected Task HealTarget(CardPlay cardPlay)
