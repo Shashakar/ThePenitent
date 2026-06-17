@@ -1,9 +1,10 @@
 ﻿using BaseLib.Abstracts;
 using BaseLib.Extensions;
 using BaseLib.Utils;
+using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Localization;
 using ThePenitent.ThePenitentCode.Character;
 using ThePenitent.ThePenitentCode.Extensions;
-using MegaCrit.Sts2.Core.Entities.Cards;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
@@ -23,4 +24,24 @@ public abstract class ThePenitentCard(int cost, CardType type, CardRarity rarity
     //Uses card_portraits/card_name.png as image path. These should be smaller images.
     public override string PortraitPath => $"{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
     public override string BetaPortraitPath => $"beta/{Id.Entry.RemovePrefix().ToLowerInvariant()}.png".CardImagePath();
+
+    protected override void AddExtraArgsToDescription(LocString description)
+    {
+        string contextualKey = CombatState is not null
+            ? $"{Id.Entry}.combatDescription"
+            : $"{Id.Entry}.outOfCombatDescription";
+
+        if (!LocString.Exists("cards", contextualKey))
+            return;
+
+        var contextualDescription = new LocString("cards", contextualKey);
+        DynamicVars.AddTo(contextualDescription);
+        AddExtraArgsToContextualDescription(contextualDescription);
+
+        description.Add("CardDescription", contextualDescription);
+    }
+
+    protected virtual void AddExtraArgsToContextualDescription(LocString description)
+    {
+    }
 }

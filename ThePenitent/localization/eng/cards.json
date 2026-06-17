@@ -8,19 +8,27 @@
   "THEPENITENT-CONFESS_CARD.description": "[gold]Ascend[/gold] {FaithPower:diff()}.\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
   "THEPENITENT-CONFESS_CARD.title": "Confess",
 
-  "THEPENITENT-CRISIS_OF_FAITH_CARD.description": "[purple]Descend[/purple] equal to your [gold]Faith[/gold].\nGain {BlockMultiplier:diff()} times that much [gold]Block[/gold]{AdditionalBlock:cond:>0? + {AdditionalBlock:diff()}|}.",
+  "THEPENITENT-CRISIS_OF_FAITH_CARD.description": "{CardDescription}",
+  "THEPENITENT-CRISIS_OF_FAITH_CARD.outOfCombatDescription": "[purple]Descend[/purple] equal to your [gold]Faith[/gold].\nGain twice that much [gold]Block[/gold]{CalculationBase:cond:>0? + {CalculationBase:diff()}|}.",
+  "THEPENITENT-CRISIS_OF_FAITH_CARD.combatDescription": "[purple]Descend[/purple] equal to your faith ({DescendAmount} Faith).\nGain that much [gold]Block[/gold]. ({CalculatedBlock} Block)",
   "THEPENITENT-CRISIS_OF_FAITH_CARD.title": "Crisis of Faith",
 
   "THEPENITENT-DARK_WHISPER_CARD.description": "[purple]Descend[/purple] {BurdenPower:diff()}.\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
   "THEPENITENT-DARK_WHISPER_CARD.title": "Dark Whisper",
   
-  "THEPENITENT-EMPTY_HANDS_CARD.description": "If you have no [gold]Block[/gold], [gold]Ascend[/gold] {FaithPower:diff()}.",
+  "THEPENITENT-EMPTY_HANDS_CARD.description": "{CardDescription}",
+  "THEPENITENT-EMPTY_HANDS_CARD.outOfCombatDescription": "If you have no [gold]Block[/gold], [gold]Ascend[/gold] {FaithPower:diff()}.",
+  "THEPENITENT-EMPTY_HANDS_CARD.combatDescription": "If you have 0 [gold]Block[/gold] (currently {CurrentBlock}), [gold]Ascend[/gold] {FaithPower:diff()}.",
   "THEPENITENT-EMPTY_HANDS_CARD.title": "Empty Hands",
 
-  "THEPENITENT-FALL_FROM_GRACE_CARD.description": "[purple]Descend[/purple] twice your [gold]Faith[/gold].\nDeal that much damage. ({CalculatedDamage:diff()} damage)",
+  "THEPENITENT-FALL_FROM_GRACE_CARD.description": "{CardDescription}",
+  "THEPENITENT-FALL_FROM_GRACE_CARD.outOfCombatDescription": "[purple]Descend[/purple] twice your [gold]Faith[/gold].\nDeal that much damage{CalculationBase:cond:>0? + {CalculationBase:diff()}|}.",
+  "THEPENITENT-FALL_FROM_GRACE_CARD.combatDescription": "[purple]Descend[/purple] {DescendAmount} (twice your [gold]Faith[/gold]).\nDeal {CalculatedDamage:diff()} damage.",
   "THEPENITENT-FALL_FROM_GRACE_CARD.title": "Fall From Grace",
 
-  "THEPENITENT-FINAL_PENANCE_CARD.description": "Lose HP equal to half your [purple]Burden[/purple], rounded down.\nDeal damage to ALL enemies equal to {ExtraDamage:diff()} times the HP lost.\n[gold]Ascend[/gold] equal to your [purple]Burden[/purple].",
+  "THEPENITENT-FINAL_PENANCE_CARD.description": "{CardDescription}",
+  "THEPENITENT-FINAL_PENANCE_CARD.outOfCombatDescription": "Lose HP equal to half your [purple]Burden[/purple], rounded down.\nDeal damage to ALL enemies equal to {ExtraDamage:diff()} times the HP lost.\n[gold]Ascend[/gold] equal to your [purple]Burden[/purple].",
+  "THEPENITENT-FINAL_PENANCE_CARD.combatDescription": "Lose {HpLossAmount} HP (half your [purple]Burden[/purple]).\nDeal {ExtraDamage:diff()} that much damage to ALL enemies ({DamageAmount} each).\n[gold]Ascend[/gold] {BurdenAmount} (equal to your Burden).",
   "THEPENITENT-FINAL_PENANCE_CARD.title": "Final Penance",
 
   "THEPENITENT-GENTLE_MERCY_CARD.description": "Heal {Heal:diff()} HP.\nThis healing does not generate [purple]Burden[/purple].",
@@ -41,7 +49,9 @@
   "THEPENITENT-PRAYER_CARD.description": "[gold]Ascend[/gold] {FaithPower:diff()}.",
   "THEPENITENT-PRAYER_CARD.title": "Prayer",
 
-  "THEPENITENT-RUINOUS_CONFESSION_CARD.description": "[gold]Ascend[/gold] equal to your [purple]Burden[/purple].\nDeal damage equal to {ExtraDamage:diff()} times the Ascended amount to ALL enemies.",
+  "THEPENITENT-RUINOUS_CONFESSION_CARD.description": "{CardDescription}",
+  "THEPENITENT-RUINOUS_CONFESSION_CARD.outOfCombatDescription": "[gold]Ascend[/gold] equal to your [purple]Burden[/purple].\nDeal damage equal to {ExtraDamage:diff()} times the Ascended amount to ALL enemies.",
+  "THEPENITENT-RUINOUS_CONFESSION_CARD.combatDescription": "[gold]Ascend[/gold] equal to your [purple]Burden[/purple] ({BurdenAmount}).\nDeal that much damage ({DamageAmount}) to ALL enemies. ",
   "THEPENITENT-RUINOUS_CONFESSION_CARD.title": "Ruinous Confession",
 
   "THEPENITENT-STEADY_CONVICTION_CARD.description": "Gain {Block:diff()} [gold]Block[/gold].\n[gold]Ascend[/gold] {FaithPower:diff()}.",

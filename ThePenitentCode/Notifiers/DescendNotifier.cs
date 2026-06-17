@@ -1,5 +1,6 @@
 using ThePenitent.ThePenitentCode.CustomData;
 using ThePenitent.ThePenitentCode.Interfaces;
+using ThePenitent.ThePenitentCode.Mechanics.Notifiers;
 
 namespace ThePenitent.ThePenitentCode.Notifiers;
 

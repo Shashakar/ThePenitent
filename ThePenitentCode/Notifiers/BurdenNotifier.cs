@@ -1,8 +1,8 @@
-using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Creatures;
-using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using ThePenitent.ThePenitentCode.Interfaces;
+using ThePenitent.ThePenitentCode.Mechanics.Notifiers;
 
 namespace ThePenitent.ThePenitentCode.Notifiers;
 

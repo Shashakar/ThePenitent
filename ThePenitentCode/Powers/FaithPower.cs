@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using ThePenitent.ThePenitentCode.Interfaces;
+using ThePenitent.ThePenitentCode.Notifiers;
 
 namespace ThePenitent.ThePenitentCode.Powers;
 
@@ -21,6 +22,9 @@ public sealed class FaithPower : ThePenitentPower
             return;
 
         if (Amount <= 0)
+            return;
+
+        if (!FaithDecayNotifier.ShouldFaithDecay(Owner))
             return;
         
         // Lose half of Faith, rounded up.
@@ -85,9 +89,11 @@ public sealed class FaithPower : ThePenitentPower
         if (dealer == null)
             return;
 
-        foreach (var listener in Owner.Powers.OfType<IFaithPreventedDamageListener>())
-        {
-            await listener.OnFaithPreventedDamage(choiceContext, dealer, faithLoss);
-        }
+        await FaithPreventedDamageNotifier.NotifyFaithPreventedDamage(
+            Owner,
+            choiceContext,
+            dealer,
+            faithLoss
+        );
     }
 }

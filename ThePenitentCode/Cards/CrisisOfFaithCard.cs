@@ -1,6 +1,7 @@
 using BaseLib.Extensions;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using ThePenitent.ThePenitentCode.HoverTips;
@@ -24,9 +25,21 @@ public class CrisisOfFaithCard() :
     
     protected override IEnumerable<DynamicVar> AdditionalCanonicalVars =>
     [
-        new DynamicVar("BlockMultiplier", 2M),
-        new DynamicVar("AdditionalBlock", 0M)
+        new CalculationBaseVar(0M),
+        new CalculationExtraVar(2M),
+        new CalculatedBlockVar(ValueProp.Move)
+            .WithMultiplier((card, _) =>
+                card.Owner.Creature.GetPowerAmount<FaithPower>())
     ];
+
+    protected override void AddExtraArgsToContextualDescription(LocString description)
+    {
+        decimal faith = CombatState is not null
+            ? Owner.Creature.GetPowerAmount<FaithPower>()
+            : 0M;
+
+        description.Add("DescendAmount", faith);
+    }
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
@@ -36,15 +49,16 @@ public class CrisisOfFaithCard() :
             return;
         
         var faith = Owner.Creature.GetPower<FaithPower>()!.Amount;
-        var blockMultiplier = DynamicVars["BlockMultiplier"].BaseValue;
-        var additionalBlock = DynamicVars["AdditionalBlock"].BaseValue;
-        var amountOfBlockToGain = new BlockVar((faith * blockMultiplier) + additionalBlock, ValueProp.Move);
+        var amountOfBlockToGain = new BlockVar(
+            DynamicVars.CalculationBase.BaseValue + faith * DynamicVars.CalculationExtra.BaseValue,
+            ValueProp.Move
+        );
         await Descend(faith);
         await GainSelfBlock(play, amountOfBlockToGain);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["AdditionalBlock"].UpgradeValueBy(5M);
+        DynamicVars.CalculationBase.UpgradeValueBy(5M);
     }
 }

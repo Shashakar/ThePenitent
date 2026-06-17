@@ -1,5 +1,6 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using ThePenitent.ThePenitentCode.HoverTips;
 using ThePenitent.ThePenitentCode.Powers;
@@ -23,6 +24,19 @@ public class FinalPenanceCard() :
     [
         new ExtraDamageVar(3M)
     ];
+
+    protected override void AddExtraArgsToContextualDescription(LocString description)
+    {
+        int burden = CombatState is not null
+            ? Owner.Creature.GetPowerAmount<BurdenPower>()
+            : 0;
+
+        int hpLoss = burden / 2;
+
+        description.Add("BurdenAmount", burden);
+        description.Add("HpLossAmount", hpLoss);
+        description.Add("DamageAmount", hpLoss * DynamicVars.ExtraDamage.BaseValue);
+    }
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

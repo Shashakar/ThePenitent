@@ -6,10 +6,9 @@ using ThePenitent.ThePenitentCode.Interfaces;
 
 namespace ThePenitent.ThePenitentCode.Relics;
 
-// "Once per combat, when you Atone, do not Descend."
-public class AshStainedVeilRelic : ThePenitentRelic, IBeforeAtoneDescendListener
+public sealed class IronConfessionalRelic : ThePenitentRelic, IBeforeDescendListener
 {
-    public override RelicRarity Rarity => RelicRarity.Uncommon;
+    public override RelicRarity Rarity => RelicRarity.Common;
 
     private bool _usedThisCombat;
 
@@ -26,25 +25,19 @@ public class AshStainedVeilRelic : ThePenitentRelic, IBeforeAtoneDescendListener
 
     public override bool ShowCounter => !_usedThisCombat;
 
-    public Task BeforeAtoneDescend(AtoneData atoneData)
+    public Task BeforeDescend(DescendData descendData)
     {
         if (_usedThisCombat)
             return Task.CompletedTask;
 
-        if (atoneData.Owner != Owner.Creature)
+        if (descendData.Owner != Owner.Creature)
             return Task.CompletedTask;
 
-        if (!atoneData.RestoredHp)
-            return Task.CompletedTask;
-
-        if (atoneData.DescendAmount <= 0)
+        if (descendData.Amount <= 0)
             return Task.CompletedTask;
 
         Flash();
-
-        atoneData.PreventDescend = true;
-        atoneData.DescendAmount = 0;
-
+        descendData.Amount = Math.Max(0M, descendData.Amount - 2M);
         _usedThisCombat = true;
 
         return Task.CompletedTask;

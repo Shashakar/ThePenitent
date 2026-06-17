@@ -1,5 +1,6 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization;
 using ThePenitent.ThePenitentCode.HoverTips;
 
 namespace ThePenitent.ThePenitentCode.Cards;
@@ -18,6 +19,15 @@ public class EmptyHandsCard() :
 {
     protected override bool ShouldGlowRedInternal => Owner.Creature.Block != 0;
     protected override bool ShouldGlowGoldInternal => Owner.Creature.Block == 0;
+
+    protected override void AddExtraArgsToContextualDescription(LocString description)
+    {
+        int block = CombatState is not null
+            ? Owner.Creature.Block
+            : 0;
+
+        description.Add("CurrentBlock", block);
+    }
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,

@@ -15,7 +15,7 @@ public class ThePenitent : PlaceholderCharacterModel
 {
     public const string CharacterId = "ThePenitent";
 
-    public static readonly Color Color = new("D8C89A");
+    public static readonly Color Color = new("1A160A");
 
     public override Color NameColor => Color;
     public override Color MapDrawingColor => Color;
