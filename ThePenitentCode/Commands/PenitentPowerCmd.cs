@@ -22,6 +22,14 @@ public static class PenitentPowerCmd
         if (amount <= 0)
             return;
 
+        var ascendData = new AscendData(
+            owner,
+            amount,
+            source,
+            cardSource,
+            combatState
+        );
+
         decimal remaining = amount;
 
         BurdenPower? burden = GetPower<BurdenPower>(owner);
@@ -41,7 +49,10 @@ public static class PenitentPowerCmd
         }
 
         if (remaining <= 0)
+        {
+            await AscendNotifier.NotifyAfterAscend(ascendData);
             return;
+        }
 
         await PowerCmd.Apply<FaithPower>(
             owner,
@@ -49,6 +60,8 @@ public static class PenitentPowerCmd
             source ?? owner,
             cardSource
         );
+
+        await AscendNotifier.NotifyAfterAscend(ascendData);
     }
 
     public static async Task ApplyBurden(

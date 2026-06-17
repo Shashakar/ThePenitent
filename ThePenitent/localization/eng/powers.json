@@ -2,6 +2,22 @@
   "THEPENITENT-BURDEN_POWER.description": "At the end of combat, lose HP equal to your Burden. If this would kill you, survive at 1 HP and lose Max HP equal to the excess.",
   "THEPENITENT-BURDEN_POWER.smartDescription": "At the end of combat, lose [blue]{Amount}[/blue] HP. If this would kill you, survive at 1 HP and lose Max HP equal to the excess.",
   "THEPENITENT-BURDEN_POWER.title": "Burden",
+
+  "THEPENITENT-ASHEN_EDICT_POWER.description": "Whenever you Ascend, apply Weak.",
+  "THEPENITENT-ASHEN_EDICT_POWER.smartDescription": "Whenever you Ascend, apply [blue]1[/blue] Weak to a random enemy.",
+  "THEPENITENT-ASHEN_EDICT_POWER.title": "Ashen Edict",
+
+  "THEPENITENT-ASHEN_EDICT_ALL_ENEMIES_POWER.description": "Whenever you Ascend, apply Weak to ALL enemies.",
+  "THEPENITENT-ASHEN_EDICT_ALL_ENEMIES_POWER.smartDescription": "Whenever you Ascend, apply [blue]1[/blue] Weak to ALL enemies.",
+  "THEPENITENT-ASHEN_EDICT_ALL_ENEMIES_POWER.title": "Ashen Edict",
+
+  "THEPENITENT-CROWN_OF_THORNS_POWER.description": "The first time each combat your Descend creates Burden, gain that much Block.",
+  "THEPENITENT-CROWN_OF_THORNS_POWER.smartDescription": "The first time each combat your Descend creates Burden, gain that much Block.",
+  "THEPENITENT-CROWN_OF_THORNS_POWER.title": "Crown of Thorns",
+
+  "THEPENITENT-CROWN_OF_THORNS_VENGEFUL_POWER.description": "The first time each combat your Descend creates Burden, gain that much Block and deal that much damage to a random enemy.",
+  "THEPENITENT-CROWN_OF_THORNS_VENGEFUL_POWER.smartDescription": "The first time each combat your Descend creates Burden, gain that much Block and deal that much damage to a random enemy.",
+  "THEPENITENT-CROWN_OF_THORNS_VENGEFUL_POWER.title": "Crown of Thorns",
   
   "THEPENITENT-FAITH_POWER.description": "Faith prevents damage equal to its amount. This persists between turns. At the start of your turn, lose half of your Faith.",
   "THEPENITENT-FAITH_POWER.smartDescription": "Faith prevents the next [blue]{Amount}[/blue] damage.",
@@ -10,6 +26,10 @@
   "THEPENITENT-GRIM_CERTAINTY_POWER.description": "Whenever your Descend creates Burden, deal damage to a random enemy.",
   "THEPENITENT-GRIM_CERTAINTY_POWER.smartDescription": "Whenever your Descend creates Burden, deal [blue]{Amount}[/blue] damage to a random enemy.",
   "THEPENITENT-GRIM_CERTAINTY_POWER.title": "Grim Certainty",
+
+  "THEPENITENT-RITES_OF_ENDURANCE_POWER.description": "Whenever Faith prevents damage, gain Block next turn.",
+  "THEPENITENT-RITES_OF_ENDURANCE_POWER.smartDescription": "Whenever Faith prevents damage, gain [blue]{Amount}[/blue] Block next turn.",
+  "THEPENITENT-RITES_OF_ENDURANCE_POWER.title": "Rites of Endurance",
 
   "THEPENITENT-ZEALOUS_RETORT_POWER.description": "Whenever Faith prevents damage, deal damage to the attacker",
   "THEPENITENT-ZEALOUS_RETORT_POWER.smartDescription": "Whenever Faith prevents damage, deal [blue]{Amount}[/blue] damage to the attacker",

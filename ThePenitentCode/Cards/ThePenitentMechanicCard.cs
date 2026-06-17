@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using ThePenitent.ThePenitentCode.Commands;
 using ThePenitent.ThePenitentCode.CustomData;
@@ -299,5 +300,56 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
         return results
             .Where(result => result.Receiver == Owner.Creature)
             .Sum(result => result.UnblockedDamage);
+    }
+
+    protected Task ApplyWeak(CardPlay cardPlay, decimal amount)
+    {
+        ArgumentNullException.ThrowIfNull(cardPlay.Target);
+
+        return PowerCmd.Apply<WeakPower>(
+            cardPlay.Target,
+            amount,
+            Owner.Creature,
+            this
+        );
+    }
+
+    protected Task ApplyFrail(CardPlay cardPlay, decimal amount)
+    {
+        ArgumentNullException.ThrowIfNull(cardPlay.Target);
+
+        return PowerCmd.Apply<FrailPower>(
+            cardPlay.Target,
+            amount,
+            Owner.Creature,
+            this
+        );
+    }
+
+    protected Task ApplyTemporaryStrengthLoss(CardPlay cardPlay, decimal amount)
+    {
+        ArgumentNullException.ThrowIfNull(cardPlay.Target);
+
+        return PowerCmd.Apply<PiercingWailPower>(
+            cardPlay.Target,
+            amount,
+            Owner.Creature,
+            this
+        );
+    }
+
+    protected async Task ApplyWeakToAllEnemies(decimal amount)
+    {
+        if (CombatState is null)
+            return;
+
+        foreach (Creature enemy in CombatState.HittableEnemies)
+            await PowerCmd.Apply<WeakPower>(enemy, amount, Owner.Creature, this);
+    }
+
+    protected bool IsSoloCombat()
+    {
+        return CombatState is null ||
+               CombatState.Allies.Count(creature => creature.IsPlayer) <= 1;
     }
 }

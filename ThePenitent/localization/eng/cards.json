@@ -1,9 +1,18 @@
 {
   "THEPENITENT-BLACK_BENEDICTION_CARD.description": "Deal {Damage:diff()} damage.\n[purple]Descend[/purple] {BurdenPower:diff()}.",
   "THEPENITENT-BLACK_BENEDICTION_CARD.title": "Black Benediction",
+
+  "THEPENITENT-ASHEN_EDICT_CARD.description": "Whenever you [gold]Ascend[/gold], apply 1 [blue]Weak[/blue] to {AllEnemies:cond:>0?ALL enemies|a random enemy}.",
+  "THEPENITENT-ASHEN_EDICT_CARD.title": "Ashen Edict",
   
   "THEPENITENT-BLASPHEMOUS_BOLT_CARD.description": "Deal {Damage:diff()} damage.\n[purple]Descend[/purple] {BurdenPower:diff()}.",
   "THEPENITENT-BLASPHEMOUS_BOLT_CARD.title": "Blasphemous Bolt",
+
+  "THEPENITENT-BURDENED_REBUKE_CARD.description": "Apply {Weak:diff()} [blue]Weak[/blue].\n[purple]Descend[/purple] {BurdenPower:diff()}.",
+  "THEPENITENT-BURDENED_REBUKE_CARD.title": "Burdened Rebuke",
+
+  "THEPENITENT-CROWN_OF_THORNS_CARD.description": "The first time each combat your [purple]Descend[/purple] creates [purple]Burden[/purple], gain that much [gold]Block[/gold]{DealsDamage:cond:>0? and deal that much damage to a random enemy|}.",
+  "THEPENITENT-CROWN_OF_THORNS_CARD.title": "Crown of Thorns",
 
   "THEPENITENT-CONFESS_CARD.description": "[gold]Ascend[/gold] {FaithPower:diff()}.\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
   "THEPENITENT-CONFESS_CARD.title": "Confess",
@@ -40,8 +49,17 @@
   "THEPENITENT-HEAVY_SOUL_CARD.description": "Deal {Damage:diff()} damage.\nIf you have [purple]Burden[/purple], deal {Damage:diff()} additional damage.",
   "THEPENITENT-HEAVY_SOUL_CARD.title": "Heavy Soul",
 
+  "THEPENITENT-HUMBLING_LITANY_CARD.description": "Enemy loses {StrengthLoss:diff()} Strength this turn.\nExhaust.",
+  "THEPENITENT-HUMBLING_LITANY_CARD.title": "Humbling Litany",
+
   "THEPENITENT-INTERCESSION_CARD.description": "[gold]Atone[/gold] an ally {Heal:diff()}",
   "THEPENITENT-INTERCESSION_CARD.title": "Intercession",
+
+  "THEPENITENT-LONE_VIGIL_CARD.description": "Gain {Block:diff()} [gold]Block[/gold].\nIf you have no allies, [gold]Ascend[/gold] {FaithPower:diff()}.",
+  "THEPENITENT-LONE_VIGIL_CARD.title": "Lone Vigil",
+
+  "THEPENITENT-MARTYRS_RESOLVE_CARD.description": "Lose {HpLoss} HP.\nGain {Block:diff()} [gold]Block[/gold].\nDraw {Cards:diff()} card.",
+  "THEPENITENT-MARTYRS_RESOLVE_CARD.title": "Martyr's Resolve",
 
   "THEPENITENT-MEND_WOUNDS_CARD.description": "[gold]Atone[/gold] {Heal:diff()}.",
   "THEPENITENT-MEND_WOUNDS_CARD.title": "Mend Wounds",
@@ -53,6 +71,15 @@
   "THEPENITENT-RUINOUS_CONFESSION_CARD.outOfCombatDescription": "[gold]Ascend[/gold] equal to your [purple]Burden[/purple].\nDeal damage equal to {ExtraDamage:diff()} times the Ascended amount to ALL enemies.",
   "THEPENITENT-RUINOUS_CONFESSION_CARD.combatDescription": "[gold]Ascend[/gold] equal to your [purple]Burden[/purple] ({BurdenAmount}).\nDeal that much damage ({DamageAmount}) to ALL enemies. ",
   "THEPENITENT-RUINOUS_CONFESSION_CARD.title": "Ruinous Confession",
+
+  "THEPENITENT-RITES_OF_ENDURANCE_CARD.description": "Whenever [gold]Faith[/gold] prevents damage, gain {RitesOfEndurancePower:diff()} [gold]Block[/gold] next turn.",
+  "THEPENITENT-RITES_OF_ENDURANCE_CARD.title": "Rites of Endurance",
+
+  "THEPENITENT-SACKCLOTH_CURSE_CARD.description": "Apply {Weak:diff()} [blue]Weak[/blue] and {Frail:diff()} [blue]Frail[/blue].\nExhaust.",
+  "THEPENITENT-SACKCLOTH_CURSE_CARD.title": "Sackcloth Curse",
+
+  "THEPENITENT-SCOURGING_BLOW_CARD.description": "Deal {Damage:diff()} damage.\nIf you have [purple]Burden[/purple], apply {Weak:diff()} [blue]Weak[/blue].",
+  "THEPENITENT-SCOURGING_BLOW_CARD.title": "Scourging Blow",
 
   "THEPENITENT-STEADY_CONVICTION_CARD.description": "Gain {Block:diff()} [gold]Block[/gold].\n[gold]Ascend[/gold] {FaithPower:diff()}.",
   "THEPENITENT-STEADY_CONVICTION_CARD.title": "Steady Conviction",
