@@ -40,7 +40,6 @@ Rules:
 - When The Penitent gains Faith, remove that much Burden first.
 - Any excess becomes Faith.
 - Faith persists between turns.
-- At the start of The Penitent's turn, Faith decays.
 
 Example:
 
@@ -319,7 +318,6 @@ Faith prevents damage, removes Burden, and absorbs future Burden. This is powerf
 Countermeasures:
 
 - Keep Faith values modest.
-- Preserve Faith decay.
 - Avoid too many free or low-cost Ascend effects.
 - Be careful with starting relic Faith value.
 
@@ -393,7 +391,7 @@ PenitentPowerCmd
   owns Faith/Burden scale cancellation
 
 FaithPower
-  owns damage prevention and Faith decay
+  owns damage prevention
 
 BurdenPower
   owns end-of-combat punishment
@@ -470,8 +468,7 @@ This distinction is critical for balance.
 
 These should be answered through playtesting.
 
-1. Should Faith decay at the start of turn or end of turn?
-- Start of turn
+1. Are current Faith values still modest enough now that Faith does not decay?
 2. Is Fractured Halo at 4 Faith too low, too high, or correct?
 - I went with 6, but we can still test this out
 3. Are common Ascend values too strong because they also cleanse Burden?

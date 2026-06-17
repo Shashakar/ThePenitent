@@ -19,7 +19,7 @@
   "THEPENITENT-CROWN_OF_THORNS_VENGEFUL_POWER.smartDescription": "The first time each combat your Descend creates Burden, gain that much Block and deal that much damage to a random enemy.",
   "THEPENITENT-CROWN_OF_THORNS_VENGEFUL_POWER.title": "Crown of Thorns",
   
-  "THEPENITENT-FAITH_POWER.description": "Faith prevents damage equal to its amount. This persists between turns. At the start of your turn, lose half of your Faith.",
+  "THEPENITENT-FAITH_POWER.description": "Faith prevents damage equal to its amount. This persists between turns.",
   "THEPENITENT-FAITH_POWER.smartDescription": "Faith prevents the next [blue]{Amount}[/blue] damage.",
   "THEPENITENT-FAITH_POWER.title": "Faith",
 
