@@ -29,4 +29,7 @@ public abstract class ThePenitentRelic : CustomRelicModel
     
     public PowerVar<FaithPower> Faith =>
         (PowerVar<FaithPower>)DynamicVars["FaithPower"];
+
+    public PowerVar<BurdenPower> Burden =>
+        (PowerVar<BurdenPower>)DynamicVars["BurdenPower"];
 }

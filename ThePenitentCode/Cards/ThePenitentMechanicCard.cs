@@ -7,6 +7,9 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
 using ThePenitent.ThePenitentCode.Commands;
+using ThePenitent.ThePenitentCode.CustomData;
+using ThePenitent.ThePenitentCode.Mechanics.Notifiers;
+using ThePenitent.ThePenitentCode.Notifiers;
 using ThePenitent.ThePenitentCode.Powers;
 
 namespace ThePenitent.ThePenitentCode.Cards;
@@ -46,7 +49,7 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
         _keywords = keywords?.ToArray() ?? [];
         _extraHoverTips = extraHoverTips?.ToArray() ?? [];
     }
-    
+
     protected bool HasBurdenPower => Owner.Creature.HasPower<BurdenPower>();
     protected bool HasFaithPower => Owner.Creature.HasPower<FaithPower>();
 
@@ -56,7 +59,7 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
         {
             if (_damage is not null)
                 yield return new DamageVar(_damage.Value, ValueProp.Move);
-            
+
             if (_block is not null)
                 yield return new BlockVar(_block.Value, ValueProp.Move);
 
@@ -92,7 +95,7 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
     protected virtual IEnumerable<DynamicVar> AdditionalCanonicalVars => [];
 
     protected virtual IEnumerable<CardKeyword> AdditionalCanonicalKeywords => [];
-    
+
     protected override IEnumerable<IHoverTip> ExtraHoverTips
     {
         get
@@ -104,7 +107,7 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
                 yield return hoverTip;
         }
     }
-    
+
     protected virtual IEnumerable<IHoverTip> AdditionalExtraHoverTips => [];
 
     protected DamageVar Damage => DynamicVars.Damage;
@@ -126,12 +129,12 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
     {
         return ApplyBurden(Burden.BaseValue);
     }
-    
+
     protected Task Descend(decimal amount)
     {
         return ApplyBurden(amount);
     }
-    
+
     private Task ApplyBurden(decimal amount)
     {
         return PenitentPowerCmd.ApplyBurden(
@@ -142,7 +145,7 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
             CombatState
         );
     }
-    
+
     protected Task Ascend()
     {
         return ApplyFaith(Faith.BaseValue);
@@ -198,7 +201,7 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
     {
         if (CombatState is null)
             return Task.CompletedTask;
-        
+
         return DamageCmd.Attack(damageAmount)
             .FromCard(this)
             .TargetingAllOpponents(CombatState)
@@ -209,7 +212,7 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
     {
         return GainBlock(Owner.Creature, cardPlay, Block);
     }
-    
+
     protected Task GainSelfBlock(CardPlay cardPlay, BlockVar blockAmount)
     {
         return GainBlock(Owner.Creature, cardPlay, blockAmount);
@@ -228,18 +231,39 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
     {
         Creature target = cardPlay.Target ?? Owner.Creature;
 
+        var atoneData = new AtoneData(
+            Owner.Creature,
+            target,
+            Heal.BaseValue,
+            this,
+            CombatState
+        );
+
+        await AtoneNotifier.NotifyBeforeAtone(atoneData);
+
+        if (atoneData.HealAmount <= 0)
+        {
+            await AtoneNotifier.NotifyAfterAtone(atoneData);
+            return;
+        }
+
         int hpBefore = target.CurrentHp;
 
-        await CreatureCmd.Heal(target, Heal.BaseValue);
+        await CreatureCmd.Heal(target, atoneData.HealAmount);
 
         int hpAfter = target.CurrentHp;
         int hpRestored = Math.Max(0, hpAfter - hpBefore);
 
-        if (hpRestored <= 0)
-            return;
+        atoneData.ActualHealAmount = hpRestored;
+        atoneData.DescendAmount = hpRestored;
 
-        await Descend(hpRestored);
-        
+        if (atoneData.ActualHealAmount > 0)
+            await AtoneNotifier.NotifyBeforeAtoneDescend(atoneData);
+
+        if (atoneData.WillDescend)
+            await Descend(atoneData.DescendAmount);
+
+        await AtoneNotifier.NotifyAfterAtone(atoneData);
     }
 
     protected Task HealTarget(CardPlay cardPlay)
@@ -264,7 +288,7 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
             null
         );
     }
-    
+
     protected async Task<int> LoseHpAndGetHpLost(int hpAmount)
     {
         if (hpAmount <= 0)

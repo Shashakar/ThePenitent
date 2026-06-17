@@ -1,5 +1,6 @@
-﻿using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using ThePenitent.ThePenitentCode.HoverTips;
 using ThePenitent.ThePenitentCode.Powers;
@@ -23,6 +24,16 @@ public sealed class RuinousConfessionCard() :
     [
         new ExtraDamageVar(2M)
     ];
+
+    protected override void AddExtraArgsToContextualDescription(LocString description)
+    {
+        decimal burden = CombatState is not null
+            ? Owner.Creature.GetPowerAmount<BurdenPower>()
+            : 0M;
+
+        description.Add("BurdenAmount", burden);
+        description.Add("DamageAmount", burden * DynamicVars.ExtraDamage.BaseValue);
+    }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {

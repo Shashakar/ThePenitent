@@ -1,11 +1,11 @@
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
-using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
-using ThePenitent.ThePenitentCode.Interfaces;
+using ThePenitent.ThePenitentCode.CustomData;
+using ThePenitent.ThePenitentCode.Notifiers;
 using ThePenitent.ThePenitentCode.Powers;
 
 namespace ThePenitent.ThePenitentCode.Commands;
@@ -16,7 +16,7 @@ public static class PenitentPowerCmd
         Creature owner,
         decimal amount,
         Creature? source,
-        CardModel? cardSource, 
+        CardModel? cardSource,
         CombatState? combatState)
     {
         if (amount <= 0)
@@ -30,9 +30,12 @@ public static class PenitentPowerCmd
         {
             decimal burdenRemoved = Math.Min(burden.Amount, remaining);
 
-            // Private method, can't be accessed here
-            // burden.Flash();
-            await PowerCmd.ModifyAmount(burden, -burdenRemoved, source, cardSource);
+            await PowerCmd.ModifyAmount(
+                burden,
+                -burdenRemoved,
+                source,
+                cardSource
+            );
 
             remaining -= burdenRemoved;
         }
@@ -52,24 +55,40 @@ public static class PenitentPowerCmd
         Creature owner,
         decimal amount,
         Creature? source,
-        CardModel? cardSource, 
+        CardModel? cardSource,
         CombatState? combatState)
     {
         if (amount <= 0)
             return;
 
-        decimal remainingCharges = amount;
-        decimal faithRemoved = 0;
+        var descendData = new DescendData(
+            owner,
+            amount,
+            source,
+            cardSource,
+            combatState
+        );
+
+        await DescendNotifier.NotifyBeforeDescend(descendData);
+
+        if (!descendData.WillDescend)
+            return;
+
+        decimal finalDescendAmount = descendData.Amount;
+        decimal remainingCharges = descendData.Amount;
 
         FaithPower? faith = GetPower<FaithPower>(owner);
 
         if (faith is not null && faith.Amount > 0)
         {
-            faithRemoved = Math.Min(faith.Amount, remainingCharges);
+            decimal faithRemoved = Math.Min(faith.Amount, remainingCharges);
 
-            // Private method, can't be accessed here
-            // faith.Flash();
-            await PowerCmd.ModifyAmount(faith, -faithRemoved, source, cardSource);
+            await PowerCmd.ModifyAmount(
+                faith,
+                -faithRemoved,
+                source,
+                cardSource
+            );
 
             remainingCharges -= faithRemoved;
         }
@@ -84,44 +103,14 @@ public static class PenitentPowerCmd
             cardSource
         );
 
-        await NotifyCreatedBurdenListeners(owner, amount, remainingCharges, source, cardSource, combatState);
-    }
-    
-    private static async Task NotifyCreatedBurdenListeners
-    (
-        Creature owner,
-        decimal descendAmount,
-        decimal burdenCreated,
-        Creature? source,
-        CardModel? cardSource,
-        CombatState? combatState
-    )
-    {
-        List<Task> tasks = [];
-
-        foreach (ICreatedBurdenListener listener in owner.Powers.OfType<ICreatedBurdenListener>())
-        {
-            tasks.Add(listener.OnCreatedBurden(
-                owner,
-                descendAmount,
-                burdenCreated,
-                source,
-                cardSource, 
-                combatState));
-        }
-
-        foreach (ICreatedBurdenListener listener in owner.Player.Relics.OfType<ICreatedBurdenListener>())
-        {
-            tasks.Add(listener.OnCreatedBurden(
-                owner,
-                descendAmount,
-                burdenCreated,
-                source,
-                cardSource, 
-                combatState));
-        }
-
-        await Task.WhenAll(tasks);
+        await BurdenNotifier.NotifyCreatedBurden(
+            owner,
+            finalDescendAmount,
+            remainingCharges,
+            source,
+            cardSource,
+            combatState
+        );
     }
 
     private static TPower? GetPower<TPower>(Creature owner)

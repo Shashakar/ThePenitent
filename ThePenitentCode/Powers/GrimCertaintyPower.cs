@@ -23,14 +23,23 @@ public sealed class GrimCertaintyPower : ThePenitentPower, ICreatedBurdenListene
 
         if (burdenCreated <= 0)
             return;
-        
-        IReadOnlyList<Creature> hittableEnemies = CombatState.HittableEnemies;
+
+        if (combatState is null)
+            return;
+
+        IReadOnlyList<Creature> hittableEnemies = combatState.HittableEnemies;
         if (hittableEnemies.Count == 0)
+            return;
+
+        if (Owner.Player is null)
             return;
 
         Flash();
 
-        Creature target = Owner.Player.RunState.Rng.CombatTargets.NextItem(hittableEnemies);
+        Creature? target = Owner.Player.RunState.Rng.CombatTargets.NextItem(hittableEnemies);
+
+        if (target is null)
+            return;
 
         await CreatureCmd.Damage(
             new ThrowingPlayerChoiceContext(),

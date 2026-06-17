@@ -1,5 +1,6 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using ThePenitent.ThePenitentCode.HoverTips;
@@ -18,7 +19,16 @@ public sealed class FallFromGraceCard() :
     )
 {
     protected override bool ShouldGlowRedInternal => !HasFaithPower;
+    
+    protected override void AddExtraArgsToContextualDescription(LocString description)
+    {
+        decimal faith = CombatState is not null
+            ? Owner.Creature.GetPowerAmount<FaithPower>()
+            : 0M;
 
+        description.Add("DescendAmount", faith * 2M);
+    }
+    
     protected override IEnumerable<DynamicVar> AdditionalCanonicalVars =>
     [
         new CalculationBaseVar(0M),
@@ -35,11 +45,15 @@ public sealed class FallFromGraceCard() :
         if (faith <= 0)
             return;
 
+        var calculatedDamage =
+            DynamicVars.CalculationBase.BaseValue +
+            faith * DynamicVars.ExtraDamage.BaseValue;
+        
         // Convert all current Faith into equal Burden.
         // Descending by faith * 2 removes all Faith, then gains that much Burden.
         await Descend(faith * 2M);
 
-        await AttackTarget(choiceContext, cardPlay, DynamicVars.CalculatedDamage.BaseValue);
+        await AttackTarget(choiceContext, cardPlay, calculatedDamage);
     }
 
     protected override void OnUpgrade()

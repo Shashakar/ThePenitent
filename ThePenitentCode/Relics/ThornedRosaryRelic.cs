@@ -3,7 +3,9 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.ValueProps;
 using ThePenitent.ThePenitentCode.Interfaces;
 
 namespace ThePenitent.ThePenitentCode.Relics;
@@ -13,7 +15,10 @@ public class ThornedRosaryRelic() : ThePenitentRelic, ICreatedBurdenListener
     public override RelicRarity Rarity =>
         RelicRarity.Uncommon;
 
-    private decimal damageAmount = 1;
+    protected override IEnumerable<DynamicVar> CanonicalVars =>
+    [
+        new DamageVar(1M, ValueProp.Unpowered)
+    ];
     
     public async Task OnCreatedBurden(Creature owner, decimal descendAmount, decimal burdenCreated, Creature? source,
         CardModel? cardSource, CombatState? combatState)
@@ -29,11 +34,14 @@ public class ThornedRosaryRelic() : ThePenitentRelic, ICreatedBurdenListener
 
         Flash();
         
-        // hit all enemies
-        await DamageCmd.Attack(damageAmount)
-            .FromCard(null)
-            .TargetingAllOpponents(combatState)
-            .Execute(new ThrowingPlayerChoiceContext());
+        await CreatureCmd.Damage(
+            new ThrowingPlayerChoiceContext(),
+            combatState.GetOpponentsOf(Owner.Creature),
+            DynamicVars.Damage.BaseValue,
+            ValueProp.Unpowered,
+            Owner.Creature,
+            null
+        );
     }
     
 }
