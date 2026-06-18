@@ -8,10 +8,10 @@
   "THEPENITENT-BLASPHEMOUS_BOLT_CARD.description": "Deal {Damage:diff()} damage.\n[purple]Descend[/purple] {BurdenPower:diff()}.",
   "THEPENITENT-BLASPHEMOUS_BOLT_CARD.title": "Blasphemous Bolt",
 
-  "THEPENITENT-BURDENED_REBUKE_CARD.description": "Apply {Weak:diff()} [blue]Weak[/blue].\n[purple]Descend[/purple] {BurdenPower:diff()}.",
+  "THEPENITENT-BURDENED_REBUKE_CARD.description": "Apply {WeakPower:diff()} [blue]Weak[/blue].\n[purple]Descend[/purple] {BurdenPower:diff()}.",
   "THEPENITENT-BURDENED_REBUKE_CARD.title": "Burdened Rebuke",
 
-  "THEPENITENT-CROWN_OF_THORNS_CARD.description": "The first time each combat your [purple]Descend[/purple] creates [purple]Burden[/purple], gain that much [gold]Block[/gold]{DealsDamage:cond:>0? and deal that much damage to a random enemy|}.",
+  "THEPENITENT-CROWN_OF_THORNS_CARD.description": "At the end of your turn, if you have [purple]Burden[/purple], gain that much [gold]Block[/gold] and gain {ThornsPower:diff()} Thorns.",
   "THEPENITENT-CROWN_OF_THORNS_CARD.title": "Crown of Thorns",
 
   "THEPENITENT-CONFESS_CARD.description": "[gold]Ascend[/gold] {FaithPower:diff()}.\nDraw {Cards:diff()} {Cards:plural:card|cards}.",
@@ -75,11 +75,14 @@
   "THEPENITENT-RITES_OF_ENDURANCE_CARD.description": "Whenever [gold]Faith[/gold] prevents damage, gain {RitesOfEndurancePower:diff()} [gold]Block[/gold] next turn.",
   "THEPENITENT-RITES_OF_ENDURANCE_CARD.title": "Rites of Endurance",
 
-  "THEPENITENT-SACKCLOTH_CURSE_CARD.description": "Apply {Weak:diff()} [blue]Weak[/blue] and {Frail:diff()} [blue]Frail[/blue].\nExhaust.",
+  "THEPENITENT-SACKCLOTH_CURSE_CARD.description": "Apply {WeakPower:diff()} [blue]Weak[/blue] and {FrailPower:diff()} [blue]Frail[/blue].\nExhaust.",
   "THEPENITENT-SACKCLOTH_CURSE_CARD.title": "Sackcloth Curse",
 
-  "THEPENITENT-SCOURGING_BLOW_CARD.description": "Deal {Damage:diff()} damage.\nIf you have [purple]Burden[/purple], apply {Weak:diff()} [blue]Weak[/blue].",
+  "THEPENITENT-SCOURGING_BLOW_CARD.description": "Deal {Damage:diff()} damage.\nIf you have [purple]Burden[/purple], apply {WeakPower:diff()} [blue]Weak[/blue].",
   "THEPENITENT-SCOURGING_BLOW_CARD.title": "Scourging Blow",
+
+  "THEPENITENT-SHELTERING_PRAYER.description": "Gain Block equal to your [gold]Faith[/gold].",
+  "THEPENITENT-SHELTERING_PRAYER.title": "Sheltering Prayer",
 
   "THEPENITENT-STEADY_CONVICTION_CARD.description": "Gain {Block:diff()} [gold]Block[/gold].\n[gold]Ascend[/gold] {FaithPower:diff()}.",
   "THEPENITENT-STEADY_CONVICTION_CARD.title": "Steady Conviction",

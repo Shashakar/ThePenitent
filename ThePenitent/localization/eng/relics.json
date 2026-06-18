@@ -27,7 +27,7 @@
   "THEPENITENT-HERETICS_CANDLE_RELIC.flavor": "Its flame does not warm. It accuses.",
   "THEPENITENT-HERETICS_CANDLE_RELIC.title": "Heretic's Candle",
   
-  "THEPENITENT-HALLOW_CROWN_RELIC.description": "Faith no longer decays. You cannot gain Block from cards.",
+  "THEPENITENT-HALLOW_CROWN_RELIC.description": "At the end of your turn, if you have Faith, gain {Block} Block.",
   "THEPENITENT-HALLOW_CROWN_RELIC.flavor": "It shines without grace, a perfect circle around an empty promise.",
   "THEPENITENT-HALLOW_CROWN_RELIC.title": "Hallow Crown",
 

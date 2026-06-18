@@ -30,11 +30,11 @@ public sealed class SackclothCurseCard() :
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await ApplyWeak(cardPlay, DynamicVars.Weak.BaseValue);
-        await ApplyFrail(cardPlay, DynamicVars["Frail"].BaseValue);
+        await ApplyFrail(cardPlay, DynamicVars["FrailPower"].BaseValue);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Frail"].UpgradeValueBy(1M);
+        DynamicVars["FrailPower"].UpgradeValueBy(1M);
     }
 }

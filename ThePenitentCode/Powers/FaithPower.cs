@@ -16,25 +16,7 @@ public sealed class FaithPower : ThePenitentPower
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    public override async Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, CombatState combatState)
-    {
-        if (side == CombatSide.Enemy || side == CombatSide.None)
-            return;
-
-        if (Amount <= 0)
-            return;
-
-        if (!FaithDecayNotifier.ShouldFaithDecay(Owner))
-            return;
-        
-        // Lose half of Faith, rounded up.
-        var newFaithAmount = (int)Math.Floor(Amount / 2.0);
-        if (newFaithAmount <= 0)
-            await PowerCmd.Remove(this);
-        else SetAmount(newFaithAmount);
-    }
-
-    private int _pendingFaithLoss;
+    /*private int _pendingFaithLoss;
 
     public override decimal ModifyHpLostBeforeOsty(
         Creature target,
@@ -95,5 +77,5 @@ public sealed class FaithPower : ThePenitentPower
             dealer,
             faithLoss
         );
-    }
+    }*/
 }

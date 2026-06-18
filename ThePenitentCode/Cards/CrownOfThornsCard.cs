@@ -2,6 +2,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models.Powers;
 using ThePenitent.ThePenitentCode.HoverTips;
 using ThePenitent.ThePenitentCode.Powers;
 
@@ -17,12 +18,11 @@ public sealed class CrownOfThornsCard() :
         extraHoverTips: [PenitentHoverTipFactory.Burden()]
     )
 {
-    private const string DealsDamageKey = "DealsDamage";
 
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
         new PowerVar<CrownOfThornsPower>(1M),
-        new DynamicVar(DealsDamageKey, 0M),
+        new PowerVar<ThornsPower>(2M),
     ];
 
     public PowerVar<CrownOfThornsPower> CrownOfThorns =>
@@ -31,28 +31,25 @@ public sealed class CrownOfThornsCard() :
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        if (IsUpgraded)
-        {
-            await PowerCmd.Apply<CrownOfThornsVengefulPower>(
-                Owner.Creature,
-                1M,
-                Owner.Creature,
-                this
-            );
-        }
-        else
-        {
-            await PowerCmd.Apply<CrownOfThornsPower>(
-                Owner.Creature,
-                CrownOfThorns.BaseValue,
-                Owner.Creature,
-                this
-            );
-        }
+
+        await PowerCmd.Apply<CrownOfThornsPower>(
+            Owner.Creature,
+            CrownOfThorns.BaseValue,
+            Owner.Creature,
+            this
+        );
+        
+        await PowerCmd.Apply<ThornsPower>(
+            Owner.Creature,
+            DynamicVars["ThornsPower"].BaseValue,
+            Owner.Creature,
+            this
+        );
+        
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars[DealsDamageKey].UpgradeValueBy(1M);
+        DynamicVars["ThornsPower"].UpgradeValueBy(1M);
     }
 }
