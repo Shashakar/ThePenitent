@@ -16,7 +16,7 @@ public sealed class FaithPower : ThePenitentPower
 
     public override PowerStackType StackType => PowerStackType.Counter;
 
-    private int _pendingFaithLoss;
+    /*private int _pendingFaithLoss;
 
     public override decimal ModifyHpLostBeforeOsty(
         Creature target,
@@ -77,5 +77,5 @@ public sealed class FaithPower : ThePenitentPower
             dealer,
             faithLoss
         );
-    }
+    }*/
 }

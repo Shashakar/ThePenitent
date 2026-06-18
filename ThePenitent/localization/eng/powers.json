@@ -11,13 +11,9 @@
   "THEPENITENT-ASHEN_EDICT_ALL_ENEMIES_POWER.smartDescription": "Whenever you Ascend, apply [blue]1[/blue] Weak to ALL enemies.",
   "THEPENITENT-ASHEN_EDICT_ALL_ENEMIES_POWER.title": "Ashen Edict",
 
-  "THEPENITENT-CROWN_OF_THORNS_POWER.description": "The first time each combat your Descend creates Burden, gain that much Block.",
-  "THEPENITENT-CROWN_OF_THORNS_POWER.smartDescription": "The first time each combat your Descend creates Burden, gain that much Block.",
+  "THEPENITENT-CROWN_OF_THORNS_POWER.description": "At the end of your turn, if you have Burden, gain that much Block",
+  "THEPENITENT-CROWN_OF_THORNS_POWER.smartDescription": "At the end of your turn, if you have [purple]Burden[/purple], gain that much [gold]Block[/gold]",
   "THEPENITENT-CROWN_OF_THORNS_POWER.title": "Crown of Thorns",
-
-  "THEPENITENT-CROWN_OF_THORNS_VENGEFUL_POWER.description": "The first time each combat your Descend creates Burden, gain that much Block and deal that much damage to a random enemy.",
-  "THEPENITENT-CROWN_OF_THORNS_VENGEFUL_POWER.smartDescription": "The first time each combat your Descend creates Burden, gain that much Block and deal that much damage to a random enemy.",
-  "THEPENITENT-CROWN_OF_THORNS_VENGEFUL_POWER.title": "Crown of Thorns",
   
   "THEPENITENT-FAITH_POWER.description": "Faith prevents damage equal to its amount. This persists between turns.",
   "THEPENITENT-FAITH_POWER.smartDescription": "Faith prevents the next [blue]{Amount}[/blue] damage.",
