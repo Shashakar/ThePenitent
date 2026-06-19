@@ -1,6 +1,7 @@
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models.Powers;
 using ThePenitent.ThePenitentCode.CustomData;
 using ThePenitent.ThePenitentCode.Interfaces;
@@ -32,7 +33,8 @@ public class AshenEdictPower : ThePenitentPower, IAscendListener
         if (AppliesToAllEnemies)
         {
             foreach (Creature enemy in enemies)
-                await PowerCmd.Apply<WeakPower>(enemy, 1M, Owner, null);
+                await PowerCmd.Apply<WeakPower>(
+                    new ThrowingPlayerChoiceContext(), enemy, 1M, Owner, null);
 
             return;
         }
@@ -44,6 +46,7 @@ public class AshenEdictPower : ThePenitentPower, IAscendListener
         if (target is null)
             return;
 
-        await PowerCmd.Apply<WeakPower>(target, 1M, Owner, null);
+        await PowerCmd.Apply<WeakPower>(
+            new ThrowingPlayerChoiceContext(),target, 1M, Owner, null);
     }
 }

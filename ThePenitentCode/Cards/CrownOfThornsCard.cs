@@ -33,6 +33,7 @@ public sealed class CrownOfThornsCard() :
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
 
         await PowerCmd.Apply<CrownOfThornsPower>(
+            choiceContext,
             Owner.Creature,
             CrownOfThorns.BaseValue,
             Owner.Creature,
@@ -40,6 +41,7 @@ public sealed class CrownOfThornsCard() :
         );
         
         await PowerCmd.Apply<ThornsPower>(
+            choiceContext,
             Owner.Creature,
             DynamicVars["ThornsPower"].BaseValue,
             Owner.Creature,

@@ -31,6 +31,7 @@ public class ZealousRetortCard() :
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         await PowerCmd.Apply<ZealousRetortPower>(
+            choiceContext,
             Owner.Creature,
             ZealousRetort.BaseValue,
             Owner.Creature,

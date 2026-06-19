@@ -17,7 +17,7 @@ public static class PenitentPowerCmd
         decimal amount,
         Creature? source,
         CardModel? cardSource,
-        CombatState? combatState)
+        ICombatState? combatState)
     {
         if (amount <= 0)
             return;
@@ -39,6 +39,7 @@ public static class PenitentPowerCmd
             decimal burdenRemoved = Math.Min(burden.Amount, remaining);
 
             await PowerCmd.ModifyAmount(
+                new ThrowingPlayerChoiceContext(),
                 burden,
                 -burdenRemoved,
                 source,
@@ -55,6 +56,7 @@ public static class PenitentPowerCmd
         }
 
         await PowerCmd.Apply<FaithPower>(
+            new ThrowingPlayerChoiceContext(),
             owner,
             remaining,
             source ?? owner,
@@ -69,7 +71,7 @@ public static class PenitentPowerCmd
         decimal amount,
         Creature? source,
         CardModel? cardSource,
-        CombatState? combatState)
+        ICombatState? combatState)
     {
         if (amount <= 0)
             return;
@@ -97,6 +99,7 @@ public static class PenitentPowerCmd
             decimal faithRemoved = Math.Min(faith.Amount, remainingCharges);
 
             await PowerCmd.ModifyAmount(
+                new ThrowingPlayerChoiceContext(),
                 faith,
                 -faithRemoved,
                 source,
@@ -110,6 +113,7 @@ public static class PenitentPowerCmd
             return;
 
         await PowerCmd.Apply<BurdenPower>(
+            new ThrowingPlayerChoiceContext(),
             owner,
             remainingCharges,
             source ?? owner,

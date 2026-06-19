@@ -30,7 +30,10 @@ public sealed class BurdenedRebukeCard() :
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await ApplyWeak(cardPlay, DynamicVars.Weak.BaseValue);
+        await ApplyWeak(
+            choiceContext, 
+            cardPlay, 
+            DynamicVars.Weak.BaseValue);
         await Descend();
     }
 

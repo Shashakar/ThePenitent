@@ -16,7 +16,7 @@ public sealed class GrimCertaintyPower : ThePenitentPower, ICreatedBurdenListene
     public override PowerStackType StackType => PowerStackType.Counter;
 
     public async Task OnCreatedBurden(Creature owner, decimal descendAmount, decimal burdenCreated, Creature? source,
-        CardModel? cardSource, CombatState? combatState)
+        CardModel? cardSource, ICombatState? combatState)
     {
         if (owner != Owner)
             return;

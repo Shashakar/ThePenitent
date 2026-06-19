@@ -32,6 +32,7 @@ public class GrimUncertaintyCard() :
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         await PowerCmd.Apply<GrimCertaintyPower>(
+            choiceContext,
             Owner.Creature,
             GrimCertainty.BaseValue,
             Owner.Creature,

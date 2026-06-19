@@ -12,5 +12,5 @@ public interface ICreatedBurdenListener
         decimal burdenCreated,
         Creature? source,
         CardModel? cardSource,
-        CombatState? combatState);
+        ICombatState? combatState);
 }

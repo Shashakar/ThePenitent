@@ -29,6 +29,7 @@ public sealed class RitesOfEnduranceCard() :
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
         await PowerCmd.Apply<RitesOfEndurancePower>(
+            choiceContext,
             Owner.Creature,
             RitesOfEndurance.BaseValue,
             Owner.Creature,

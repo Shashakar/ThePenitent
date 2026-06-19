@@ -11,7 +11,7 @@ public sealed class DescendData
     public Creature Owner { get; }
     public Creature? Source { get; }
     public CardModel? CardSource { get; }
-    public CombatState? CombatState { get; }
+    public ICombatState? CombatState { get; }
 
     public decimal BaseAmount { get; }
     public decimal Amount { get; set; }
@@ -25,7 +25,7 @@ public sealed class DescendData
         decimal amount,
         Creature? source,
         CardModel? cardSource,
-        CombatState? combatState)
+        ICombatState? combatState)
     {
         Owner = owner;
         Source = source;

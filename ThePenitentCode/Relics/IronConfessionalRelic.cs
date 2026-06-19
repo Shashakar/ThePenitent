@@ -1,4 +1,5 @@
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using ThePenitent.ThePenitentCode.CustomData;
@@ -12,10 +13,8 @@ public sealed class IronConfessionalRelic : ThePenitentRelic, IBeforeDescendList
 
     private bool _usedThisCombat;
 
-    public override Task BeforeSideTurnStart(
-        PlayerChoiceContext choiceContext,
-        CombatSide side,
-        CombatState combatState)
+    public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants,
+        ICombatState combatState)
     {
         if (side == Owner.Creature.Side && combatState.RoundNumber == 1)
             _usedThisCombat = false;

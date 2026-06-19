@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -9,7 +10,6 @@ using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using ThePenitent.ThePenitentCode.Commands;
 using ThePenitent.ThePenitentCode.CustomData;
-using ThePenitent.ThePenitentCode.Mechanics.Notifiers;
 using ThePenitent.ThePenitentCode.Notifiers;
 using ThePenitent.ThePenitentCode.Powers;
 
@@ -302,23 +302,26 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
             .Sum(result => result.UnblockedDamage);
     }
 
-    protected Task ApplyWeak(CardPlay cardPlay, decimal amount)
+    protected Task ApplyWeak(PlayerChoiceContext context, CardPlay cardPlay, decimal amount)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
 
         return PowerCmd.Apply<WeakPower>(
+            context,
             cardPlay.Target,
             amount,
             Owner.Creature,
-            this
+            this,
+            false
         );
     }
 
-    protected Task ApplyFrail(CardPlay cardPlay, decimal amount)
+    protected Task ApplyFrail(PlayerChoiceContext context, CardPlay cardPlay, decimal amount)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
 
         return PowerCmd.Apply<FrailPower>(
+            context,
             cardPlay.Target,
             amount,
             Owner.Creature,
@@ -326,11 +329,12 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
         );
     }
 
-    protected Task ApplyTemporaryStrengthLoss(CardPlay cardPlay, decimal amount)
+    protected Task ApplyTemporaryStrengthLoss(PlayerChoiceContext context, CardPlay cardPlay, decimal amount)
     {
         ArgumentNullException.ThrowIfNull(cardPlay.Target);
 
         return PowerCmd.Apply<PiercingWailPower>(
+            context,
             cardPlay.Target,
             amount,
             Owner.Creature,
@@ -338,13 +342,13 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
         );
     }
 
-    protected async Task ApplyWeakToAllEnemies(decimal amount)
+    protected async Task ApplyWeakToAllEnemies(PlayerChoiceContext context, decimal amount)
     {
         if (CombatState is null)
             return;
 
         foreach (Creature enemy in CombatState.HittableEnemies)
-            await PowerCmd.Apply<WeakPower>(enemy, amount, Owner.Creature, this);
+            await PowerCmd.Apply<WeakPower>(context, enemy, amount, Owner.Creature, this);
     }
 
     protected bool IsSoloCombat()

@@ -32,6 +32,7 @@ public sealed class AshenEdictCard() :
         if (IsUpgraded)
         {
             await PowerCmd.Apply<AshenEdictAllEnemiesPower>(
+                choiceContext,
                 Owner.Creature,
                 1M,
                 Owner.Creature,
@@ -41,6 +42,7 @@ public sealed class AshenEdictCard() :
         else
         {
             await PowerCmd.Apply<AshenEdictPower>(
+                choiceContext,
                 Owner.Creature,
                 AshenEdict.BaseValue,
                 Owner.Creature,

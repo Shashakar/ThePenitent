@@ -18,7 +18,7 @@ public sealed class BurdenNotifier : PenitentNotifierBase
         decimal burdenCreated,
         Creature? source,
         CardModel? cardSource,
-        CombatState? combatState)
+        ICombatState? combatState)
     {
         return NotifyListeners<ICreatedBurdenListener>(
             owner,

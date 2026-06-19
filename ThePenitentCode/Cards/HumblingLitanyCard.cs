@@ -26,7 +26,10 @@ public sealed class HumblingLitanyCard() :
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await ApplyTemporaryStrengthLoss(cardPlay, DynamicVars[StrengthLossKey].BaseValue);
+        await ApplyTemporaryStrengthLoss(
+            choiceContext,
+            cardPlay, 
+            DynamicVars[StrengthLossKey].BaseValue);
     }
 
     protected override void OnUpgrade()

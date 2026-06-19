@@ -21,7 +21,7 @@ public class ThornedRosaryRelic() : ThePenitentRelic, ICreatedBurdenListener
     ];
     
     public async Task OnCreatedBurden(Creature owner, decimal descendAmount, decimal burdenCreated, Creature? source,
-        CardModel? cardSource, CombatState? combatState)
+        CardModel? cardSource, ICombatState? combatState)
     {
         if (owner != Owner.Creature)
             return;

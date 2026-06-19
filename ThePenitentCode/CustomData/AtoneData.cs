@@ -10,7 +10,7 @@ public sealed class AtoneData
     public Creature Owner { get; }
     public Creature Target { get; }
     public CardModel? CardSource { get; }
-    public CombatState? CombatState { get; }
+    public ICombatState? CombatState { get; }
 
     /// <summary>
     /// The original Atone amount before relics/powers modify anything.
@@ -48,7 +48,7 @@ public sealed class AtoneData
         Creature target,
         decimal baseAmount,
         CardModel? cardSource,
-        CombatState? combatState)
+        ICombatState? combatState)
     {
         Owner = owner;
         Target = target;

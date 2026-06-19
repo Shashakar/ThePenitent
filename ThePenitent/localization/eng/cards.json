@@ -11,7 +11,7 @@
   "THEPENITENT-BURDENED_REBUKE_CARD.description": "Apply {WeakPower:diff()} [blue]Weak[/blue].\n[purple]Descend[/purple] {BurdenPower:diff()}.",
   "THEPENITENT-BURDENED_REBUKE_CARD.title": "Burdened Rebuke",
 
-  "THEPENITENT-CROWN_OF_THORNS_CARD.description": "At the end of your turn, if you have [purple]Burden[/purple], gain that much [gold]Block[/gold] and gain {ThornsPower:diff()} Thorns.",
+  "THEPENITENT-CROWN_OF_THORNS_CARD.description": "Gain {ThornsPower:diff()} Thorns. At the end of your turn, if you have [purple]Burden[/purple], gain that much [gold]Block[/gold]",
   "THEPENITENT-CROWN_OF_THORNS_CARD.title": "Crown of Thorns",
 
   "THEPENITENT-CONFESS_CARD.description": "[gold]Ascend[/gold] {FaithPower:diff()}.\nDraw {Cards:diff()} {Cards:plural:card|cards}.",

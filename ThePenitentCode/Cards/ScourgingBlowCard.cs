@@ -34,7 +34,10 @@ public sealed class ScourgingBlowCard() :
         await AttackTarget(choiceContext, cardPlay);
 
         if (HasBurdenPower)
-            await ApplyWeak(cardPlay, DynamicVars.Weak.BaseValue);
+            await ApplyWeak(
+                choiceContext,
+                cardPlay, 
+                DynamicVars.Weak.BaseValue);
     }
 
     protected override void OnUpgrade()

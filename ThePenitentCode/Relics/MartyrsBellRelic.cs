@@ -20,10 +20,8 @@ public sealed class MartyrsBellRelic : ThePenitentRelic, IFaithPreventedDamageLi
         new BlockVar(4M, ValueProp.Unpowered)
     ];
 
-    public override Task BeforeSideTurnStart(
-        PlayerChoiceContext choiceContext,
-        CombatSide side,
-        CombatState combatState)
+    public override Task BeforeSideTurnStart(PlayerChoiceContext choiceContext, CombatSide side, IReadOnlyList<Creature> participants,
+        ICombatState combatState)
     {
         if (side == Owner.Creature.Side)
             _usedThisTurn = false;
