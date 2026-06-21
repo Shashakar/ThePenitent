@@ -6,7 +6,7 @@ using ThePenitent.ThePenitentCode.Powers;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
-public class ShelteringPrayer() : 
+public class ShelteringPrayerCard() : 
     ThePenitentMechanicCard
     (
         cost: 2,
@@ -18,16 +18,14 @@ public class ShelteringPrayer() :
 {
     public override bool GainsBlock => true;
 
-    protected override IEnumerable<DynamicVar> AdditionalCanonicalVars =>
-    [
-        new BlockVar(Owner.Creature.GetPowerAmount<FaithPower>(), ValueProp.Move)
-    ];
-
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await GainSelfBlock(play);
+
+        var block = new BlockVar(Owner.Creature.GetPowerAmount<FaithPower>(), ValueProp.Move);
+            
+        await GainSelfBlock(play, block);
     }
 
     protected override void OnUpgrade()

@@ -81,8 +81,8 @@
   "THEPENITENT-SCOURGING_BLOW_CARD.description": "Deal {Damage:diff()} damage.\nIf you have [purple]Burden[/purple], apply {WeakPower:diff()} [blue]Weak[/blue].",
   "THEPENITENT-SCOURGING_BLOW_CARD.title": "Scourging Blow",
 
-  "THEPENITENT-SHELTERING_PRAYER.description": "Gain Block equal to your [gold]Faith[/gold].",
-  "THEPENITENT-SHELTERING_PRAYER.title": "Sheltering Prayer",
+  "THEPENITENT-SHELTERING_PRAYER_CARD.description": "Gain Block equal to your [gold]Faith[/gold].",
+  "THEPENITENT-SHELTERING_PRAYER_CARD.title": "Sheltering Prayer",
 
   "THEPENITENT-STEADY_CONVICTION_CARD.description": "Gain {Block:diff()} [gold]Block[/gold].\n[gold]Ascend[/gold] {FaithPower:diff()}.",
   "THEPENITENT-STEADY_CONVICTION_CARD.title": "Steady Conviction",
