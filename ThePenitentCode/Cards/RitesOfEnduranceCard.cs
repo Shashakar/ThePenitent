@@ -10,11 +10,15 @@ namespace ThePenitent.ThePenitentCode.Cards;
 public sealed class RitesOfEnduranceCard() :
     ThePenitentMechanicCard
     (
-        cost: 1,
+        cost: 3,
         type: CardType.Power,
-        rarity: CardRarity.Uncommon,
+        rarity: CardRarity.Rare,
         target: TargetType.Self,
-        extraHoverTips: [PenitentHoverTipFactory.Faith()]
+        extraHoverTips: [
+            PenitentHoverTipFactory.Descend(),
+            PenitentHoverTipFactory.Faith(),
+            PenitentHoverTipFactory.Burden()
+        ]
     )
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
@@ -39,6 +43,6 @@ public sealed class RitesOfEnduranceCard() :
 
     protected override void OnUpgrade()
     {
-        RitesOfEndurance.UpgradeValueBy(1M);
+        EnergyCost.UpgradeBy(-1);
     }
 }

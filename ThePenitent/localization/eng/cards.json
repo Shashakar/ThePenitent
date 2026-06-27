@@ -72,7 +72,7 @@
   "THEPENITENT-RUINOUS_CONFESSION_CARD.combatDescription": "[gold]Ascend[/gold] equal to your [purple]Burden[/purple] ({BurdenAmount}).\nDeal that much damage ({DamageAmount}) to ALL enemies. ",
   "THEPENITENT-RUINOUS_CONFESSION_CARD.title": "Ruinous Confession",
 
-  "THEPENITENT-RITES_OF_ENDURANCE_CARD.description": "Whenever [gold]Faith[/gold] prevents damage, gain {RitesOfEndurancePower:diff()} [gold]Block[/gold] next turn.",
+  "THEPENITENT-RITES_OF_ENDURANCE_CARD.description": "The first time each turn you would lose HP from blockable damage, prevent it.\n[purple]Descend[/purple] equal to the damage prevented.",
   "THEPENITENT-RITES_OF_ENDURANCE_CARD.title": "Rites of Endurance",
 
   "THEPENITENT-SACKCLOTH_CURSE_CARD.description": "Apply {WeakPower:diff()} [blue]Weak[/blue] and {FrailPower:diff()} [blue]Frail[/blue].\nExhaust.",
@@ -93,7 +93,7 @@
   "THEPENITENT-THE_PENITENT_STRIKE_CARD.description": "Deal {Damage:diff()} damage.",
   "THEPENITENT-THE_PENITENT_STRIKE_CARD.title": "Strike",
 
-  "THEPENITENT-ZEALOUS_RETORT_CARD.description": "Whenever [gold]Faith[/gold] prevents damage, deal {ZealousRetortPower:diff()} damage to the attacker.",
+  "THEPENITENT-ZEALOUS_RETORT_CARD.description": "Whenever you are attacked while you have [gold]Faith[/gold], deal {ZealousRetortPower:diff()} damage to the attacker.",
   "THEPENITENT-ZEALOUS_RETORT_CARD.title": "Zealous Retort"
 
 }

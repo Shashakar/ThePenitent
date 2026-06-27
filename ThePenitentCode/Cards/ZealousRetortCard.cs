@@ -41,6 +41,6 @@ public class ZealousRetortCard() :
 
     protected override void OnUpgrade()
     {
-        ZealousRetort.UpgradeValueBy(1M);
+        ZealousRetort.UpgradeValueBy(2M);
     }
 }

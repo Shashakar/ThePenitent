@@ -1,46 +1,80 @@
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
-using ThePenitent.ThePenitentCode.Interfaces;
+using ThePenitent.ThePenitentCode.Commands;
 
 namespace ThePenitent.ThePenitentCode.Powers;
 
-public sealed class RitesOfEndurancePower : ThePenitentPower, IFaithPreventedDamageListener
+public sealed class RitesOfEndurancePower : ThePenitentPower
 {
-    private int _pendingBlock;
+    private bool _usedThisTurn;
+    private decimal _pendingDescend;
 
     public override PowerType Type => PowerType.Buff;
 
-    public override PowerStackType StackType => PowerStackType.Counter;
+    public override PowerStackType StackType => PowerStackType.Single;
 
-    public Task OnFaithPreventedDamage(
-        PlayerChoiceContext choiceContext,
-        MegaCrit.Sts2.Core.Entities.Creatures.Creature attacker,
-        int preventedAmount)
+    public override decimal ModifyHpLostBeforeOsty(
+        Creature target,
+        decimal amount,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource)
     {
-        if (preventedAmount <= 0)
-            return Task.CompletedTask;
+        if (_usedThisTurn)
+            return amount;
 
-        _pendingBlock += Amount;
+        if (amount <= 0M)
+            return amount;
+
+        if (target != Owner)
+            return amount;
+
+        if (props.HasFlag(ValueProp.Unblockable))
+            return amount;
+
+        _usedThisTurn = true;
+        _pendingDescend += amount;
         Flash();
 
-        return Task.CompletedTask;
+        return 0M;
     }
 
-    public async Task AfterTurnStart(int roundNumber, CombatSide side)
+    public override async Task AfterDamageReceived(
+        PlayerChoiceContext choiceContext,
+        Creature target,
+        DamageResult result,
+        ValueProp props,
+        Creature? dealer,
+        CardModel? cardSource)
     {
-        if (side != CombatSide.Player)
+        if (target != Owner)
             return;
 
-        if (_pendingBlock <= 0)
+        if (_pendingDescend <= 0M)
             return;
 
-        int block = _pendingBlock;
-        _pendingBlock = 0;
+        decimal descendAmount = _pendingDescend;
+        _pendingDescend = 0M;
 
-        Flash();
-        await CreatureCmd.GainBlock(Owner, block, default, null);
+        await PenitentPowerCmd.ApplyBurden(
+            Owner,
+            descendAmount,
+            dealer,
+            cardSource,
+            null
+        );
+    }
+
+    public Task AfterTurnStart(int roundNumber, CombatSide side)
+    {
+        _usedThisTurn = false;
+        _pendingDescend = 0M;
+
+        return Task.CompletedTask;
     }
 }
