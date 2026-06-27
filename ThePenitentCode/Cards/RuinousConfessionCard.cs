@@ -3,7 +3,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using ThePenitent.ThePenitentCode.HoverTips;
-using ThePenitent.ThePenitentCode.Powers;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
@@ -28,7 +27,7 @@ public sealed class RuinousConfessionCard() :
     protected override void AddExtraArgsToContextualDescription(LocString description)
     {
         decimal burden = CombatState is not null
-            ? Owner.Creature.GetPowerAmount<BurdenPower>()
+            ? BurdenAmount
             : 0M;
 
         description.Add("BurdenAmount", burden);
@@ -37,7 +36,7 @@ public sealed class RuinousConfessionCard() :
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        int ascendedAmount = Owner.Creature.GetPowerAmount<BurdenPower>();
+        int ascendedAmount = (int)BurdenAmount;
 
         if (ascendedAmount <= 0)
             return;

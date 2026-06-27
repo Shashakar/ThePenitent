@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Models;
 using ThePenitent.ThePenitentCode.CustomData;
 using ThePenitent.ThePenitentCode.Notifiers;
 using ThePenitent.ThePenitentCode.Powers;
+using ThePenitent.ThePenitentCode.Scale;
 
 namespace ThePenitent.ThePenitentCode.Commands;
 
@@ -52,6 +53,7 @@ public static class PenitentPowerCmd
         if (remaining <= 0)
         {
             await AscendNotifier.NotifyAfterAscend(ascendData);
+            PenitentScaleMeterRegistry.Update(owner);
             return;
         }
 
@@ -64,6 +66,7 @@ public static class PenitentPowerCmd
         );
 
         await AscendNotifier.NotifyAfterAscend(ascendData);
+        PenitentScaleMeterRegistry.Update(owner);
     }
 
     public static async Task ApplyBurden(
@@ -110,7 +113,10 @@ public static class PenitentPowerCmd
         }
 
         if (remainingCharges <= 0)
+        {
+            PenitentScaleMeterRegistry.Update(owner);
             return;
+        }
 
         await PowerCmd.Apply<BurdenPower>(
             new ThrowingPlayerChoiceContext(),
@@ -128,6 +134,8 @@ public static class PenitentPowerCmd
             cardSource,
             combatState
         );
+
+        PenitentScaleMeterRegistry.Update(owner);
     }
 
     private static TPower? GetPower<TPower>(Creature owner)

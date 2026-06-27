@@ -35,7 +35,7 @@
   "THEPENITENT-IRON_CONFESSIONAL_RELIC.flavor": "A prison for sins too heavy to speak aloud.",
   "THEPENITENT-IRON_CONFESSIONAL_RELIC.title": "Iron Confessional",
 
-  "THEPENITENT-MARTYRS_BELL_RELIC.description": "The first time each turn Faith prevents damage, gain {Block} Block.",
+  "THEPENITENT-MARTYRS_BELL_RELIC.description": "The first time each turn you are attacked while you have Faith, gain {Block} Block.",
   "THEPENITENT-MARTYRS_BELL_RELIC.flavor": "It rings only for those who endure the blow.",
   "THEPENITENT-MARTYRS_BELL_RELIC.title": "Martyr's Bell",
   

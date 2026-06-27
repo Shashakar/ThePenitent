@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.ValueProps;
+using ThePenitent.ThePenitentCode.Scale;
 
 namespace ThePenitent.ThePenitentCode.Powers;
 
@@ -19,10 +20,10 @@ public class CrownOfThornsPower : ThePenitentPower
         if (side != CombatSide.Enemy)
             return;
 
-        if (!Owner.HasPower<BurdenPower>())
+        if (!PenitentScaleTracker.HasBurden(Owner))
             return;
         
-        var burdenAmount = Owner.GetPowerAmount<BurdenPower>();
+        var burdenAmount = PenitentScaleTracker.BurdenAmount(Owner);
 
         await CreatureCmd.GainBlock(Owner, burdenAmount, ValueProp.Move, null);
     }

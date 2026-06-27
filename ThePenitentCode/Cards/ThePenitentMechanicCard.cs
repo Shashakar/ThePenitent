@@ -12,6 +12,7 @@ using ThePenitent.ThePenitentCode.Commands;
 using ThePenitent.ThePenitentCode.CustomData;
 using ThePenitent.ThePenitentCode.Notifiers;
 using ThePenitent.ThePenitentCode.Powers;
+using ThePenitent.ThePenitentCode.Scale;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
@@ -51,8 +52,10 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
         _extraHoverTips = extraHoverTips?.ToArray() ?? [];
     }
 
-    protected bool HasBurdenPower => Owner.Creature.HasPower<BurdenPower>();
-    protected bool HasFaithPower => Owner.Creature.HasPower<FaithPower>();
+    protected bool HasBurdenPower => PenitentScaleTracker.HasBurden(Owner.Creature);
+    protected bool HasFaithPower => PenitentScaleTracker.HasFaith(Owner.Creature);
+    protected decimal BurdenAmount => PenitentScaleTracker.BurdenAmount(Owner.Creature);
+    protected decimal FaithAmount => PenitentScaleTracker.FaithAmount(Owner.Creature);
 
     protected override IEnumerable<DynamicVar> CanonicalVars
     {
@@ -340,6 +343,33 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
             Owner.Creature,
             this
         );
+    }
+
+    protected Task ApplyStrengthLoss(PlayerChoiceContext context, CardPlay cardPlay, decimal amount)
+    {
+        ArgumentNullException.ThrowIfNull(cardPlay.Target);
+
+        return PowerCmd.Apply<StrengthPower>(
+            context,
+            cardPlay.Target,
+            -amount,
+            Owner.Creature,
+            this
+        );
+    }
+
+    protected bool IsFirstCardPlayedThisTurn(CardPlay cardPlay)
+    {
+        if (CombatState is null)
+            return true;
+
+        int playedCardsThisTurn = CombatManager.Instance.History.CardPlaysStarted
+            .Count(entry =>
+                entry.Actor == Owner.Creature &&
+                entry.CardPlay.IsFirstInSeries &&
+                entry.HappenedThisTurn(CombatState));
+
+        return cardPlay.IsFirstInSeries && playedCardsThisTurn == 1;
     }
 
     protected async Task ApplyWeakToAllEnemies(PlayerChoiceContext context, decimal amount)

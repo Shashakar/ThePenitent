@@ -4,12 +4,13 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
-using ThePenitent.ThePenitentCode.Interfaces;
+using ThePenitent.ThePenitentCode.Scale;
 
 namespace ThePenitent.ThePenitentCode.Relics;
 
-public sealed class MartyrsBellRelic : ThePenitentRelic, IFaithPreventedDamageListener
+public sealed class MartyrsBellRelic : ThePenitentRelic
 {
     public override RelicRarity Rarity => RelicRarity.Uncommon;
 
@@ -31,15 +32,24 @@ public sealed class MartyrsBellRelic : ThePenitentRelic, IFaithPreventedDamageLi
 
     public override bool ShowCounter => !_usedThisTurn;
 
-    public async Task OnFaithPreventedDamage(
+    public override async Task AfterDamageReceived(
         PlayerChoiceContext choiceContext,
-        Creature attacker,
-        int preventedAmount)
+        Creature target,
+        DamageResult result,
+        ValueProp props,
+        Creature? attacker,
+        CardModel? cardSource)
     {
         if (_usedThisTurn)
             return;
 
-        if (preventedAmount <= 0)
+        if (target != Owner.Creature)
+            return;
+
+        if (attacker is null || attacker == Owner.Creature)
+            return;
+
+        if (!PenitentScaleTracker.HasFaith(Owner.Creature))
             return;
 
         Flash();

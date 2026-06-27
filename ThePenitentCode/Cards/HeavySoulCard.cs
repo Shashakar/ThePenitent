@@ -2,7 +2,6 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using ThePenitent.ThePenitentCode.HoverTips;
-using ThePenitent.ThePenitentCode.Powers;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
@@ -21,7 +20,7 @@ public class HeavySoulCard() :
 
     protected override void AddExtraArgsToContextualDescription(LocString description)
     {
-        decimal damage = CombatState is not null && Owner.Creature.HasPower<BurdenPower>()
+        decimal damage = CombatState is not null && HasBurdenPower
             ? Damage.BaseValue * 2M
             : Damage.BaseValue;
 
@@ -33,7 +32,7 @@ public class HeavySoulCard() :
         CardPlay play)
     {
 
-        decimal damage = Owner.Creature.HasPower<BurdenPower>()
+        decimal damage = HasBurdenPower
             ? (Damage.BaseValue * 2)
             : Damage.BaseValue;
 

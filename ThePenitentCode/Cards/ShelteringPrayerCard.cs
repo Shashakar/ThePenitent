@@ -2,7 +2,6 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
-using ThePenitent.ThePenitentCode.Powers;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
@@ -23,7 +22,7 @@ public class ShelteringPrayerCard() :
         CardPlay play)
     {
 
-        var block = new BlockVar(Owner.Creature.GetPowerAmount<FaithPower>(), ValueProp.Move);
+        var block = new BlockVar(FaithAmount, ValueProp.Move);
             
         await GainSelfBlock(play, block);
     }
