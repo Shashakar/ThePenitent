@@ -6,6 +6,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using ThePenitent.ThePenitentCode.Commands;
 using ThePenitent.ThePenitentCode.Extensions;
 using ThePenitent.ThePenitentCode.Powers;
+using ThePenitent.ThePenitentCode.Scale;
 
 namespace ThePenitent.ThePenitentCode.Relics;
 
@@ -30,7 +31,7 @@ public sealed class CrackedCenserRelic : ThePenitentRelic
         if (side != Owner.Creature.Side || combatState.RoundNumber > 1)
             return;
 
-        if (Owner.Creature.HasPower<FaithPower>() || Owner.Creature.HasPower<BurdenPower>())
+        if (PenitentScaleTracker.HasFaith(Owner.Creature) || PenitentScaleTracker.HasBurden(Owner.Creature))
             return;
 
         Flash();

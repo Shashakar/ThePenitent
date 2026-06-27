@@ -5,7 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
-using ThePenitent.ThePenitentCode.Powers;
+using ThePenitent.ThePenitentCode.Scale;
 
 namespace ThePenitent.ThePenitentCode.Relics;
 
@@ -24,7 +24,7 @@ public sealed class HallowCrownRelic : ThePenitentRelic
         if (side == Owner.Creature.Side || side == CombatSide.None)
             return;
 
-        if (!Owner.Creature.HasPower<FaithPower>())
+        if (!PenitentScaleTracker.HasFaith(Owner.Creature))
             return;
 
         Flash();

@@ -32,7 +32,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Alchyr.Sts2.BaseLib" Version="*" PrivateAssets="All"/>
+        <PackageReference Include="Alchyr.Sts2.BaseLib" Version="3.3.1" PrivateAssets="All"/>
         <PackageReference Include="Krafs.Publicizer" Version="2.3.0" PrivateAssets="All"/>
         <PackageReference Include="Alchyr.Sts2.ModAnalyzers" Version="*"/>
         <!-- Generates a .pck file when building if only using simple assets. May not work on all setups. Uncomment to test. -->
@@ -42,10 +42,12 @@
 
     <ItemGroup>
         <Compile Remove="ThePenitent/**"/>
+        <Compile Remove="ThePenitent.Tests/**"/>
         <Compile Remove="materials/**"/>
         <Compile Remove="shaders/**"/>
         <Compile Remove="images/**"/>
         <EmbeddedResource Remove="ThePenitent/**"/>
+        <EmbeddedResource Remove="ThePenitent.Tests/**"/>
         <EmbeddedResource Remove="materials/**"/>
         <EmbeddedResource Remove="shaders/**"/>
         <EmbeddedResource Remove="images/**"/>
@@ -57,6 +59,7 @@
         <None Include="ThePenitent.json" />
         <None Include="project.godot"/>
         <None Include="ThePenitent/**"/>
+        <None Include="ThePenitent.Tests/**"/>
     </ItemGroup>
 
     <ItemGroup>

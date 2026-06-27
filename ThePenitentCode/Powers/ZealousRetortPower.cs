@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
+using ThePenitent.ThePenitentCode.Scale;
 
 namespace ThePenitent.ThePenitentCode.Powers;
 
@@ -31,7 +32,7 @@ public sealed class ZealousRetortPower : ThePenitentPower
         if (dealer is null || dealer == Owner)
             return;
 
-        if (!Owner.HasPower<FaithPower>())
+        if (!PenitentScaleTracker.HasFaith(Owner))
             return;
 
         Flash();

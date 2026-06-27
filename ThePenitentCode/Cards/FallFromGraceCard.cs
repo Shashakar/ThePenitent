@@ -4,7 +4,7 @@ using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using ThePenitent.ThePenitentCode.HoverTips;
-using ThePenitent.ThePenitentCode.Powers;
+using ThePenitent.ThePenitentCode.Scale;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
@@ -23,7 +23,7 @@ public sealed class FallFromGraceCard() :
     protected override void AddExtraArgsToContextualDescription(LocString description)
     {
         decimal faith = CombatState is not null
-            ? Owner.Creature.GetPowerAmount<FaithPower>()
+            ? FaithAmount
             : 0M;
 
         description.Add("DescendAmount", faith * 2M);
@@ -35,12 +35,12 @@ public sealed class FallFromGraceCard() :
         new ExtraDamageVar(2M),
         new CalculatedDamageVar(ValueProp.Move)
             .WithMultiplier((card, _) =>
-                card.Owner.Creature.GetPowerAmount<FaithPower>())
+                PenitentScaleTracker.FaithAmount(card.Owner.Creature))
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        decimal faith = Owner.Creature.GetPowerAmount<FaithPower>();
+        decimal faith = FaithAmount;
 
         if (faith <= 0)
             return;

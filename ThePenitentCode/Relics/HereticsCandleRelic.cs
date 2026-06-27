@@ -3,7 +3,7 @@ using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.ValueProps;
-using ThePenitent.ThePenitentCode.Powers;
+using ThePenitent.ThePenitentCode.Scale;
 
 namespace ThePenitent.ThePenitentCode.Relics;
 
@@ -24,7 +24,7 @@ public sealed class HereticsCandleRelic : ThePenitentRelic
         if (cardSource?.Type != CardType.Attack)
             return 0M;
 
-        if (!Owner.Creature.HasPower<BurdenPower>())
+        if (!PenitentScaleTracker.HasBurden(Owner.Creature))
             return 0M;
 
         return 2M;

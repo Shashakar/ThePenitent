@@ -1,13 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://cwild2ipjnim1"]
+[gd_scene load_steps=4 format=3 uid="uid://cwild2ipjnim1"]
 
 [ext_resource type="Texture2D" uid="uid://ndqjv88abui5" path="res://ThePenitent/images/combat/layer1_penitent.png" id="1_iwlta"]
 [ext_resource type="Texture2D" uid="uid://djo7vy1ni7ahp" path="res://ThePenitent/images/combat/layer2_penitent.png" id="2_ahw2p"]
+[ext_resource type="PackedScene" uid="uid://b6p1nbnpsfaxi" path="res://ThePenitent/images/charui/penitent_scale_meter.tscn" id="3_scale"]
 
 [node name="PenitentEnergyCounter" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 128.0
 offset_bottom = 128.0
+
+[node name="PenitentScaleMeter" parent="." instance=ExtResource("3_scale")]
+position = Vector2(64, -18)
+scale = Vector2(0.45, 0.45)
 
 [node name="Layers" type="Control" parent="."]
 unique_name_in_owner = true

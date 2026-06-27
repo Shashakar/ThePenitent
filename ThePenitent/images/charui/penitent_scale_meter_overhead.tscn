@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7em6yjx4a35q"]
+
+[ext_resource type="Texture2D" uid="uid://bnxx424xupeuf" path="res://ThePenitent/images/charui/scale_bar.png" id="1_scale_bar"]
+[ext_resource type="Texture2D" uid="uid://dy1hdbei8ky6q" path="res://ThePenitent/images/charui/scale_marker.png" id="2_scale_marker"]
+
+[node name="PenitentScaleMeter" type="Node2D"]
+
+[node name="Bar" type="Sprite2D" parent="."]
+texture = ExtResource("1_scale_bar")
+
+[node name="MarkerPivot" type="Node2D" parent="."]
+position = Vector2(0, 38)
+
+[node name="Marker" type="Sprite2D" parent="MarkerPivot"]
+position = Vector2(0, -38)
+texture = ExtResource("2_scale_marker")

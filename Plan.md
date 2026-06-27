@@ -6,11 +6,11 @@
 
 The character's central fantasy is:
 
-> Faith protects and purifies. Burden empowers and corrupts. The Penitent survives by moving between the two, healing others at personal cost, and deciding when to endure, repent, or fall deeper for power.
+> Faith steadies and purifies. Burden empowers and corrupts. The Penitent survives by moving between the two, healing others at personal cost, and deciding when to endure, repent, or fall deeper for power.
 
 The Penitent has three primary archetypes:
 
-1. **Devotion** — Ascend toward Faith, prevent damage, and convert spiritual certainty into defense.
+1. **Devotion** — Ascend toward Faith, cleanse Burden, and convert spiritual certainty into defense.
 2. **Contrition** — Atone to heal self or allies, while The Penitent takes on the Burden.
 3. **Heresy** — Descend toward Burden for stronger attacks and dangerous payoff cards.
 
@@ -36,18 +36,9 @@ The Penitent should normally have **Faith**, **Burden**, or neither. Faith and B
 
 Rules:
 
-- Faith prevents HP damage 1-for-1 after Block is applied.
 - When The Penitent gains Faith, remove that much Burden first.
 - Any excess becomes Faith.
 - Faith persists between turns.
-
-Example:
-
-```text
-The Penitent has 6 Faith.
-The Penitent would take 4 unblocked HP damage.
-Faith prevents 4 damage and becomes 2.
-```
 
 Example with Burden:
 
@@ -205,7 +196,7 @@ Design intent:
 
 Fractured Halo nudges The Penitent toward Devotion at combat start. It gives a small buffer before Atone or Heresy cards push the character toward Burden.
 
-Starting at 4 Faith is safer than 6 under the scale model because Faith prevents damage, cleanses Burden, and absorbs future Burden gain.
+Starting at 4 Faith is safer than 6 under the scale model because Faith cleanses Burden and absorbs future Burden gain.
 
 ---
 
@@ -228,7 +219,7 @@ This list reflects the current implemented / planned values.
 |---|---:|---:|---:|---|---|
 | Empty Hands | Skill | Common | TBD | If you have no Block, Ascend 10. | If you have no Block, Ascend 12. |
 | Steady Conviction | Skill | Common | TBD | Gain 4 Block and 3 Faith. | Gain 6 Block and 4 Faith. |
-| Zealous Retort | Power | Uncommon | TBD | Whenever Faith prevents damage, deal 3 damage to the attacker. | Deal 4 damage instead. |
+| Zealous Retort | Power | Uncommon | TBD | Whenever you are attacked while you have Faith, deal 3 damage to the attacker. | Deal 4 damage instead. |
 | Crisis of Faith | Skill | Uncommon | TBD | Descend equal to your Faith. Gain twice that much Block. | Gain twice that much Block + 5. |
 | Confess | Skill | Uncommon/Common | TBD | Gain 5 Faith. Draw 1 card. | Gain 7 Faith. Draw 1 card. |
 
@@ -273,7 +264,7 @@ Devotion wants to stay Faith-positive.
 
 Typical goals:
 
-- Prevent damage with Faith.
+- Build Faith to buffer against future Descend costs.
 - Use Ascend to cleanse Burden.
 - Use Faith as a buffer before Atone or Heresy effects.
 - Convert Faith into Block through Crisis of Faith.
@@ -311,9 +302,9 @@ Risk: if Burden payoffs are too efficient, Burden becomes pure upside and the sc
 
 ## Balance Watchlist
 
-## Faith May Be Too Universal
+## Faith May Become Too Safe
 
-Faith prevents damage, removes Burden, and absorbs future Burden. This is powerful.
+Faith removes Burden and absorbs future Burden. This is powerful because it can make risky Descend and Atone lines safe before they ever create Burden.
 
 Countermeasures:
 
@@ -391,7 +382,7 @@ PenitentPowerCmd
   owns Faith/Burden scale cancellation
 
 FaithPower
-  owns damage prevention
+  owns Faith display/state while Faith remains implemented as a power
 
 BurdenPower
   owns end-of-combat punishment

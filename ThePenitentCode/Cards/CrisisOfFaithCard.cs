@@ -5,7 +5,7 @@ using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.ValueProps;
 using ThePenitent.ThePenitentCode.HoverTips;
-using ThePenitent.ThePenitentCode.Powers;
+using ThePenitent.ThePenitentCode.Scale;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
@@ -29,13 +29,13 @@ public class CrisisOfFaithCard() :
         new CalculationExtraVar(2M),
         new CalculatedBlockVar(ValueProp.Move)
             .WithMultiplier((card, _) =>
-                card.Owner.Creature.GetPowerAmount<FaithPower>())
+                PenitentScaleTracker.FaithAmount(card.Owner.Creature))
     ];
 
     protected override void AddExtraArgsToContextualDescription(LocString description)
     {
         decimal faith = CombatState is not null
-            ? Owner.Creature.GetPowerAmount<FaithPower>()
+            ? FaithAmount
             : 0M;
 
         description.Add("DescendAmount", faith);
@@ -45,10 +45,10 @@ public class CrisisOfFaithCard() :
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        if (!Owner.HasPower<FaithPower>())
+        if (!HasFaithPower)
             return;
         
-        var faith = Owner.Creature.GetPower<FaithPower>()!.Amount;
+        var faith = FaithAmount;
         var amountOfBlockToGain = new BlockVar(
             DynamicVars.CalculationBase.BaseValue + faith * DynamicVars.CalculationExtra.BaseValue,
             ValueProp.Move

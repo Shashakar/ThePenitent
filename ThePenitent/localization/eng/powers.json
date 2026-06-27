@@ -15,8 +15,8 @@
   "THEPENITENT-CROWN_OF_THORNS_POWER.smartDescription": "At the end of your turn, if you have [purple]Burden[/purple], gain that much [gold]Block[/gold]",
   "THEPENITENT-CROWN_OF_THORNS_POWER.title": "Crown of Thorns",
   
-  "THEPENITENT-FAITH_POWER.description": "Faith prevents damage equal to its amount. This persists between turns.",
-  "THEPENITENT-FAITH_POWER.smartDescription": "Faith prevents the next [blue]{Amount}[/blue] damage.",
+  "THEPENITENT-FAITH_POWER.description": "Faith is the positive side of the Penitent's scale. It removes Burden before Faith is gained.",
+  "THEPENITENT-FAITH_POWER.smartDescription": "[blue]{Amount}[/blue] Faith. Faith removes Burden before Faith is gained.",
   "THEPENITENT-FAITH_POWER.title": "Faith",
 
   "THEPENITENT-GRIM_CERTAINTY_POWER.description": "Whenever your Descend creates Burden, deal damage to a random enemy.",

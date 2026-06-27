@@ -3,7 +3,6 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using ThePenitent.ThePenitentCode.HoverTips;
-using ThePenitent.ThePenitentCode.Powers;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
@@ -28,7 +27,7 @@ public class FinalPenanceCard() :
     protected override void AddExtraArgsToContextualDescription(LocString description)
     {
         int burden = CombatState is not null
-            ? Owner.Creature.GetPowerAmount<BurdenPower>()
+            ? (int)BurdenAmount
             : 0;
 
         int hpLoss = burden / 2;
@@ -42,11 +41,10 @@ public class FinalPenanceCard() :
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        if (!Owner.Creature.HasPower<BurdenPower>())
+        if (!HasBurdenPower)
             return;
 
-        // get Burden amount
-        int burdenAmount = Owner.Creature.GetPower<BurdenPower>()!.Amount;
+        int burdenAmount = (int)BurdenAmount;
         
         // get half of Burden rounded down
         int halfOfBurden =  burdenAmount / 2;
