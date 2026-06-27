@@ -49,13 +49,13 @@
   "THEPENITENT-HEAVY_SOUL_CARD.description": "Deal {Damage:diff()} damage.\nIf you have [purple]Burden[/purple], deal {Damage:diff()} additional damage.",
   "THEPENITENT-HEAVY_SOUL_CARD.title": "Heavy Soul",
 
-  "THEPENITENT-HUMBLING_LITANY_CARD.description": "Enemy loses {StrengthLoss:diff()} Strength this turn.\nExhaust.",
+  "THEPENITENT-HUMBLING_LITANY_CARD.description": "Enemy loses {StrengthLoss:diff()} Strength.\nExhaust.",
   "THEPENITENT-HUMBLING_LITANY_CARD.title": "Humbling Litany",
 
   "THEPENITENT-INTERCESSION_CARD.description": "[gold]Atone[/gold] an ally {Heal:diff()}",
   "THEPENITENT-INTERCESSION_CARD.title": "Intercession",
 
-  "THEPENITENT-LONE_VIGIL_CARD.description": "Gain {Block:diff()} [gold]Block[/gold].\nIf you have no allies, [gold]Ascend[/gold] {FaithPower:diff()}.",
+  "THEPENITENT-LONE_VIGIL_CARD.description": "Gain {Block:diff()} [gold]Block[/gold].\nIf this is the first card you've played this turn, [gold]Ascend[/gold] {FaithPower:diff()}.",
   "THEPENITENT-LONE_VIGIL_CARD.title": "Lone Vigil",
 
   "THEPENITENT-MARTYRS_RESOLVE_CARD.description": "Lose {HpLoss} HP.\nGain {Block:diff()} [gold]Block[/gold].\nDraw {Cards:diff()} card.",

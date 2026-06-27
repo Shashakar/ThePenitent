@@ -345,6 +345,33 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
         );
     }
 
+    protected Task ApplyStrengthLoss(PlayerChoiceContext context, CardPlay cardPlay, decimal amount)
+    {
+        ArgumentNullException.ThrowIfNull(cardPlay.Target);
+
+        return PowerCmd.Apply<StrengthPower>(
+            context,
+            cardPlay.Target,
+            -amount,
+            Owner.Creature,
+            this
+        );
+    }
+
+    protected bool IsFirstCardPlayedThisTurn(CardPlay cardPlay)
+    {
+        if (CombatState is null)
+            return true;
+
+        int playedCardsThisTurn = CombatManager.Instance.History.CardPlaysStarted
+            .Count(entry =>
+                entry.Actor == Owner.Creature &&
+                entry.CardPlay.IsFirstInSeries &&
+                entry.HappenedThisTurn(CombatState));
+
+        return cardPlay.IsFirstInSeries && playedCardsThisTurn == 1;
+    }
+
     protected async Task ApplyWeakToAllEnemies(PlayerChoiceContext context, decimal amount)
     {
         if (CombatState is null)

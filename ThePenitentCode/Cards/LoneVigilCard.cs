@@ -20,7 +20,7 @@ public sealed class LoneVigilCard() :
     {
         await GainSelfBlock(cardPlay);
 
-        if (IsSoloCombat())
+        if (IsFirstCardPlayedThisTurn(cardPlay))
             await Ascend();
     }
 
