@@ -1,6 +1,9 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
+using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using ThePenitent.ThePenitentCode.HoverTips;
+using ThePenitent.ThePenitentCode.Scale;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
@@ -13,7 +16,7 @@ public class GentleMercyCard() :
         target: TargetType.AnyPlayer,
         healAmount: 6M,
         keywords: [CardKeyword.Exhaust],
-        extraHoverTips: [PenitentHoverTipFactory.Burden()]
+        extraHoverTips: [PenitentHoverTipFactory.Descend(), PenitentHoverTipFactory.Prophet()]
     )
 {
     
@@ -21,7 +24,12 @@ public class GentleMercyCard() :
         PlayerChoiceContext choiceContext,
         CardPlay play)
     {
-        await HealTarget(play);
+        Creature target = play.Target ?? Owner.Creature;
+        decimal healAmount = Heal.BaseValue;
+        if (PenitentScaleTracker.IsProphet(Owner.Creature))
+            healAmount += 3M;
+
+        await CreatureCmd.Heal(target, healAmount);
     }
 
     protected override void OnUpgrade()

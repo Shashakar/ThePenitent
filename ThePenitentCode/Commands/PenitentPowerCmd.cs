@@ -53,7 +53,7 @@ public static class PenitentPowerCmd
         if (remaining <= 0)
         {
             await AscendNotifier.NotifyAfterAscend(ascendData);
-            PenitentScaleMeterRegistry.Update(owner);
+            RefreshScaleDependents(owner);
             return;
         }
 
@@ -66,7 +66,7 @@ public static class PenitentPowerCmd
         );
 
         await AscendNotifier.NotifyAfterAscend(ascendData);
-        PenitentScaleMeterRegistry.Update(owner);
+        RefreshScaleDependents(owner);
     }
 
     public static async Task ApplyBurden(
@@ -114,7 +114,7 @@ public static class PenitentPowerCmd
 
         if (remainingCharges <= 0)
         {
-            PenitentScaleMeterRegistry.Update(owner);
+            RefreshScaleDependents(owner);
             return;
         }
 
@@ -135,7 +135,13 @@ public static class PenitentPowerCmd
             combatState
         );
 
+        RefreshScaleDependents(owner);
+    }
+
+    private static void RefreshScaleDependents(Creature owner)
+    {
         PenitentScaleMeterRegistry.Update(owner);
+        owner.Player?.PlayerCombatState?.RecalculateCardValues();
     }
 
     private static TPower? GetPower<TPower>(Creature owner)

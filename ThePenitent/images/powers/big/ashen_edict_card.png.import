@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ix1413bulfbr"
-path="res://.godot/imported/crown_of_thorns_vengeful_power.png-beaae760c13d036d43cf279e099bbf5d.ctex"
+uid="uid://cjaec3mj1gqb2"
+path="res://.godot/imported/ashen_edict_card.png-147f22a9fef0d9042c8cbcbb6d57d558.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ThePenitent/images/powers/big/crown_of_thorns_vengeful_power.png"
-dest_files=["res://.godot/imported/crown_of_thorns_vengeful_power.png-beaae760c13d036d43cf279e099bbf5d.ctex"]
+source_file="res://ThePenitent/images/powers/big/ashen_edict_card.png"
+dest_files=["res://.godot/imported/ashen_edict_card.png-147f22a9fef0d9042c8cbcbb6d57d558.ctex"]
 
 [params]
 

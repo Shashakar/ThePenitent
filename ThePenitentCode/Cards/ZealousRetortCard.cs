@@ -14,7 +14,7 @@ public class ZealousRetortCard() :
         type: CardType.Power, 
         rarity: CardRarity.Uncommon,
         target: TargetType.Self, 
-        extraHoverTips: [PenitentHoverTipFactory.Faith()]
+        extraHoverTips: [PenitentHoverTipFactory.Faith(), PenitentHoverTipFactory.Prophet()]
     )
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>

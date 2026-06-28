@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using ThePenitent.ThePenitentCode.HoverTips;
+using ThePenitent.ThePenitentCode.Scale;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
@@ -19,7 +20,8 @@ public sealed class BurdenedRebukeCard() :
         [
             HoverTipFactory.FromPower<WeakPower>(),
             PenitentHoverTipFactory.Descend(),
-            PenitentHoverTipFactory.Burden()
+            PenitentHoverTipFactory.Burden(),
+            PenitentHoverTipFactory.Heretic()
         ]
     )
 {
@@ -30,11 +32,16 @@ public sealed class BurdenedRebukeCard() :
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await Descend();
+
+        decimal weakAmount = DynamicVars.Weak.BaseValue;
+        if (PenitentScaleTracker.IsHeretic(Owner.Creature))
+            weakAmount += 1M;
+
         await ApplyWeak(
             choiceContext, 
             cardPlay, 
-            DynamicVars.Weak.BaseValue);
-        await Descend();
+            weakAmount);
     }
 
     protected override void OnUpgrade()

@@ -4,8 +4,10 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.HoverTips;
+using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Exceptions;
 using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using ThePenitent.ThePenitentCode.Commands;
@@ -56,6 +58,22 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
     protected bool HasFaithPower => PenitentScaleTracker.HasFaith(Owner.Creature);
     protected decimal BurdenAmount => PenitentScaleTracker.BurdenAmount(Owner.Creature);
     protected decimal FaithAmount => PenitentScaleTracker.FaithAmount(Owner.Creature);
+    protected PenitentScale CurrentScale
+    {
+        get
+        {
+            try
+            {
+                return Owner?.Creature is null
+                    ? PenitentScale.Neutral
+                    : PenitentScaleTracker.Get(Owner.Creature);
+            }
+            catch (CanonicalModelException)
+            {
+                return PenitentScale.Neutral;
+            }
+        }
+    }
 
     protected override IEnumerable<DynamicVar> CanonicalVars
     {
@@ -129,6 +147,43 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
         return (PowerVar<TPower>)DynamicVars[key];
     }
 
+    protected override void AddExtraArgsToDescription(LocString description)
+    {
+        base.AddExtraArgsToDescription(description);
+        AddStateDescriptionArgs(description);
+    }
+
+    protected override void AddExtraArgsToContextualDescription(LocString description)
+    {
+        AddStateDescriptionArgs(description);
+    }
+
+    private void AddStateDescriptionArgs(LocString description)
+    {
+        bool inCombat = CombatState is not null;
+        description.Add("ProphetPrefix", PenitentStateText.ProphetPrefix(CurrentScale, inCombat));
+        description.Add("ProphetSuffix", PenitentStateText.ProphetSuffix(CurrentScale, inCombat));
+        description.Add("PenitentPrefix", PenitentStateText.PenitentPrefix(CurrentScale, inCombat));
+        description.Add("PenitentSuffix", PenitentStateText.PenitentSuffix(CurrentScale, inCombat));
+        description.Add("HereticPrefix", PenitentStateText.HereticPrefix(CurrentScale, inCombat));
+        description.Add("HereticSuffix", PenitentStateText.HereticSuffix(CurrentScale, inCombat));
+    }
+
+    protected string ProphetLine(string text)
+    {
+        return PenitentStateText.Prophet(text, CurrentScale, CombatState is not null);
+    }
+
+    protected string HereticLine(string text)
+    {
+        return PenitentStateText.Heretic(text, CurrentScale, CombatState is not null);
+    }
+
+    protected string PenitentLine(string text)
+    {
+        return PenitentStateText.Penitent(text, CurrentScale, CombatState is not null);
+    }
+
     protected Task Descend()
     {
         return ApplyBurden(Burden.BaseValue);
@@ -174,6 +229,11 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
     protected Task DrawCards(PlayerChoiceContext choiceContext)
     {
         return CardPileCmd.Draw(choiceContext, Cards.BaseValue, Owner);
+    }
+
+    protected Task DrawCards(PlayerChoiceContext choiceContext, int amount)
+    {
+        return CardPileCmd.Draw(choiceContext, amount, Owner);
     }
 
     protected Task AttackTarget(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -228,8 +288,7 @@ public abstract class ThePenitentMechanicCard : ThePenitentCard
     }
 
     /// <summary>
-    /// Heals the target. The Penitent gains Burden equal to the actual HP restored.
-    /// Under the Faith/Burden scale, Faith absorbs this Burden first.
+    /// Heals the target. The Penitent Descends equal to the actual HP restored.
     /// </summary>
     protected async Task AtoneTarget(CardPlay cardPlay)
     {

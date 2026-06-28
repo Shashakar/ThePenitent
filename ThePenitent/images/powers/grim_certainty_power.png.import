@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mchso51oun3v"
-path="res://.godot/imported/grim_uncertainty_power.png-8970b3578183a31db56ca34df16f1fbf.ctex"
+uid="uid://vhl5uhku6d1s"
+path="res://.godot/imported/grim_certainty_power.png-5db6779c8d4dc1f6b7c31c9590054ea3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ThePenitent/images/powers/grim_uncertainty_power.png"
-dest_files=["res://.godot/imported/grim_uncertainty_power.png-8970b3578183a31db56ca34df16f1fbf.ctex"]
+source_file="res://ThePenitent/images/powers/grim_certainty_power.png"
+dest_files=["res://.godot/imported/grim_certainty_power.png-5db6779c8d4dc1f6b7c31c9590054ea3.ctex"]
 
 [params]
 

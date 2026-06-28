@@ -11,7 +11,7 @@ offset_right = 128.0
 offset_bottom = 128.0
 
 [node name="PenitentScaleMeter" parent="." instance=ExtResource("3_scale")]
-position = Vector2(64, -18)
+position = Vector2(63, -78)
 scale = Vector2(0.45, 0.45)
 
 [node name="Layers" type="Control" parent="."]

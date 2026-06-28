@@ -5,6 +5,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models.Powers;
 using ThePenitent.ThePenitentCode.CustomData;
 using ThePenitent.ThePenitentCode.Interfaces;
+using ThePenitent.ThePenitentCode.Scale;
 
 namespace ThePenitent.ThePenitentCode.Powers;
 
@@ -30,7 +31,7 @@ public class AshenEdictPower : ThePenitentPower, IAscendListener
 
         Flash();
 
-        if (AppliesToAllEnemies)
+        if (AppliesToAllEnemies || PenitentScaleTracker.IsProphet(Owner))
         {
             foreach (Creature enemy in enemies)
                 await PowerCmd.Apply<WeakPower>(

@@ -7,6 +7,7 @@ public static class PenitentScaleMeter
     private const string MeterNodeName = "PenitentScaleMeter";
     private const string MarkerNodePath = "MarkerPivot";
     private const string ValueLabelNodePath = "MarkerPivot/ValueLabel";
+    private const string StanceLabelNodePath = "CurrentStance";
 
     private static readonly Color BurdenColor = new(0.56F, 0.40F, 0.78F, 1F);
     private static readonly Color NeutralColor = new(0.78F, 0.78F, 0.72F, 1F);
@@ -46,6 +47,13 @@ public static class PenitentScaleMeter
 
         valueLabel.Text = PenitentScaleMeterMath.ValueToLabelText(scale);
         valueLabel.AddThemeColorOverride("font_color", ToneToColor(PenitentScaleMeterMath.ValueToTone(scale)));
+
+        Label? stanceLabel = meter.GetNodeOrNull<Label>(StanceLabelNodePath);
+        if (stanceLabel is null)
+            return;
+
+        stanceLabel.Text = PenitentScaleMeterMath.ValueToStanceText(scale);
+        stanceLabel.AddThemeColorOverride("font_color", ToneToColor(PenitentScaleMeterMath.ValueToStanceTone(scale)));
     }
 
     private static Color ToneToColor(PenitentScaleMeterTone tone)

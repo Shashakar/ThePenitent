@@ -1,7 +1,10 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
+using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using MegaCrit.Sts2.Core.ValueProps;
 using ThePenitent.ThePenitentCode.HoverTips;
+using ThePenitent.ThePenitentCode.Scale;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
@@ -14,7 +17,7 @@ public class EmptyHandsCard() :
         rarity: CardRarity.Uncommon,
         target: TargetType.Self,
         faith: 10M,
-        extraHoverTips: [PenitentHoverTipFactory.Ascend(), PenitentHoverTipFactory.Faith()]
+        extraHoverTips: [PenitentHoverTipFactory.Ascend(), PenitentHoverTipFactory.Faith(), PenitentHoverTipFactory.Penitent()]
     )
 {
     protected override bool ShouldGlowRedInternal => Owner.Creature.Block != 0;
@@ -22,6 +25,8 @@ public class EmptyHandsCard() :
 
     protected override void AddExtraArgsToContextualDescription(LocString description)
     {
+        base.AddExtraArgsToContextualDescription(description);
+
         int block = CombatState is not null
             ? Owner.Creature.Block
             : 0;
@@ -36,9 +41,14 @@ public class EmptyHandsCard() :
         //If you have no block
         if (Owner.Creature.Block > 0)
             return;
-        
+
+        bool isPenitent = PenitentScaleTracker.IsPenitent(Owner.Creature);
+
         // Gain 10 faith.
         await Ascend();
+
+        if (isPenitent)
+            await GainSelfBlock(play, new BlockVar(4M, ValueProp.Move));
         
     }
 

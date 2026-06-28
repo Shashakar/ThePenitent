@@ -1,19 +1,25 @@
 {
-  "CONVICTION.title": "Conviction",
-  "CONVICTION.description": "The Penitent's spiritual scale. Ascending moves Conviction toward Faith. Descending moves it toward Burden.",
-
+  "ASCEND.description": "Move toward [gold]Faith[/gold]. Remove up to that much [purple]Burden[/purple]. Any excess becomes [gold]Faith[/gold].",
   "ASCEND.title": "Ascend",
-  "ASCEND.description": "Move Conviction toward Faith. Remove up to that much Burden. Any excess becomes Faith.",
 
+  "DESCEND.description": "Move toward [purple]Burden[/purple]. Remove up to that much [gold]Faith[/gold]. Any excess becomes [purple]Burden[/purple].",
   "DESCEND.title": "Descend",
-  "DESCEND.description": "Move Conviction toward Burden. Remove up to that much Faith. Any excess becomes Burden.",
 
-  "FAITH.title": "Faith",
-  "FAITH.description": "Positive Conviction. Generally used to prevent Burden",
-
-  "BURDEN.title": "Burden",
-  "BURDEN.description": "Negative Conviction. At combat's end, lose HP equal to your Burden. If this would kill you, survive at 1 HP and lose Max HP for each unpaid HP.",
-
+  "ATONE.description": "Heal the target. The Penitent [purple]Descends[/purple] by the HP restored.",
   "ATONE.title": "Atone",
-  "ATONE.description": "Heal the target. The Penitent Descends by the HP restored."
+
+  "FAITH.description": "Positive scale value. [gold]Prophet[/gold] effects are active while you have 6 or more [gold]Faith[/gold].",
+  "FAITH.title": "Faith",
+
+  "BURDEN.description": "Negative scale value. [purple]Heretic[/purple] effects are active while you have 6 or more [purple]Burden[/purple].",
+  "BURDEN.title": "Burden",
+
+  "PROPHET.description": "You are [gold]Prophet[/gold] while you have 6 or more [gold]Faith[/gold].",
+  "PROPHET.title": "Prophet",
+
+  "PENITENT.description": "You are Penitent while you have less than 6 [gold]Faith[/gold] and less than 6 [purple]Burden[/purple].",
+  "PENITENT.title": "Penitent",
+
+  "HERETIC.description": "You are [purple]Heretic[/purple] while you have 6 or more [purple]Burden[/purple].",
+  "HERETIC.title": "Heretic"
 }

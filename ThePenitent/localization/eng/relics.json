@@ -11,15 +11,15 @@
   "THEPENITENT-BROKEN_RELIQUARY_RELIC.flavor": "Power leaks from the fracture, and something darker leaks with it.",
   "THEPENITENT-BROKEN_RELIQUARY_RELIC.title": "Broken Reliquary",
   
-  "THEPENITENT-COMPLETED_HALO_RELIC.description": "At the start of each combat, gain {FaithPower} Faith.",
+  "THEPENITENT-COMPLETED_HALO_RELIC.description": "At the start of each combat, Ascend {FaithPower}.",
   "THEPENITENT-COMPLETED_HALO_RELIC.flavor": "Its circle is whole again. For a moment, so is the soul beneath it.",
   "THEPENITENT-COMPLETED_HALO_RELIC.title": "Completed Halo",
 
-  "THEPENITENT-CRACKED_CENSER_RELIC.description": "At the start of each combat, if you have no Faith or Burden, gain {FaithPower} Faith.",
+  "THEPENITENT-CRACKED_CENSER_RELIC.description": "At the start of each combat, if you have no Faith or Burden, Ascend {FaithPower}.",
   "THEPENITENT-CRACKED_CENSER_RELIC.flavor": "The smoke rises unevenly, but still it rises.",
   "THEPENITENT-CRACKED_CENSER_RELIC.title": "Cracked Censer",
 
-  "THEPENITENT-FRACTURED_HALO_RELIC.description": "At the start of each combat, gain {FaithPower} Faith.",
+  "THEPENITENT-FRACTURED_HALO_RELIC.description": "At the start of each combat, Ascend {FaithPower}.",
   "THEPENITENT-FRACTURED_HALO_RELIC.flavor": "Its light is damaged, but not gone. The faithful learn to survive on what remains.",
   "THEPENITENT-FRACTURED_HALO_RELIC.title": "Fractured Halo",
 
@@ -39,7 +39,7 @@
   "THEPENITENT-MARTYRS_BELL_RELIC.flavor": "It rings only for those who endure the blow.",
   "THEPENITENT-MARTYRS_BELL_RELIC.title": "Martyr's Bell",
   
-  "THEPENITENT-SEALED_PENANCE_RELIC.description": "At combat's end, Burden cannot reduce your Max HP by more than 3.",
+  "THEPENITENT-SEALED_PENANCE_RELIC.description": "The first time each combat your Descend would create Burden, Descend 3 less.",
   "THEPENITENT-SEALED_PENANCE_RELIC.flavor": "Some debts are deferred. None are forgiven.",
   "THEPENITENT-SEALED_PENANCE_RELIC.title": "Sealed Penance",
 

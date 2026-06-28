@@ -37,10 +37,14 @@ public sealed class ZealousRetortPower : ThePenitentPower
 
         Flash();
 
+        decimal damage = Amount;
+        if (PenitentScaleTracker.IsProphet(Owner))
+            damage += 2M;
+
         await CreatureCmd.Damage(
             choiceContext,
             dealer,
-            Amount,
+            damage,
             ValueProp.Unpowered,
             Owner,
             null

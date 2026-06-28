@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dlqisikwhc4ak"]
 
 [ext_resource type="PackedScene" uid="uid://bmqbjin1rldw0" path="res://ThePenitent/images/charui/PenitentVisual.tscn" id="1_pb3ti"]
-[ext_resource type="PackedScene" uid="uid://c7em6yjx4a35q" path="res://ThePenitent/images/charui/penitent_scale_meter_overhead.tscn" id="2_scale"]
+[ext_resource type="PackedScene" path="res://ThePenitent/images/charui/penitent_scale_meter_overhead.tscn" id="2_scale"]
 
 [node name="Penitent" type="Node2D"]
 

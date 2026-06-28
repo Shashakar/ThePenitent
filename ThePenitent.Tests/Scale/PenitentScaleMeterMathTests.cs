@@ -43,4 +43,28 @@ public sealed class PenitentScaleMeterMathTests
 
         Assert.Equal(expectedTone, tone);
     }
+
+    [Theory]
+    [InlineData(-6, "Heretic")]
+    [InlineData(-5, "Penitent")]
+    [InlineData(0, "Penitent")]
+    [InlineData(5, "Penitent")]
+    [InlineData(6, "Prophet")]
+    public void ValueToStanceTextMapsThresholdState(decimal value, string expectedText)
+    {
+        string stanceText = PenitentScaleMeterMath.ValueToStanceText(new PenitentScale(value));
+
+        Assert.Equal(expectedText, stanceText);
+    }
+
+    [Theory]
+    [InlineData(-6, PenitentScaleMeterTone.Burden)]
+    [InlineData(0, PenitentScaleMeterTone.Neutral)]
+    [InlineData(6, PenitentScaleMeterTone.Faith)]
+    public void ValueToStanceToneMapsThresholdState(decimal value, PenitentScaleMeterTone expectedTone)
+    {
+        PenitentScaleMeterTone tone = PenitentScaleMeterMath.ValueToStanceTone(new PenitentScale(value));
+
+        Assert.Equal(expectedTone, tone);
+    }
 }

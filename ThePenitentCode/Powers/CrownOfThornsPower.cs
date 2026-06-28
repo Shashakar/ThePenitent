@@ -15,16 +15,30 @@ public class CrownOfThornsPower : ThePenitentPower
 
     public override PowerStackType StackType => PowerStackType.Single;
 
+    public static decimal BurdenToConsumeForBlock(decimal burden)
+    {
+        return Math.Floor(Math.Max(0M, burden) / 2M);
+    }
+
     public override async Task BeforeSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side, IEnumerable<Creature> participants)
     {
         if (side != CombatSide.Enemy)
             return;
 
-        if (!PenitentScaleTracker.HasBurden(Owner))
+        if (!PenitentScaleTracker.IsHeretic(Owner))
             return;
         
-        var burdenAmount = PenitentScaleTracker.BurdenAmount(Owner);
+        decimal burdenToConsume = BurdenToConsumeForBlock(PenitentScaleTracker.BurdenAmount(Owner));
+        if (burdenToConsume <= 0M)
+            return;
 
-        await CreatureCmd.GainBlock(Owner, burdenAmount, ValueProp.Move, null);
+        BurdenPower? burden = Owner.Powers.OfType<BurdenPower>().FirstOrDefault();
+        if (burden is not null)
+            await PowerCmd.ModifyAmount(choiceContext, burden, -burdenToConsume, Owner, null);
+
+        PenitentScaleMeterRegistry.Update(Owner);
+        Owner.Player?.PlayerCombatState?.RecalculateCardValues();
+
+        await CreatureCmd.GainBlock(Owner, burdenToConsume, ValueProp.Move, null);
     }
 }

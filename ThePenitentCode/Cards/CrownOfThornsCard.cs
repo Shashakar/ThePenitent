@@ -15,7 +15,7 @@ public sealed class CrownOfThornsCard() :
         type: CardType.Power,
         rarity: CardRarity.Rare,
         target: TargetType.Self,
-        extraHoverTips: [PenitentHoverTipFactory.Burden()]
+        extraHoverTips: [PenitentHoverTipFactory.Burden(), PenitentHoverTipFactory.Heretic()]
     )
 {
 

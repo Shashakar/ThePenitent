@@ -4,6 +4,7 @@ using MegaCrit.Sts2.Core.HoverTips;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models.Powers;
 using ThePenitent.ThePenitentCode.HoverTips;
+using ThePenitent.ThePenitentCode.Scale;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
@@ -18,11 +19,11 @@ public sealed class ScourgingBlowCard() :
         extraHoverTips:
         [
             HoverTipFactory.FromPower<WeakPower>(),
-            PenitentHoverTipFactory.Burden()
+            PenitentHoverTipFactory.Heretic()
         ]
     )
 {
-    protected override bool ShouldGlowGoldInternal => HasBurdenPower;
+    protected override bool ShouldGlowGoldInternal => PenitentScaleTracker.IsHeretic(Owner.Creature);
 
     protected override IEnumerable<DynamicVar> AdditionalCanonicalVars =>
     [
@@ -33,7 +34,7 @@ public sealed class ScourgingBlowCard() :
     {
         await AttackTarget(choiceContext, cardPlay);
 
-        if (HasBurdenPower)
+        if (PenitentScaleTracker.IsHeretic(Owner.Creature))
             await ApplyWeak(
                 choiceContext,
                 cardPlay, 

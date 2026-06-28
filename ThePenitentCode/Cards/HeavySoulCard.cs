@@ -2,6 +2,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization;
 using ThePenitent.ThePenitentCode.HoverTips;
+using ThePenitent.ThePenitentCode.Scale;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
@@ -13,14 +14,16 @@ public class HeavySoulCard() :
         rarity: CardRarity.Common,
         target: TargetType.AnyEnemy,
         damage: 6M,
-        extraHoverTips: [PenitentHoverTipFactory.Burden()]
+        extraHoverTips: [PenitentHoverTipFactory.Heretic()]
     )
 {
-    protected override bool ShouldGlowGoldInternal => HasBurdenPower;
+    protected override bool ShouldGlowGoldInternal => PenitentScaleTracker.IsHeretic(Owner.Creature);
 
     protected override void AddExtraArgsToContextualDescription(LocString description)
     {
-        decimal damage = CombatState is not null && HasBurdenPower
+        base.AddExtraArgsToContextualDescription(description);
+
+        decimal damage = CombatState is not null && PenitentScaleTracker.IsHeretic(Owner.Creature)
             ? Damage.BaseValue * 2M
             : Damage.BaseValue;
 
@@ -32,7 +35,7 @@ public class HeavySoulCard() :
         CardPlay play)
     {
 
-        decimal damage = HasBurdenPower
+        decimal damage = PenitentScaleTracker.IsHeretic(Owner.Creature)
             ? (Damage.BaseValue * 2)
             : Damage.BaseValue;
 

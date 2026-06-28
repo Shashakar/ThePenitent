@@ -2,6 +2,7 @@ using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using ThePenitent.ThePenitentCode.HoverTips;
 using ThePenitent.ThePenitentCode.Powers;
 
 namespace ThePenitent.ThePenitentCode.Cards;
@@ -12,15 +13,13 @@ public sealed class AshenEdictCard() :
         cost: 1,
         type: CardType.Power,
         rarity: CardRarity.Uncommon,
-        target: TargetType.Self
+        target: TargetType.Self,
+        extraHoverTips: [PenitentHoverTipFactory.Ascend(), PenitentHoverTipFactory.Prophet()]
     )
 {
-    private const string AllEnemiesKey = "AllEnemies";
-
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new PowerVar<AshenEdictPower>(1M),
-        new DynamicVar(AllEnemiesKey, 0M),
+        new PowerVar<AshenEdictPower>(1M)
     ];
 
     public PowerVar<AshenEdictPower> AshenEdict =>
@@ -29,30 +28,17 @@ public sealed class AshenEdictCard() :
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         await CreatureCmd.TriggerAnim(Owner.Creature, "Cast", Owner.Character.CastAnimDelay);
-        if (IsUpgraded)
-        {
-            await PowerCmd.Apply<AshenEdictAllEnemiesPower>(
-                choiceContext,
-                Owner.Creature,
-                1M,
-                Owner.Creature,
-                this
-            );
-        }
-        else
-        {
-            await PowerCmd.Apply<AshenEdictPower>(
-                choiceContext,
-                Owner.Creature,
-                AshenEdict.BaseValue,
-                Owner.Creature,
-                this
-            );
-        }
+        await PowerCmd.Apply<AshenEdictPower>(
+            choiceContext,
+            Owner.Creature,
+            AshenEdict.BaseValue,
+            Owner.Creature,
+            this
+        );
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars[AllEnemiesKey].UpgradeValueBy(1M);
+        EnergyCost.UpgradeBy(-1);
     }
 }

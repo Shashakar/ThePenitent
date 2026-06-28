@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using ThePenitent.ThePenitentCode.Cards;
 using ThePenitent.ThePenitentCode.HoverTips;
+using ThePenitent.ThePenitentCode.Scale;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
@@ -15,7 +16,7 @@ public class BlackBenedictionCard() :
         target: TargetType.AnyEnemy,
         damage: 24M,
         burden: 8M,
-        extraHoverTips: [PenitentHoverTipFactory.Descend(), PenitentHoverTipFactory.Burden()]
+        extraHoverTips: [PenitentHoverTipFactory.Descend(), PenitentHoverTipFactory.Burden(), PenitentHoverTipFactory.Heretic()]
     )
 {
 
@@ -24,7 +25,12 @@ public class BlackBenedictionCard() :
         CardPlay play)
     {
         await Descend();
-        await AttackTarget(choiceContext, play);
+
+        decimal damage = Damage.BaseValue;
+        if (PenitentScaleTracker.IsHeretic(Owner.Creature))
+            damage += 8M;
+
+        await AttackTarget(choiceContext, play, damage);
     }
 
     protected override void OnUpgrade()

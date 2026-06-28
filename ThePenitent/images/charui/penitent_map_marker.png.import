@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4dduvv5e3pvw"
-path="res://.godot/imported/crown_of_thorns_vengeful_power.png-8bd16176b69099af35da2ca379f06201.ctex"
+uid="uid://dl332el0rrmu4"
+path="res://.godot/imported/penitent_map_marker.png-90cb2f070d0fe595235ccbc87b349274.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ThePenitent/images/powers/crown_of_thorns_vengeful_power.png"
-dest_files=["res://.godot/imported/crown_of_thorns_vengeful_power.png-8bd16176b69099af35da2ca379f06201.ctex"]
+source_file="res://ThePenitent/images/charui/penitent_map_marker.png"
+dest_files=["res://.godot/imported/penitent_map_marker.png-90cb2f070d0fe595235ccbc87b349274.ctex"]
 
 [params]
 

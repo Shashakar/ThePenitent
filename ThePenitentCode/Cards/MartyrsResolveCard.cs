@@ -1,6 +1,8 @@
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
+using ThePenitent.ThePenitentCode.HoverTips;
+using ThePenitent.ThePenitentCode.Scale;
 
 namespace ThePenitent.ThePenitentCode.Cards;
 
@@ -12,7 +14,8 @@ public sealed class MartyrsResolveCard() :
         rarity: CardRarity.Uncommon,
         target: TargetType.Self,
         block: 8M,
-        cardsToDraw: 1
+        cardsToDraw: 1,
+        extraHoverTips: [PenitentHoverTipFactory.Penitent()]
     )
 {
     private const string HpLossKey = "HpLoss";
@@ -24,7 +27,11 @@ public sealed class MartyrsResolveCard() :
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await LoseHp(DynamicVars[HpLossKey].IntValue);
+        int hpLoss = DynamicVars[HpLossKey].IntValue;
+        if (PenitentScaleTracker.IsPenitent(Owner.Creature))
+            hpLoss = Math.Max(0, hpLoss - 1);
+
+        await LoseHp(hpLoss);
         await GainSelfBlock(cardPlay);
         await DrawCards(choiceContext);
     }

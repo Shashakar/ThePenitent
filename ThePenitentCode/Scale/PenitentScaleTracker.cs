@@ -3,8 +3,17 @@ using ThePenitent.ThePenitentCode.Powers;
 
 namespace ThePenitent.ThePenitentCode.Scale;
 
+public enum PenitentScaleState
+{
+    Heretic,
+    Penitent,
+    Prophet
+}
+
 public static class PenitentScaleTracker
 {
+    public const int StateThreshold = 6;
+
     public static PenitentScale FromAmounts(decimal faith, decimal burden)
     {
         decimal normalizedFaith = Math.Max(0M, faith);
@@ -39,5 +48,45 @@ public static class PenitentScaleTracker
     public static bool HasBurden(Creature creature)
     {
         return Get(creature).HasBurden;
+    }
+
+    public static PenitentScaleState State(PenitentScale scale)
+    {
+        if (IsProphet(scale))
+            return PenitentScaleState.Prophet;
+
+        return IsHeretic(scale)
+            ? PenitentScaleState.Heretic
+            : PenitentScaleState.Penitent;
+    }
+
+    public static bool IsProphet(PenitentScale scale)
+    {
+        return scale.Faith >= StateThreshold;
+    }
+
+    public static bool IsProphet(Creature creature)
+    {
+        return IsProphet(Get(creature));
+    }
+
+    public static bool IsHeretic(PenitentScale scale)
+    {
+        return scale.Burden >= StateThreshold;
+    }
+
+    public static bool IsHeretic(Creature creature)
+    {
+        return IsHeretic(Get(creature));
+    }
+
+    public static bool IsPenitent(PenitentScale scale)
+    {
+        return State(scale) == PenitentScaleState.Penitent;
+    }
+
+    public static bool IsPenitent(Creature creature)
+    {
+        return IsPenitent(Get(creature));
     }
 }

@@ -37,4 +37,24 @@ public static class PenitentScaleMeterMath
             ? PenitentScaleMeterTone.Faith
             : PenitentScaleMeterTone.Neutral;
     }
+
+    public static string ValueToStanceText(PenitentScale scale)
+    {
+        return PenitentScaleTracker.State(scale) switch
+        {
+            PenitentScaleState.Heretic => "Heretic",
+            PenitentScaleState.Prophet => "Prophet",
+            _ => "Penitent"
+        };
+    }
+
+    public static PenitentScaleMeterTone ValueToStanceTone(PenitentScale scale)
+    {
+        return PenitentScaleTracker.State(scale) switch
+        {
+            PenitentScaleState.Heretic => PenitentScaleMeterTone.Burden,
+            PenitentScaleState.Prophet => PenitentScaleMeterTone.Faith,
+            _ => PenitentScaleMeterTone.Neutral
+        };
+    }
 }

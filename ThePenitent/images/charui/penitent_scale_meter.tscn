@@ -27,3 +27,16 @@ theme_override_font_sizes/font_size = 52
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CurrentStance" type="Label" parent="."]
+offset_left = -104.0
+offset_top = 38.0
+offset_right = 109.0
+offset_bottom = 110.0
+theme_override_colors/font_color = Color(0.78, 0.78, 0.72, 1)
+theme_override_colors/font_outline_color = Color(0.08, 0.07, 0.08, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 52
+text = "Penitent"
+horizontal_alignment = 1
+vertical_alignment = 1

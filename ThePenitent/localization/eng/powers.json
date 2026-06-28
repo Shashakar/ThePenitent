@@ -1,22 +1,21 @@
 {
-  "THEPENITENT-BURDEN_POWER.description": "At the end of combat, lose HP equal to your Burden. If this would kill you, survive at 1 HP and lose Max HP equal to the excess.",
-  "THEPENITENT-BURDEN_POWER.smartDescription": "At the end of combat, lose [blue]{Amount}[/blue] HP. If this would kill you, survive at 1 HP and lose Max HP equal to the excess.",
+  "THEPENITENT-BURDEN_POWER.description": "Negative scale value.",
+  "THEPENITENT-BURDEN_POWER.smartDescription": "[blue]{Amount}[/blue] [purple]Burden[/purple].",
   "THEPENITENT-BURDEN_POWER.title": "Burden",
 
   "THEPENITENT-ASHEN_EDICT_POWER.description": "Whenever you Ascend, apply Weak.",
-  "THEPENITENT-ASHEN_EDICT_POWER.smartDescription": "Whenever you Ascend, apply [blue]1[/blue] Weak to a random enemy.",
+  "THEPENITENT-ASHEN_EDICT_POWER.smartDescription": "Whenever you Ascend, apply [blue]1[/blue] Weak to a random enemy. Prophet: apply to ALL enemies instead.",
   "THEPENITENT-ASHEN_EDICT_POWER.title": "Ashen Edict",
 
   "THEPENITENT-ASHEN_EDICT_ALL_ENEMIES_POWER.description": "Whenever you Ascend, apply Weak to ALL enemies.",
   "THEPENITENT-ASHEN_EDICT_ALL_ENEMIES_POWER.smartDescription": "Whenever you Ascend, apply [blue]1[/blue] Weak to ALL enemies.",
   "THEPENITENT-ASHEN_EDICT_ALL_ENEMIES_POWER.title": "Ashen Edict",
 
-  "THEPENITENT-CROWN_OF_THORNS_POWER.description": "At the end of your turn, if you have Burden, gain that much Block",
-  "THEPENITENT-CROWN_OF_THORNS_POWER.smartDescription": "At the end of your turn, if you have [purple]Burden[/purple], gain that much [gold]Block[/gold]",
+  "THEPENITENT-CROWN_OF_THORNS_POWER.description": "At the end of your turn, Heretic: consume half your Burden, rounded down, to gain that much Block.",
+  "THEPENITENT-CROWN_OF_THORNS_POWER.smartDescription": "At the end of your turn, Heretic: consume half your [purple]Burden[/purple], rounded down, to gain that much [gold]Block[/gold].",
   "THEPENITENT-CROWN_OF_THORNS_POWER.title": "Crown of Thorns",
-  
-  "THEPENITENT-FAITH_POWER.description": "Faith is the positive side of the Penitent's scale. It removes Burden before Faith is gained.",
-  "THEPENITENT-FAITH_POWER.smartDescription": "[blue]{Amount}[/blue] Faith. Faith removes Burden before Faith is gained.",
+  "THEPENITENT-FAITH_POWER.description": "Positive scale value.",
+  "THEPENITENT-FAITH_POWER.smartDescription": "[blue]{Amount}[/blue] [gold]Faith[/gold].",
   "THEPENITENT-FAITH_POWER.title": "Faith",
 
   "THEPENITENT-GRIM_CERTAINTY_POWER.description": "Whenever your Descend creates Burden, deal damage to a random enemy.",
@@ -27,7 +26,7 @@
   "THEPENITENT-RITES_OF_ENDURANCE_POWER.smartDescription": "The first time each turn you would lose HP from blockable damage, prevent it. Descend equal to the damage prevented.",
   "THEPENITENT-RITES_OF_ENDURANCE_POWER.title": "Rites of Endurance",
 
-  "THEPENITENT-ZEALOUS_RETORT_POWER.description": "Whenever you are attacked while you have Faith, deal damage to the attacker.",
-  "THEPENITENT-ZEALOUS_RETORT_POWER.smartDescription": "Whenever you are attacked while you have Faith, deal [blue]{Amount}[/blue] damage to the attacker.",
+  "THEPENITENT-ZEALOUS_RETORT_POWER.description": "Whenever you are attacked while you have Faith, deal damage to the attacker. Prophet: deal 2 more damage.",
+  "THEPENITENT-ZEALOUS_RETORT_POWER.smartDescription": "Whenever you are attacked while you have Faith, deal [blue]{Amount}[/blue] damage to the attacker. Prophet: deal 2 more damage.",
   "THEPENITENT-ZEALOUS_RETORT_POWER.title": "Zealous Retort"
 }

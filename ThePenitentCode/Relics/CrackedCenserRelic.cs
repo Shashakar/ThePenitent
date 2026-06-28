@@ -31,7 +31,7 @@ public sealed class CrackedCenserRelic : ThePenitentRelic
         if (side != Owner.Creature.Side || combatState.RoundNumber > 1)
             return;
 
-        if (PenitentScaleTracker.HasFaith(Owner.Creature) || PenitentScaleTracker.HasBurden(Owner.Creature))
+        if (!PenitentScaleTracker.IsPenitent(Owner.Creature))
             return;
 
         Flash();
