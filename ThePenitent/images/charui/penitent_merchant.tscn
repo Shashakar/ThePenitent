@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://clavt2kwjuvjf"]
+
+[ext_resource type="Script" path="res://ThePenitentCode/Nodes/PenitentMerchantCharacter.cs" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://cuui1kf5hv1e7" path="res://ThePenitent/images/charui/char_parts/lowerhalf.png" id="2_lower"]
+[ext_resource type="Texture2D" uid="uid://bxjc5cpksjovs" path="res://ThePenitent/images/charui/char_parts/chst.png" id="3_chest"]
+[ext_resource type="Texture2D" uid="uid://nai2x34w106o" path="res://ThePenitent/images/charui/char_parts/head.png" id="4_head"]
+[ext_resource type="Texture2D" uid="uid://bvgdh4cfp5uvc" path="res://ThePenitent/images/charui/char_parts/staff.png" id="5_staff"]
+[ext_resource type="Texture2D" uid="uid://bgd2sy2a8qxp7" path="res://ThePenitent/images/charui/char_parts/leftarm.png" id="6_leftarm"]
+[ext_resource type="Texture2D" uid="uid://0pxrix4blsng" path="res://ThePenitent/images/charui/char_parts/book.png" id="7_book"]
+[ext_resource type="Texture2D" uid="uid://dnbt2st01l4t4" path="res://ThePenitent/images/charui/char_parts/rightarm.png" id="8_rightarm"]
+[ext_resource type="Texture2D" uid="uid://dctk2cqus8uel" path="res://ThePenitent/images/charui/char_parts/heaven_gate_front.png" id="9_gate"]
+
+[node name="PenitentMerchant" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Visuals" type="Node2D" parent="."]
+position = Vector2(0, -155)
+scale = Vector2(0.75, 0.75)
+
+[node name="Body" type="Node2D" parent="Visuals"]
+
+[node name="LowerHalfPivot" type="Node2D" parent="Visuals/Body"]
+
+[node name="LowerHalf" type="Sprite2D" parent="Visuals/Body/LowerHalfPivot"]
+texture = ExtResource("2_lower")
+
+[node name="ChestPivot" type="Node2D" parent="Visuals/Body"]
+
+[node name="Chest" type="Sprite2D" parent="Visuals/Body/ChestPivot"]
+texture = ExtResource("3_chest")
+
+[node name="LeftArmPivot" type="Node2D" parent="Visuals/Body"]
+position = Vector2(65, -114)
+
+[node name="StaffPivot" type="Node2D" parent="Visuals/Body/LeftArmPivot"]
+position = Vector2(118, 26)
+
+[node name="Staff" type="Sprite2D" parent="Visuals/Body/LeftArmPivot/StaffPivot"]
+position = Vector2(-180, 84)
+texture = ExtResource("5_staff")
+
+[node name="LeftArm" type="Sprite2D" parent="Visuals/Body/LeftArmPivot"]
+position = Vector2(-65, 97)
+texture = ExtResource("6_leftarm")
+
+[node name="RightArmPivot" type="Node2D" parent="Visuals/Body"]
+position = Vector2(-107, -137)
+
+[node name="BookPivot" type="Node2D" parent="Visuals/Body/RightArmPivot"]
+position = Vector2(1, 196)
+
+[node name="Book" type="Sprite2D" parent="Visuals/Body/RightArmPivot/BookPivot"]
+position = Vector2(125, -89)
+texture = ExtResource("7_book")
+
+[node name="RightArm" type="Sprite2D" parent="Visuals/Body/RightArmPivot"]
+position = Vector2(124, 108)
+texture = ExtResource("8_rightarm")
+
+[node name="HeadShoulderCoveringPivot" type="Node2D" parent="Visuals/Body"]
+position = Vector2(-24, -185)
+
+[node name="HeadShoulderCovering" type="Sprite2D" parent="Visuals/Body/HeadShoulderCoveringPivot"]
+position = Vector2(23, 185)
+texture = ExtResource("4_head")
+
+[node name="HeavenGate" type="Node2D" parent="Visuals"]
+visible = false
+position = Vector2(0, -400)
+scale = Vector2(0.5, 0.5)
+
+[node name="FrontSprite" type="Sprite2D" parent="Visuals/HeavenGate"]
+texture = ExtResource("9_gate")
